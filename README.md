@@ -26,7 +26,7 @@ To begin a new design session:
     > saison_builder build 'new Saison'
 
 The user will then be guided through a series of questions to formulate an appropriate recipe:
-______________________________________________________________________________________________
+----------------------------------------------------------------------------------------------
 
 #####Baseline knowledge question set.
 This will be required initially, with an option to edit after first use:
