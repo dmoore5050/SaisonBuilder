@@ -21,6 +21,27 @@
 +------------------
 +Planned usage is as follows:
 +
++To begin a new design session:
++
++    > saison_builder build 'new Saison'
++
++The user will then be guided through a series of questions to formulate an appropriate recipe:
++
++* Baseline knowledge question set. This will be required initially, with an
++  option to edit after first use:
++
++    > What is your skill level? 'beginner', 'intermediate', 'novice'
++    > How do you prefer to brew? 'extract', 'partial mash', 'all-grain'
++    > How familiar are you with Saisons and Farmhouse ales? 'not at all', 'somewhat', 'very'
++
++* Subsequent questions will be built around the baseline set.
++  For example, someone with little to no Saison experience would be guided
++  towards a more basic option set than someone who considers themselves to be
++  very familiar with the style.
++
++
++
++
 +Demo
 +----
 +Please download the app to try it out - it's free!
