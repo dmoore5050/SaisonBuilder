@@ -17,31 +17,52 @@ Features
 --------
 The primary feature of this app will be the ability to pick and choose from a broad spectrum of characteristics and techniques to design a Saison recipe to the user's custom specifications and skill level.
 
+Dynamically generated recipes can then be saved in a user-specific library for later retrieval.
+
+Additionally, a small library of pre-generated recipes will be available as well.
+
 Usage Instructions
 ------------------
 Planned usage is as follows:
 
+To begin using the app, type:
+
+    > saison_builder
+
+This will bring up a graphic with the following options:
+
+    > To learn about the saison style, use --about
+    > To design a new recipe, use --build <recipe_name>
+    > To list previously saved recipes, use --saved
+    > To access a specific previously saved recipe, use --open <recipe_name>
+
 To begin a new design session:
 
-    > saison_builder build 'new Saison'
+    > saison_builder build <recipe_name>
 
-The user will then be guided through a series of questions to formulate an appropriate recipe:
-----------------------------------------------------------------------------------------------
+###The user is then guided through a series of questions to formulate an appropriate recipe:
 
 #####Baseline knowledge question set.
 This will be required initially, with an option to edit after first use:
 
-    > What is your skill level? 'beginner', 'intermediate', 'novice'
-    > How do you prefer to brew? 'extract', 'partial mash', 'all-grain'
-    > How familiar are you with Saisons and Farmhouse ales? 'not at all', 'somewhat', 'very'
+    > What is your skill level?
+    >         Options are: 'beginner', 'intermediate', 'expert'
+    > How do you prefer to brew?
+    >         Options are: 'extract', 'partial mash', 'all-grain'
+    > How familiar are you with Saisons and Farmhouse ales?
+    >         Options are: 'not at all', 'somewhat', 'very'
+    > What range of fermentation temperatures will you have access too?
+    >         Options are: '65-75F', '65-85F', '75-85F'
 
 #####Subsequent questions will be built around the baseline set.
-For example, someone with little to no Saison experience would be guided
-towards a more basic option set than someone who considers themselves to be
-very familiar with the style.
+For example, someone with little to no Saison/homebrewing experience would be
+guided towards a more basic option set than someone who considers themselves to
+be very familiar with the style.
 
+The process will be a straight-forward prompt-and-response experience for the
+user, adjusted to their experience level.
 
-
+To be continued...
 
 Demo
 ----
