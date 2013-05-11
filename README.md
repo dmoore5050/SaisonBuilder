@@ -40,9 +40,9 @@ To begin a new design session:
 
     > saison_builder build <recipe_name>
 
-###The user is then guided through a series of questions to formulate an appropriate recipe:
+The user is then guided through a series of questions to formulate an appropriate recipe:
 
-#####Baseline knowledge question set.
+**Baseline knowledge question set** <br>
 This will be required initially, with an option to edit after first use:
 
     > What is your skill level?
@@ -54,7 +54,7 @@ This will be required initially, with an option to edit after first use:
     > What range of fermentation temperatures will you have access too?
     >         Options are: '65-75F', '65-85F', '75-85F'
 
-#####Subsequent questions will be built around the baseline set.
+**Subsequent questions will be built around the baseline set** <br>
 For example, someone with little to no Saison/homebrewing experience would be
 guided towards a more basic option set than someone who considers themselves to
 be very familiar with the style.

@@ -21,8 +21,8 @@ If Full:
 
     > Please choose a strain of Brettanomyces:
     >         B. Bruxellensis Trois -
-    >         B. Bruxellensis -
-    >         B. Clausenii -
+    >         B. Bruxellensis - barnyard, musty, leather
+    >         B. Clausenii - pineapple/tropical fruit aroma
 
 If Partial:
 
@@ -31,11 +31,11 @@ If Partial:
     >         B. Bruxellensis - moderate intensity, barnyard, musty
     >         B. Lambicus - intense, barnyard, horseblanket, dank
     > Please choose a preferred yeast descriptor:
-    >         Classic - Dry, spicy, mildly tart/acidic.
-    >         French - Dry, spicy/peppery, prominent fruit/citrus
+    >         Classic - dry, spicy, mildly tart/acidic.
+    >         French - dry, spicy/peppery, prominent fruit/citrus
 
 If No:
 
     > Please choose a preferred yeast descriptor:
-    >         Classic - Dry, spicy, mildly tart/acidic.
-    >         French - Dry, spicy/peppery, prominent fruit/citrus
+    >         Classic - dry, spicy, mildly tart/acidic.
+    >         French - dry, spicy/peppery, more prominent fruit/citrus
