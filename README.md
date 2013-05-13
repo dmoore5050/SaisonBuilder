@@ -31,9 +31,10 @@ To begin using the app, type:
 
 This will bring up a graphic with the following options:
 
-    > To learn about the saison style, use --style
-    > To learn about more advanced saison techniques use --techniques
-    > To learn about specific saison ingredients use --ingredients
+    > To learn more about saisons, use --learn
+      > To learn about the saison style, use --style
+      > To learn about more advanced saison techniques use --techniques
+      > To learn about specific saison ingredients use --ingredients
     > To design a new recipe, use --build 
     > To list preloaded and previously saved recipes, use --list
     > To access an existing recipe, use --open <recipe_name>
