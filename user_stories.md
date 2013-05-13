@@ -21,7 +21,7 @@ That I can modify freely to meet my tastes:<br>
  * User chooses a recipe based on style descriptions provided
  * User views provided saison recipe, and chooses to use it, OR
  * User returns to previous list of style descriptors, selects a different recipe, repeats.
- * Once a recipe is chosen, from recipe view user runs `saison_builder modify`
+ * Once a recipe is chosen, from recipe view user runs `saison_builder modify <recipe_name>`
  * User is guided through a series of ingredient choices.
  * When finished, user runs `saison_builder save <recipe_name>`
  * After entering a required short description, the recipe is saved
@@ -55,6 +55,7 @@ Or about specific ingredients or brewing techniques:<br>
 
  * User runs saison_builder to access initial menu
  * If the user is a first-time app user, User answers baseline skill survey, after which menu displays 
+ * To display options for add'l reading, user runs `saison_builder learn`
  * To open style guide, user runs `saison_builder style`
  * To learn about specific saison-brewing techniques, user runs `saison_builder techniques`
  * User then selects a technique area to learn about by running `saison_builder techniques <technique_name>`
