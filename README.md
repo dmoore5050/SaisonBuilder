@@ -54,8 +54,6 @@ This will be required initially, with an option to edit after first use:
 
     > What is your skill level?
     >         Options are: 'beginner', 'intermediate', 'expert'
-    > How do you prefer to brew?
-    >         Options are: 'extract', 'partial mash', 'all-grain'
     > How familiar are you with Saisons and Farmhouse ales?
     >         Options are: 'not at all', 'somewhat', 'very'
     > What range of fermentation temperatures will you have access too?
