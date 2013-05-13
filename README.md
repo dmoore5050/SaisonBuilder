@@ -7,7 +7,7 @@ This is my Unit 2 (Ruby) Capstone project for Nashville Software School Software
 
 The constraints of the project are that they must use standard library Ruby with the exception of being able to use ActiveRecord as an ORM. The concept with this capstone is to demonstrate mastery of Ruby itself.
 
-The goal of this project is to create an app to help novice and veteran experts alike navigate the nearly-limitless options available when designing and brewing a Saison, or Belgian Farmhouse ale.
+The goal of this project is to create an app to help novice and veteran experts alike navigate the nearly-limitless options available when designing and brewing an all-grain Saison, or Belgian Farmhouse ale.
 
 Project Status / TODO
 ---------------------
@@ -15,7 +15,7 @@ This project is currently in the planning stages.
 
 Features
 --------
-The primary feature of this app will be the ability to pick and choose from a broad spectrum of characteristics and techniques to design a Saison recipe to the user's custom specifications and skill level.
+The primary feature of this app will be the ability to pick and choose from a broad spectrum of ingredients and techniques to design an all-grain Saison recipe to the user's custom specifications and skill level.
 
 Dynamically generated recipes can then be saved in a user-specific library for later retrieval.
 
