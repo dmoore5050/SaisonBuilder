@@ -1,6 +1,6 @@
-As an inexperienced homebrewer/saison drinker, 
-In order to find a saison recipe that I can brew,
-And that will help me establish a baseline for the Saison style:
+As an inexperienced homebrewer/saison drinker,<br>
+In order to find a saison recipe that I can brew,<br>
+And that will help me establish a baseline for the Saison style:<br>
 
  * To access initial menu, user runs > saison_builder
  * If the user is a first-time app user, User answers baseline skill survey, after which menu displays 
@@ -11,9 +11,9 @@ And that will help me establish a baseline for the Saison style:
 
 <hr>
 
-As an experienced homebrewer/inexperienced Saison drinker/brewer,
-In order to find a solid base saison recipe,
-That I can modify freely to meet my tastes:
+As an experienced homebrewer/inexperienced Saison drinker/brewer,<br>
+In order to find a solid base saison recipe,<br>
+That I can modify freely to meet my tastes:<br>
  
  * To access initial menu, user runs `saison_builder`
  * If the user is a first-time app user, User answers baseline skill survey, after which menu displays 
@@ -28,8 +28,8 @@ That I can modify freely to meet my tastes:
 
 <hr>
 
-As an experienced hombrewer/Saison drinker,
-In order to build a new Saison recipe from scratch:
+As an experienced hombrewer/Saison drinker,<br>
+In order to build a new Saison recipe from scratch:<br>
 
  * To access initial menu, user runs `saison_builder`
  * If the user is a first-time app user, User answers baseline skill survey
@@ -40,8 +40,8 @@ In order to build a new Saison recipe from scratch:
 
 <hr>
 
-As a user who has prevously used the app to create and save recipes,
-In order to access or delete a previously created recipe:
+As a user who has prevously used the app to create and save recipes,<br>
+In order to access or delete a previously created recipe:<br>
 
  * To access initial menu, user runs `saison_builder`
  * To list previously saved recipes, user runs `saison_builder list`
@@ -50,8 +50,8 @@ In order to access or delete a previously created recipe:
 
 <hr>
 
-As a user who wishes to learn more about the saison style,
-Or about specific ingredients or brewing techniques:
+As a user who wishes to learn more about the saison style,<br>
+Or about specific ingredients or brewing techniques:<br>
 
  * User runs saison_builder to access initial menu
  * If the user is a first-time app user, User answers baseline skill survey, after which menu displays 
