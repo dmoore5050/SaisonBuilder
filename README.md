@@ -31,10 +31,16 @@ To begin using the app, type:
 
 This will bring up a graphic with the following options:
 
-    > To learn about the saison style, use --about
-    > To design a new recipe, use --build <recipe_name>
-    > To list previously saved recipes, use --saved
-    > To access a specific previously saved recipe, use --open <recipe_name>
+    > To learn about the saison style, use --style
+    > To learn about more advanced saison techniques use --techniques
+    > To learn about specific saison ingredients use --ingredients
+    > To design a new recipe, use --build 
+    > To list preloaded and previously saved recipes, use --list
+    > To access an existing recipe, use --open <recipe_name>
+    > To modify an existing recipe, use --modify <recipe_name>
+    > To save a new or modified recipe, use --save <recipe_name>
+    > To delete and existing recipe, use --delete <recipe_name>
+    > To return to this menu, use --menu
 
 To begin a new design session:
 
@@ -80,6 +86,7 @@ Changelog
 ---------
 
 5/10/2013 - Created initial repository with README
+5/13/2013 - Refined/fleshed out README and user_stories
 
 License
 -------
