@@ -55,7 +55,7 @@ Or about specific ingredients or brewing techniques:<br>
 
  * User runs saison_builder to access initial menu
  * If the user is a first-time app user, User answers baseline skill survey, after which menu displays 
- * To display options for add'l reading, user runs `saison_builder learn`
+ * To display options for additional reading, user runs `saison_builder learn`
  * To open style guide, user runs `saison_builder style`
  * To learn about specific saison-brewing techniques, user runs `saison_builder techniques`
  * User then selects a technique area to learn about by running `saison_builder techniques <technique_name>`
