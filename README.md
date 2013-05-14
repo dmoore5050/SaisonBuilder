@@ -1,5 +1,5 @@
-NSS Saison Builder project
-=====================
+Saison Builder: a @NashSoftware capstone project
+================================================
 
 Purpose
 -------
@@ -9,9 +9,9 @@ The constraints of the project are that they must use standard library Ruby with
 
 The goal of this project is to create an app to help novice and veteran experts alike navigate the nearly-limitless options available when designing and brewing a Saison, or Belgian Farmhouse ale.
 
-Project Status / TODO
----------------------
-This project is currently in the planning stages.
+Project Status
+--------------
+This project is currently in planning.
 
 Features
 --------
@@ -40,7 +40,7 @@ To begin a new design session:
 
     > saison_builder build <recipe_name>
 
-The user is then guided through a series of questions to formulate an appropriate recipe:
+**The user is then guided through a series of questions to formulate an appropriate recipe.**
 
 **Baseline knowledge question set** <br>
 This will be required initially, with an option to edit after first use:
