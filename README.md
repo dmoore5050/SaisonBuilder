@@ -7,7 +7,7 @@ This is my Unit 2 (Ruby) Capstone project for Nashville Software School Software
 
 The constraints of the project are that they must use standard library Ruby with the exception of being able to use ActiveRecord as an ORM. The concept with this capstone is to demonstrate mastery of Ruby itself.
 
-The goal of this project is to create an app to help novice and veteran experts alike navigate the nearly-limitless options available when designing and brewing a Saison, or Belgian Farmhouse ale.
+The goal of this project is to create an app to help novice and veteran experts alike navigate the nearly-limitless options available when designing and brewing an all-grain Saison, or Belgian Farmhouse ale.
 
 Project Status
 --------------
@@ -15,7 +15,7 @@ This project is currently in planning.
 
 Features
 --------
-The primary feature of this app will be the ability to pick and choose from a broad spectrum of characteristics and techniques to design a Saison recipe to the user's custom specifications and skill level.
+The primary feature of this app will be the ability to pick and choose from a broad spectrum of ingredients and techniques to design an all-grain Saison recipe to the user's custom specifications and skill level.
 
 Dynamically generated recipes can then be saved in a user-specific library for later retrieval.
 
@@ -31,10 +31,17 @@ To begin using the app, type:
 
 This will bring up a graphic with the following options:
 
-    > To learn about the saison style, use --about
-    > To design a new recipe, use --build <recipe_name>
-    > To list previously saved recipes, use --saved
-    > To access a specific previously saved recipe, use --open <recipe_name>
+    > To learn more about saisons, use --learn
+      > To learn about the saison style, use --style
+      > To learn about more advanced saison techniques use --techniques
+      > To learn about specific saison ingredients use --ingredients
+    > To design a new recipe, use --build 
+    > To list preloaded and previously saved recipes, use --list
+    > To access an existing recipe, use --open <recipe_name>
+    > To modify an existing recipe, use --modify <recipe_name>
+    > To save a new or modified recipe, use --save <recipe_name>
+    > To delete and existing recipe, use --delete <recipe_name>
+    > To return to this menu, use --menu
 
 To begin a new design session:
 
@@ -47,8 +54,6 @@ This will be required initially, with an option to edit after first use:
 
     > What is your skill level?
     >         Options are: 'beginner', 'intermediate', 'expert'
-    > How do you prefer to brew?
-    >         Options are: 'extract', 'partial mash', 'all-grain'
     > How familiar are you with Saisons and Farmhouse ales?
     >         Options are: 'not at all', 'somewhat', 'very'
     > What range of fermentation temperatures will you have access too?
@@ -80,6 +85,7 @@ Changelog
 ---------
 
 5/10/2013 - Created initial repository with README
+5/13/2013 - Refined/fleshed out README and user_stories
 
 License
 -------
