@@ -11,7 +11,6 @@ end
 desc "Run tests"
 task :default => :test
 
-
 require 'active_record'
 require 'yaml'
 

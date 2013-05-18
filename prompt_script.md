@@ -2,7 +2,7 @@
         I would like to use a pre-configured recipe.
         I would like to modify a pre-configured base recipe to my specifications.
         I would like to build a new saison recipe from scratch.
-   
+
 If preconfigured:
 
     Choose a short description of your desired Saison:
@@ -25,38 +25,38 @@ If modify:
         Gravity
         Hop bill
         Additional ingredients
-        
-  If yeast:
+
+If yeast:
 
     Please choose one:
         I want to change the primary yeast used
         I want to use Brett for a secondary fermentation
         I want to use Brett for all fermentation
-        
-  * If change primary:
+
+-If change primary:
 
      Please choose a preferred yeast descriptor:
          Classic - dry, spicy, mildly tart/acidic.
          French - dry, spicy/peppery, more prominent fruit/citrus
-        
-  * If Brett Secondary:
+
+-If Brett Secondary:
 
      Please choose a strain of Brettanomyces:
          B. Claussenii - subtle, pineapple/tropical fruit aroma
          B. Bruxellensis - moderate intensity, barnyard, musty
-         B. Lambicus - intense Brett character, barnyard, horseblanket, dank 
-         
-  * If All-Brett:
+         B. Lambicus - intense Brett character, barnyard, horseblanket, dank
+
+-If All-Brett:
 
      Please choose a strain of Brettanomyces:
          B. Bruxellensis Trois -
          B. Bruxellensis - barnyard, musty, leather
          B. Clausenii - pineapple/tropical fruit aroma
 
-  If Grain: 
-  
+If Grain:
+
      Please choose a specialized grain character:
-  
+
 
 A more experienced homebrewer more familiar with the style would be asked
 additional questions to further refine and/or expand their options:
@@ -71,14 +71,14 @@ If Yes:
          Partial-Brett - acidic, barnyard, leather characteristics in addition to traditional saison traits
          All-Brett - prominent barnyard, leather, funky, horseblanket)
 
-If Full:
+-If Full:
 
      Please choose a strain of Brettanomyces:
          B. Bruxellensis Trois -
          B. Bruxellensis - barnyard, musty, leather
          B. Clausenii - pineapple/tropical fruit aroma
 
-If Partial:
+-If Partial:
 
      Please choose a strain of Brettanomyces:
          B. Claussenii - subtle, pineapple/tropical fruit aroma
