@@ -1,12 +1,12 @@
-#!/usr/bin/env ruby
+require 'test_helper'
 
-require_relative 'bootstrap_ar'
+class TestPrintInitialMenu < MiniTest::Unit::TestCase
+  include DatabaseCleaner
 
-database = ENV['FP_ENV'] || 'development'
-connect_to database
+  def test_prints_main_menu
+    actual = `ruby saisonbuilder`
 
-if ARGV[0].nil?
-  logo = <<EOS
+    logo = <<EOS
     ____     _                ___       _ __   __
    / _____ _(_______  ___    / _ )__ __(_/ ___/ ___ ____
   _\\ \\/ _ `/ (_-/ _ \\/ _ \\  / _  / // / / / _  / -_/ __/
@@ -14,7 +14,7 @@ if ARGV[0].nil?
 
 EOS
 
-  menu = <<EOS
+    menu = <<EOS
                     by Dustin Moore
 
 Learn about the saison style:    sb style
@@ -28,28 +28,9 @@ Delete an existing recipe:       sb remove <recipe_name>
 Return to this menu:             sb home
 EOS
 
-  puts logo + menu
-end
+    expected = logo + menu
 
-command = ARGV[0]
+    assert_equal expected, actual
+  end
 
-if command == "add"
-  recipe_name = ARGV[1]
-  recipe = Recipe.new(name: recipe_name)
-  if recipe.save
-    puts "Success!"
-  else
-    puts "Failure: #{recipe.errors.full_messages.join(", ")}"
-  end
-elsif command == "list"
-  recipes = Recipe.all
-  recipes.each_with_index do |recipe, i|
-   puts "#{i+1}. #{recipe.name}"
-  end
-elsif command == "remove"
-  recipe_name = ARGV[1]
-  matching_recipes = Recipe.where(name: recipe_name).all
-  matching_recipes.each do |recipe|
-   recipe.destroy
-  end
 end

@@ -35,19 +35,19 @@ or
 This will bring up a menu displaying the following options:
 
     > To learn more about saisons,  type 'sb learn'
-      > To learn about the saison style, type 'sb 'style'
-      > To learn about more advanced saison techniques, type 'sb 'techniques'
-      > To learn about specific saison ingredients, type 'sb 'ingredients'
-    > To list preloaded and previously saved recipes, type 'sb 'list'
-    > To design a new recipe, type 'sb new <recipe_name>'
+      > To learn about the saison style, type 'sb style'
+      > To learn about more advanced saison techniques, type 'sb techniques'
+      > To learn about specific saison ingredients, type 'sb ingredients'
+    > To view recipe library, type 'sb list'
+    > To build a new recipe, type 'sb add <recipe_name>'
     > To access an existing recipe, type 'sb open <recipe_name>'
     > To modify an existing recipe, type 'sb modify <recipe_name>'
-    > To delete and existing recipe, type 'sb remove <recipe_name>'
+    > To delete an existing recipe, type 'sb remove <recipe_name>'
     > To return to this menu, type 'sb home'
 
-**The user is then guided through a series of questions to formulate an appropriate recipe.**
+**The user is then guided through a series of questions to determine and/or modify an appropriate recipe.**
 
-To be continued...
+(work in progress)
 
 Demo
 ----
