@@ -16,8 +16,6 @@ db_namespace = namespace :db do
   desc "Migrate the db"
   task :migrate do
     connect_to 'development'
-    # connection_details = YAML::load(File.open('config/database.yml'))
-    # ActiveRecord::Base.establish_connection(connection_details)
     ActiveRecord::Migrator.migrate("db/migrate/")
     db_namespace["schema:dump"].invoke
   end

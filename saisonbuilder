@@ -1,0 +1,29 @@
+#!/usr/bin/env ruby
+
+require_relative 'bootstrap_ar'
+
+database = ENV['FP_ENV'] || 'development'
+connect_to database
+
+command = ARGV[0]
+
+if command == "add"
+  user_name = ARGV[1]
+  user = User.new(name: user_name)
+  if user.save
+    puts "Success!"
+  else
+    puts "Failure: #{user.errors.full_messages.join(", ")}"
+  end
+elsif command == "list"
+  users = User.all
+  users.each_with_index do |user, i|
+   puts "#{i+1}. #{user.name}"
+  end
+elsif command == "remove"
+  user_name = ARGV[1]
+  matching_users = User.where(name: user_name).all
+  matching_users.each do |user|
+   user.destroy
+  end
+end

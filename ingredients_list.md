@@ -10,7 +10,7 @@ Type codes =
 
 1 - Grains (8)
 
-*  Pilsner (base)
+* Pilsner (base)
 * Pale 2-row malt (base)
 * Munich (base)
 * White Wheat Malt (base)

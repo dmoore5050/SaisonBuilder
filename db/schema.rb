@@ -13,7 +13,7 @@
 
 ActiveRecord::Schema.define(:version => 20130515112300) do
 
-  create_table "projects", :force => true do |t|
+  create_table "users", :force => true do |t|
     t.string "name"
   end
 
