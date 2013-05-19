@@ -1,5 +1,4 @@
 #!/usr/bin/env ruby
-# -*- ruby -*-
 
 require_relative 'bootstrap_ar'
 require 'yaml'

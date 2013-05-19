@@ -11,10 +11,20 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130515112300) do
+ActiveRecord::Schema.define(:version => 20130519061300) do
+
+  create_table "ingredients", :force => true do |t|
+    t.string "name"
+    t.string "description"
+    t.string "type_code"
+    t.string "yeast_code_wyeast"
+    t.string "yeast_code_wl"
+  end
 
   create_table "recipes", :force => true do |t|
     t.string "name"
+    t.string "boil_length"
+    t.string "primary_fermentation_temp"
   end
 
 end
