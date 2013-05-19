@@ -8,7 +8,10 @@ require_relative 'libraries/techniques'
 database = ENV['FP_ENV'] || 'development'
 connect_to database
 
-case ARGV[0]
+command = nil
+command = ARGV[0].downcase unless ARGV[0].nil?
+
+case command
 when nil
   Menu.render_menu
 when 'style'
@@ -19,20 +22,19 @@ when 'ingredients'
 when 'add'
   recipe_name = ARGV[1]
   recipe = Recipe.new(name: recipe_name)
-  if recipe.save
-    puts 'Success!'
-  else
-    puts "Failure: #{recipe.errors.full_messages.join(", ")}"
+  case
+  when recipe.save then puts 'Success!'
+  else puts "Failure: #{recipe.errors.full_messages.join(", ")}"
   end
 when 'list'
   recipes = Recipe.all
   recipes.each_with_index do |recipe, i|
-   puts "#{i+1}. #{recipe.name}"
+    puts "#{i+1}. #{recipe.name}"
   end
 when 'remove'
   recipe_name = ARGV[1]
   matching_recipes = Recipe.where(name: recipe_name).all
   matching_recipes.each do |recipe|
-   recipe.destroy
+    recipe.destroy
   end
 end
