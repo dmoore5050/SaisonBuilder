@@ -1,11 +1,7 @@
-require 'test_helper'
 
-class TestPrintInitialMenu < MiniTest::Unit::TestCase
-  include DatabaseCleaner
+module Menu
 
-  def test_prints_main_menu
-    actual = `ruby saisonbuilder`
-
+  def Menu.render_menu
     logo = <<EOS
     ____     _                ___       _ __   __
    / _____ _(_______  ___    / _ )__ __(_/ ___/ ___ ____
@@ -28,9 +24,7 @@ Modify an existing recipe:       sb modify <recipe_name>
 Delete an existing recipe:       sb remove <recipe_name>
 EOS
 
-    expected = logo + menu
-
-    assert_equal expected, actual
+    puts logo + menu
   end
 
 end

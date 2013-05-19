@@ -1,52 +1,31 @@
 #!/usr/bin/env ruby
 
 require_relative 'bootstrap_ar'
+require_relative 'libraries/style'
+require_relative 'libraries/menu'
 
 database = ENV['FP_ENV'] || 'development'
 connect_to database
 
-if ARGV[0].nil?
-  logo = <<EOS
-    ____     _                ___       _ __   __
-   / _____ _(_______  ___    / _ )__ __(_/ ___/ ___ ____
-  _\\ \\/ _ `/ (_-/ _ \\/ _ \\  / _  / // / / / _  / -_/ __/
- /___/\\_,_/_/___\\___/_//_/ /____/\\_,_/_/_/\\_,_/\\__/_/
-
-EOS
-
-  menu = <<EOS
-                    by Dustin Moore
-
-Learn about the saison style:    sb style
-Learn about brewing techniques:  sb techniques
-Learn about ingredients:         sb ingredients
-View recipe library:             sb list
-Build a new recipe:              sb add <recipe_name>
-Access an existing recipe:       sb open <recipe_name>
-Modify an existing recipe:       sb modify <recipe_name>
-Delete an existing recipe:       sb remove <recipe_name>
-Return to this menu:             sb home
-EOS
-
-  puts logo + menu
-end
-
-command = ARGV[0]
-
-if command == "add"
+case ARGV[0]
+when nil
+  Menu.render_menu
+when 'style'
+  Style.render_style_definition
+when 'add'
   recipe_name = ARGV[1]
   recipe = Recipe.new(name: recipe_name)
   if recipe.save
-    puts "Success!"
+    puts 'Success!'
   else
     puts "Failure: #{recipe.errors.full_messages.join(", ")}"
   end
-elsif command == "list"
+when 'list'
   recipes = Recipe.all
   recipes.each_with_index do |recipe, i|
    puts "#{i+1}. #{recipe.name}"
   end
-elsif command == "remove"
+when 'remove'
   recipe_name = ARGV[1]
   matching_recipes = Recipe.where(name: recipe_name).all
   matching_recipes.each do |recipe|

@@ -34,16 +34,15 @@ or
 
 This will bring up a menu displaying the following options:
 
-    > To learn more about saisons,  type 'sb learn'
-      > To learn about the saison style, type 'sb style'
-      > To learn about more advanced saison techniques, type 'sb techniques'
-      > To learn about specific saison ingredients, type 'sb ingredients'
-    > To view recipe library, type 'sb list'
-    > To build a new recipe, type 'sb add <recipe_name>'
-    > To access an existing recipe, type 'sb open <recipe_name>'
-    > To modify an existing recipe, type 'sb modify <recipe_name>'
-    > To delete an existing recipe, type 'sb remove <recipe_name>'
-    > To return to this menu, type 'sb home'
+    > Return to this menu:             sb
+    > Learn about the saison style:    sb style
+    > Learn about brewing techniques:  sb techniques
+    > Learn about ingredients:         sb ingredients
+    > View recipe library:             sb list
+    > Build a new recipe:              sb add <recipe_name>
+    > Access an existing recipe:       sb open <recipe_name>
+    > Modify an existing recipe:       sb modify <recipe_name>
+    > Delete an existing recipe:       sb remove <recipe_name>
 
 **The user is then guided through a series of questions to determine and/or modify an appropriate recipe.**
 
