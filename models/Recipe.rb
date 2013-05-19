@@ -3,5 +3,5 @@
 # require 'active_record'
 
 class User < ActiveRecord::Base
-  validates_uniqueness_of :name, message: "That user name is already assigned"
+  validates_uniqueness_of :name, message: "That recipe name is already assigned"
 end

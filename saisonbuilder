@@ -8,22 +8,22 @@ connect_to database
 command = ARGV[0]
 
 if command == "add"
-  user_name = ARGV[1]
-  user = User.new(name: user_name)
-  if user.save
+  recipe_name = ARGV[1]
+  recipe = Recipe.new(name: recipe_name)
+  if recipe.save
     puts "Success!"
   else
-    puts "Failure: #{user.errors.full_messages.join(", ")}"
+    puts "Failure: #{recipe.errors.full_messages.join(", ")}"
   end
 elsif command == "list"
-  users = User.all
-  users.each_with_index do |user, i|
-   puts "#{i+1}. #{user.name}"
+  recipes = Recipe.all
+  recipes.each_with_index do |recipe, i|
+   puts "#{i+1}. #{recipe.name}"
   end
 elsif command == "remove"
-  user_name = ARGV[1]
-  matching_users = User.where(name: user_name).all
-  matching_users.each do |user|
-   user.destroy
+  recipe_name = ARGV[1]
+  matching_recipes = Recipe.where(name: recipe_name).all
+  matching_recipes.each do |recipe|
+   recipe.destroy
   end
 end

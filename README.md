@@ -11,7 +11,7 @@ The goal of this project is to create an app to help novice and veteran experts 
 
 Project Status
 --------------
-This project is currently in planning.
+Basic database add-remove-list functionality in place.
 
 Features
 --------
@@ -19,53 +19,33 @@ The primary feature of this app will be the ability to pick and choose from a br
 
 Dynamically generated recipes can then be saved in a user-specific library for later retrieval.
 
-Additionally, a small library of pre-generated recipes will be available as well.
+Additionally, a small library of pre-generated recipes will be available.
 
 Usage Instructions
 ------------------
 Planned usage is as follows:
 
-To begin using the app, type:
+To begin using the app, type either:
 
     > saison_builder
+or
 
-This will bring up a graphic with the following options:
+    > sb
 
-    > To learn more about saisons, use --learn
-      > To learn about the saison style, use --style
-      > To learn about more advanced saison techniques use --techniques
-      > To learn about specific saison ingredients use --ingredients
-    > To design a new recipe, use --build 
-    > To list preloaded and previously saved recipes, use --list
-    > To access an existing recipe, use --open <recipe_name>
-    > To modify an existing recipe, use --modify <recipe_name>
-    > To save a new or modified recipe, use --save <recipe_name>
-    > To delete and existing recipe, use --delete <recipe_name>
-    > To return to this menu, use --menu
+This will bring up a menu displaying the following options:
 
-To begin a new design session:
-
-    > saison_builder build <recipe_name>
+    > To learn more about saisons,  type 'sb learn'
+      > To learn about the saison style, type 'sb 'style'
+      > To learn about more advanced saison techniques, type 'sb 'techniques'
+      > To learn about specific saison ingredients, type 'sb 'ingredients'
+    > To list preloaded and previously saved recipes, type 'sb 'list'
+    > To design a new recipe, type 'sb new <recipe_name>'
+    > To access an existing recipe, type 'sb open <recipe_name>'
+    > To modify an existing recipe, type 'sb modify <recipe_name>'
+    > To delete and existing recipe, type 'sb remove <recipe_name>'
+    > To return to this menu, type 'sb home'
 
 **The user is then guided through a series of questions to formulate an appropriate recipe.**
-
-**Baseline knowledge question set** <br>
-This will be required initially, with an option to edit after first use:
-
-    > What is your skill level?
-    >         Options are: 'beginner', 'intermediate', 'expert'
-    > How familiar are you with Saisons and Farmhouse ales?
-    >         Options are: 'not at all', 'somewhat', 'very'
-    > What range of fermentation temperatures will you have access too?
-    >         Options are: '65-75F', '65-85F', '75-85F'
-
-**Subsequent questions will be built around the baseline set** <br>
-For example, someone with little to no Saison/homebrewing experience would be
-guided towards a more basic option set than someone who considers themselves to
-be very familiar with the style.
-
-The process will be a straight-forward prompt-and-response experience for the
-user, adjusted to their experience level.
 
 To be continued...
 
