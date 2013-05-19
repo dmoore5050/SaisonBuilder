@@ -1,7 +1,7 @@
 
 module Style
 
-  def Style.render_style_definition
+  def Style.render_definition
     style_description = <<EOS
 
     Saison, or Farmhouse ale, is a style of beer native to the

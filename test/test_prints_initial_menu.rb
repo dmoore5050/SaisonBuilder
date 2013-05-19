@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class TestPrintInitialMenu < MiniTest::Unit::TestCase
+class TestPrintMenu < MiniTest::Unit::TestCase
   include DatabaseCleaner
 
   def test_prints_main_menu

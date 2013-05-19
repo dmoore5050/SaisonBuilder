@@ -3,6 +3,7 @@
 require_relative 'bootstrap_ar'
 require_relative 'libraries/style'
 require_relative 'libraries/menu'
+require_relative 'libraries/techniques'
 
 database = ENV['FP_ENV'] || 'development'
 connect_to database
@@ -11,7 +12,10 @@ case ARGV[0]
 when nil
   Menu.render_menu
 when 'style'
-  Style.render_style_definition
+  Style.render_definition
+when 'techniques'
+  Techniques.render_list
+when 'ingredients'
 when 'add'
   recipe_name = ARGV[1]
   recipe = Recipe.new(name: recipe_name)
