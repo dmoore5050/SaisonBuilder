@@ -19,4 +19,5 @@ class TestListingrecipes < MiniTest::Unit::TestCase
 EOS
     assert_equal expected, actual
   end
+
 end

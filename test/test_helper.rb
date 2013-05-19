@@ -8,6 +8,6 @@ ENV['FP_ENV'] = 'test'
 module DatabaseCleaner
   def before_setup
     super
-    User.destroy_all
+    Recipe.destroy_all
   end
 end
