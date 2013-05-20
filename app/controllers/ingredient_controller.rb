@@ -13,8 +13,10 @@ class IngredientController
 
   def list_ingredients
     ingredients = Ingredient.all
+    puts ' '
     ingredients.each_with_index do |ingredient, i|
-      puts "#{i+1}. #{ingredient.name}"
+      ingredient_name = "#{i+1}. #{ingredient.name}:"
+      puts ingredient_name.ljust(26) + "#{ingredient.description}"
     end
   end
 
