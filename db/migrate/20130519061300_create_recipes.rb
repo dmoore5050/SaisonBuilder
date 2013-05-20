@@ -1,4 +1,5 @@
 class CreateRecipes < ActiveRecord::Migration
+
   def change
     create_table :recipes do |t|
       t.string :name
@@ -6,4 +7,5 @@ class CreateRecipes < ActiveRecord::Migration
       t.string :primary_fermentation_temp
     end
   end
+
 end

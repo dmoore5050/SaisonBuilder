@@ -42,7 +42,7 @@ This will bring up a menu displaying the following options:
     > Build a new recipe:              sb add <recipe_name>
     > Access an existing recipe:       sb open <recipe_name>
     > Modify an existing recipe:       sb modify <recipe_name>
-    > Delete an existing recipe:       sb remove <recipe_name>
+    > Delete an existing recipe:       sb delete <recipe_name>
 
 **The user is then guided through a series of questions to determine and/or modify an appropriate recipe.**
 

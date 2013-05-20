@@ -1,4 +1,4 @@
-require 'test_helper'
+require_relative '../test_helper'
 
 class TestPrintMenu < MiniTest::Unit::TestCase
   include DatabaseCleaner
@@ -25,7 +25,7 @@ View recipe library:             sb list
 Build a new recipe:              sb add <recipe_name>
 Access an existing recipe:       sb open <recipe_name>
 Modify an existing recipe:       sb modify <recipe_name>
-Delete an existing recipe:       sb remove <recipe_name>
+Delete an existing recipe:       sb delete <recipe_name>
 EOS
 
     expected = logo + menu

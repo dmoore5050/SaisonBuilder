@@ -1,15 +1,19 @@
 #!/usr/bin/env ruby
 
 require_relative 'bootstrap_ar'
-require_relative 'libraries/style'
-require_relative 'libraries/menu'
-require_relative 'libraries/techniques'
+require_relative 'views/style'
+require_relative 'views/menu'
+require_relative 'views/techniques'
 
 database = ENV['FP_ENV'] || 'development'
 connect_to database
 
 command = nil
 command = ARGV[0].downcase unless ARGV[0].nil?
+
+params = { command: command, recipe: { name: ARGV[1] } }
+controller = BuildController.new(params)
+ingredient_controller = IngredientController.new
 
 case command
 when nil
@@ -19,22 +23,11 @@ when 'style'
 when 'techniques'
   Techniques.render_list
 when 'ingredients'
+  ingredient_controller.list_ingredients
 when 'add'
-  recipe_name = ARGV[1]
-  recipe = Recipe.new(name: recipe_name)
-  case
-  when recipe.save then puts 'Success!'
-  else puts "Failure: #{recipe.errors.full_messages.join(", ")}"
-  end
+  controller.create
 when 'list'
-  recipes = Recipe.all
-  recipes.each_with_index do |recipe, i|
-    puts "#{i+1}. #{recipe.name}"
-  end
-when 'remove'
-  recipe_name = ARGV[1]
-  matching_recipes = Recipe.where(name: recipe_name).all
-  matching_recipes.each do |recipe|
-    recipe.destroy
-  end
+  controller.list_recipes
+when 'delete'
+  controller.delete
 end

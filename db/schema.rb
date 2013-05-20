@@ -11,14 +11,14 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130519061300) do
+ActiveRecord::Schema.define(:version => 20130519093200) do
 
   create_table "ingredients", :force => true do |t|
-    t.string "name"
-    t.string "description"
-    t.string "type_code"
-    t.string "yeast_code_wyeast"
-    t.string "yeast_code_wl"
+    t.string  "name"
+    t.string  "description"
+    t.integer "type_code"
+    t.integer "yeast_code_wyeast"
+    t.integer "yeast_code_wl"
   end
 
   create_table "recipes", :force => true do |t|
