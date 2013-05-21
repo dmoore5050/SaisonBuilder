@@ -1,7 +1,6 @@
     Please choose one of the following options:
         I would like to use a pre-configured recipe.
         I would like to modify a pre-configured base recipe to my specifications.
-        I would like to build a new saison recipe from scratch.
 
 If preconfigured:
 
@@ -127,7 +126,7 @@ If Grain:
          Yes (return to Grain menu)
          No (return to Modify menu)
 
--If Increase wheat character:
+-If Increase rye character:
 
      Base malt composition has been altered to provide more rye character.
 
@@ -180,7 +179,7 @@ If Hop bill:
 
 If Other ingredients:
 
-     White type of additional ingredient would you like to add?
+     What type of additional ingredient would you like to add?
          Spice(s)
          Fruit
          Botanical(s)
