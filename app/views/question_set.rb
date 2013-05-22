@@ -10,7 +10,7 @@ module QuestionSet
 
     puts question
     answer = $stdin.gets.downcase.chomp!
-    answer[' ', '.'] = '_' if answer.include? ' '
+    answer[' '] = '_' if answer.include? ' '
 
     if answer.include?('q') || answer.include?('x')
       return
