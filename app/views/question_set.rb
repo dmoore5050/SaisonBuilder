@@ -1,14 +1,16 @@
+require_relative '../../bootstrap_ar'
+
 module QuestionSet
 
-  RECIPE_ARRAY = [ 'classic', 'hoppy_classic', 'rye_saison', 'new_world', 'black_saison' ]
-  OPTION_ARRAY = [ 'menu', 'use', 'modify', 'yeast', 'change_primary', 'add_primary', 'blend', 'add_another_strain', 'brett_only', 'brett_secondary', 'grain', 'sweetness', 'roast', 'brown', 'black', 'wheat', 'rye', 'hops', 'gravity', 'other', 'done', 'spices', 'fruit', 'botanicals', 'adjuncts', 'more_botanicals']
-  COMPONENTS_ARRAY = [ 'dupont', 'french', 'american', 'brett_c', 'brett_b', 'brett_l', 'brett_b_trois', 'caramel', 'honey', '7.5%', '8.5%', '5.5%', '4.5%', '3.5%', 'bitterness', 'cardamom', 'citrus_zest', 'white_peppercorns', 'thai_basil', 'ginger', 'peaches', 'blackberries', 'mango', 'currants', 'hibiscus', 'lavender', 'rose_hips', 'corn_sugar', 'turbinado_sugar', 'rice']
+  RECIPE_ARRAY = %w( classic hoppy_classic rye_saison new_world black_saison )
+  OPTION_ARRAY = %w( menu use modify yeast change_primary add_primary blend add_another_strain brett_only brett_secondary grain sweetness roast brown black wheat rye hops flavor_hops aroma_hops gravity other done spices fruit botanicals adjuncts more_botanicals)
+  COMPONENTS_ARRAY = %w( dupont french american blend_brett_c blend_brett_b blend_brett_l only_brett_c only_brett_b only_brett_l only_brett_b_trois secondary_brett_b secondary_brett_c secondary_brett_l caramel honey eight seven five four bitterness floral_spicy piney_citrus spicy floral citrus coriander citrus_zest white_peppercorns thai_basil ginger peaches blackberries mango currants hibiscus lavender rose_hips corn_sugar turbinado_sugar rice)
 
   def QuestionSet.route(question, trackback)
 
     puts question
     answer = $stdin.gets.downcase.chomp!
-    answer[' '] = '_' if answer.include? ' '
+    answer[' ', '.'] = '_' if answer.include? ' '
 
     if answer.include?('q') || answer.include?('x')
       return
@@ -109,9 +111,9 @@ EOS
     question = <<EOS
 
 Please choose a strain of Brettanomyces:
-    Brett C -  Subtle, pineapple/tropical fruit aroma
-    Brett B -  Moderate intensity, barnyard, musty
-    Brett L -  Intense Brett character, barnyard, horseblanket, dank
+    Blend Brett C -  Subtle, pineapple/tropical fruit aroma
+    Blend Brett B -  Moderate intensity, barnyard, musty
+    Blend Brett L -  Intense Brett character, barnyard, horseblanket, dank
 
 EOS
     QuestionSet.route question, 'blend'
@@ -131,12 +133,13 @@ EOS
   def QuestionSet.brett_only
     question = <<EOS
 
-Please choose a strain of Brettanomyces (please expect a significantly longer fermentation period when using only Brett):
+Please choose a strain of Brettanomyces
+(Expect a significantly longer fermentation period when using only Brett):
 
-    Brett B Trois -  Delicate Pineapple and tropical fruit, tart.
-    Brett B -        Barnyard, musty, leather
-    Brett C -        Pineapple/tropical fruit aroma
-    Brett L -        Intense, dank, musty, horseblanket
+    Only Brett B Trois -  Delicate Pineapple and tropical fruit, tart.
+    Only Brett B -        Barnyard, musty, leather
+    Only Brett C -        Pineapple/tropical fruit aroma
+    Only Brett L -        Intense, dank, musty, horseblanket
 
 EOS
     QuestionSet.route question, 'brett_only'
@@ -146,9 +149,9 @@ EOS
     question = <<EOS
 
 Please choose a strain of Brettanomyces:
-    Brett C -  Subtle, pineapple/tropical fruit aroma
-    Brett B -  Moderate intensity, barnyard, musty
-    Brett L -  Intense Brett character, barnyard, horseblanket, dank
+    Secondary Brett C -  Subtle, pineapple/tropical fruit aroma
+    Secondary Brett B -  Moderate intensity, barnyard, musty
+    Secondary Brett L -  Intense Brett character, barnyard, horseblanket, dank
 
 EOS
     QuestionSet.route question, 'brett_secondary'
@@ -222,7 +225,7 @@ EOS
   def QuestionSet.gravity
     question = <<EOS
 
-Would you like to increase or decrease the standard 6.5% gravity of your saison:
+Would you like to increase or decrease the standard 6% gravity of your saison?
     Increase
     Decrease
 
@@ -240,8 +243,8 @@ EOS
     question = <<EOS
 
 What is your desired final gravity?
-    7.5%
-    8.5%
+    Eight - 8% ABV
+    Seven - 7% ABV
 
 EOS
     QuestionSet.route question, 'increase'
@@ -251,9 +254,8 @@ EOS
     question = <<EOS
 
 What is your desired final gravity?
-    5.5%
-    4.5%
-    3.5%
+    Five - 5% ABV
+    Four - 4% ABV
 
 EOS
   QuestionSet.route question, 'decrease'
@@ -263,15 +265,33 @@ EOS
     question = <<EOS
 
 How would you like to change the hop character?
-    Bitterness -    Increase bitterness
-    Flavor(Euro) -  Increase flavor/aroma (European hop character)
-    Flavor(US) -    Increase flavor/aroma (American hop character)
-    Aroma(Euro) -   Increase aroma (European hop character)
-    Aroma(US) -     Increase aroma (American hop character)
+    Bitterness -   Increase bitterness
+    Flavor hops -  Increase flavor/aroma
+    Aroma hops -   Increase aroma
 
 EOS
     QuestionSet.route question, 'hops'
   end
+
+  def QuestionSet.flavor_hops
+    question = <<EOS
+What kind of hop flavor would you like to add?
+    Floral spicy -       Increase flavor/aroma (European hop character)
+    Piney citrus -  Increase flavor/aroma (American hop character)
+
+EOS
+    QuestionSet.route question, 'flavor_hops'
+end
+
+  def QuestionSet.aroma_hops
+    question = <<EOS
+What kind of hop flavor would you like to add?
+    Floral -  Increase aroma (Western European)
+    Spicy -   Increase aroma (Eastern European)
+    Citrus -  Increase aroma (American)
+EOS
+    QuestionSet.route question, 'aroma_hops'
+end
 
   def QuestionSet.addl_hop_changes #***
     question = <<EOS
@@ -302,7 +322,7 @@ EOS
     question = <<EOS
 
 What spice would you like to add to the recipe?
-    Cardamom
+    Coriander
     Citrus zest
     White peppercorns
     Thai Basil
