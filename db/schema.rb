@@ -11,19 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130521220000) do
-
-  create_table "grain_profiles", :force => true do |t|
-    t.integer "recipe_id"
-    t.integer "quantity"
-  end
-
-  create_table "hop_profiles", :force => true do |t|
-    t.integer "recipe_id"
-    t.integer "quantity"
-    t.string  "usage"
-    t.string  "duration"
-  end
+ActiveRecord::Schema.define(:version => 20130522142100) do
 
   create_table "ingredients", :force => true do |t|
     t.string  "name"
@@ -31,27 +19,20 @@ ActiveRecord::Schema.define(:version => 20130521220000) do
     t.integer "type_code"
     t.integer "yeast_code_wyeast"
     t.integer "yeast_code_wl"
-    t.integer "grain_profile_id"
-    t.integer "hop_profile_id"
-    t.integer "yeast_profile_id"
-    t.integer "other_ingredient_profile_id"
   end
 
-  create_table "other_ingredient_profiles", :force => true do |t|
-    t.integer "recipe_id"
-    t.integer "quantity"
-    t.string  "usage"
+  create_table "recipe_ingredients", :force => true do |t|
+    t.string "recipe_id"
+    t.string "ingredient_id"
+    t.string "quantity"
+    t.string "usage"
+    t.string "duration"
   end
 
   create_table "recipes", :force => true do |t|
     t.string "name"
     t.string "boil_length"
     t.string "primary_fermentation_temp"
-  end
-
-  create_table "yeast_profiles", :force => true do |t|
-    t.integer "recipe_id"
-    t.string  "usage"
   end
 
 end

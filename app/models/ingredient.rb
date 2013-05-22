@@ -1,8 +1,6 @@
 
 class Ingredient < ActiveRecord::Base
   validates_uniqueness_of :name, message: "That ingredient name is already assigned"
-  belongs_to :grain_profile
-  belongs_to :hop_profile
-  belongs_to :yeast_profile
-  belongs_to :other_ingredient_profile
+  has_many :recipe_ingredients
+  has_many :recipes, through: :recipe_ingredients
 end
