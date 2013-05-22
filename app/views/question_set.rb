@@ -8,7 +8,6 @@ module QuestionSet
 
     puts question
     answer = $stdin.gets.downcase.chomp!
-
     answer[' '] = '_' if answer.include? ' '
 
     if answer.include?('q') || answer.include?('x')
@@ -20,7 +19,8 @@ module QuestionSet
     elsif COMPONENTS_ARRAY.include? answer
       puts "execute method....#{answer}"
     else
-      puts 'That is not a valid option.'
+      puts "\n'#{answer}' is not a valid option. Please choose from the choices listed."
+      puts "Type 'Menu' to return to Recipes menu, or 'Quit' to exit SaisonBuilder."
       QuestionSet.send("#{trackback}")
     end
 
