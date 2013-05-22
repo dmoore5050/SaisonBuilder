@@ -22,7 +22,7 @@ Learn about the saison style:    sb style
 Learn about brewing techniques:  sb techniques
 Learn about ingredients:         sb ingredients
 View recipe library:             sb list
-Build a new recipe:              sb add <recipe_name>
+Build a new recipe:              sb build <recipe_name>
 Access an existing recipe:       sb open <recipe_name>
 Modify an existing recipe:       sb modify <recipe_name>
 Delete an existing recipe:       sb delete <recipe_name>

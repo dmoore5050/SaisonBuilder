@@ -12,7 +12,7 @@ command = nil
 command = ARGV[0].downcase unless ARGV[0].nil?
 
 params = { command: command, recipe: { name: ARGV[1] } }
-controller = BuildController.new(params)
+recipe_controller = RecipeController.new(params)
 ingredient_controller = IngredientController.new
 
 case command
@@ -24,10 +24,12 @@ when 'techniques'
   Techniques.render_list
 when 'ingredients'
   ingredient_controller.list_ingredients
+when 'build'
+  QuestionSet.menu
 when 'add'
-  controller.create
+  recipe_controller.create
 when 'list'
-  controller.list_recipes
+  recipe_controller.list_recipes
 when 'delete'
-  controller.delete
+  recipe_controller.delete
 end
