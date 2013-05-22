@@ -4,6 +4,7 @@ require_relative 'bootstrap_ar'
 require_relative 'views/style'
 require_relative 'views/menu'
 require_relative 'views/techniques'
+require_relative 'views/question_set'
 
 database = ENV['FP_ENV'] || 'development'
 connect_to database
