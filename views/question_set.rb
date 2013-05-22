@@ -4,11 +4,14 @@ module QuestionSet
   OPTION_ARRAY = [ 'menu', 'use', 'modify', 'yeast', 'change_primary', 'add_primary', 'blend', 'add_another_strain', 'brett_only', 'brett_secondary', 'grain', 'sweetness', 'roast', 'brown', 'black', 'wheat', 'rye', 'hops', 'gravity', 'other', 'done', 'spices', 'fruit', 'botanicals', 'adjuncts', 'more_botanicals']
   COMPONENTS_ARRAY = [ 'dupont', 'french', 'american', 'brett_c', 'brett_b', 'brett_l', 'brett_b_trois', 'caramel', 'honey', '7.5%', '8.5%', '5.5%', '4.5%', '3.5%', 'bitterness', 'cardamom', 'citrus_zest', 'white_peppercorns', 'thai_basil', 'ginger', 'peaches', 'blackberries', 'mango', 'currants', 'hibiscus', 'lavender', 'rose_hips', 'corn_sugar', 'turbinado_sugar', 'rice']
 
-  def QuestionSet.build(answer)
+  def QuestionSet.route(question, trackback)
+
+    puts question
+    answer = $stdin.gets.downcase.chomp!
 
     answer[' '] = '_' if answer.include? ' '
 
-    if answer == 'quit'
+    if answer.include?('q') || answer.include?('x')
       return
     elsif OPTION_ARRAY.include? answer
       QuestionSet.send("#{answer}")
@@ -16,6 +19,9 @@ module QuestionSet
       puts "print recipe...#{answer}"
     elsif COMPONENTS_ARRAY.include? answer
       puts "execute method....#{answer}"
+    else
+      puts 'That is not a valid option.'
+      QuestionSet.send("#{trackback}")
     end
 
   end
@@ -28,9 +34,7 @@ Please choose one of the following options:
      Modify -  Modify an existing base recipe
 
 EOS
-    puts question
-    answer = $stdin.gets.downcase.chomp!
-    QuestionSet.build answer
+    QuestionSet.route question, 'menu'
   end
 
   def QuestionSet.use
@@ -44,9 +48,7 @@ Choose a saison recipe:
     Black Saison -   Complex malt character, mild roast, spicy yeast character
 
 EOS
-    puts question
-    answer = $stdin.gets.downcase.chomp!
-    QuestionSet.build answer
+    QuestionSet.route question, 'use'
   end
 
   def QuestionSet.modify
@@ -61,9 +63,7 @@ What aspect of the recipe would you like to change?
     Done -     I'm finished modifying this recipe
 
 EOS
-    puts question
-    answer = $stdin.gets.downcase.chomp!
-    QuestionSet.build answer
+    QuestionSet.route question, 'modify'
   end
 
   def QuestionSet.yeast
@@ -78,9 +78,7 @@ Please choose one:
     Done -             Return to Modify Recipe menu
 
 EOS
-    puts question
-    answer = $stdin.gets.downcase.chomp!
-    QuestionSet.build answer
+    QuestionSet.route question, 'primary'
   end
 
   def QuestionSet.change_primary
@@ -92,9 +90,7 @@ Please choose a new primary yeast:
     American -  Trad'l saison yeast pre-blended with Brettanomyces.
 
 EOS
-    puts question
-    answer = $stdin.gets.downcase.chomp!
-    QuestionSet.build answer
+    QuestionSet.route question, 'change_primary'
   end
 
   def QuestionSet.add_primary
@@ -106,9 +102,7 @@ Please choose an additional primary yeast:
     American -  Trad'l saison yeast pre-blended with Brettanomyces.
 
 EOS
-    puts question
-    answer = $stdin.gets.downcase.chomp!
-    QuestionSet.build answer
+    QuestionSet.route question, 'add_primary'
   end
 
   def QuestionSet.blend
@@ -120,9 +114,7 @@ Please choose a strain of Brettanomyces:
     Brett L -  Intense Brett character, barnyard, horseblanket, dank
 
 EOS
-    puts question
-    answer = $stdin.gets.downcase.chomp!
-    QuestionSet.build answer
+    QuestionSet.route question, 'blend'
   end
 
   def QuestionSet.add_another_strain
@@ -133,9 +125,7 @@ Would you like to add an additional strain of Brett to blend?
     Yeast -   (return to Yeast menu)
 
 EOS
-    puts question
-    answer = $stdin.gets.downcase.chomp!
-    QuestionSet.build answer
+    QuestionSet.route question, 'add_another_strain'
   end
 
   def QuestionSet.brett_only
@@ -149,9 +139,7 @@ Please choose a strain of Brettanomyces (please expect a significantly longer fe
     Brett L -        Intense, dank, musty, horseblanket
 
 EOS
-    puts question
-    answer = $stdin.gets.downcase.chomp!
-    QuestionSet.build answer
+    QuestionSet.route question, 'brett_only'
   end
 
   def QuestionSet.brett_secondary
@@ -163,9 +151,7 @@ Please choose a strain of Brettanomyces:
     Brett L -  Intense Brett character, barnyard, horseblanket, dank
 
 EOS
-    puts question
-    answer = $stdin.gets.downcase.chomp!
-    QuestionSet.build answer
+    QuestionSet.route question, 'brett_secondary'
   end
 
   def QuestionSet.grain
@@ -179,9 +165,7 @@ How would you like to alter malt character:
     Done -       I'm finished modifying malt character (return to Modify menu)
 
 EOS
-    puts question
-    answer = $stdin.gets.downcase.chomp!
-    QuestionSet.build answer
+    QuestionSet.route question, 'grain'
   end
 
   def QuestionSet.sweetness
@@ -192,12 +176,10 @@ Choose a desired sweetness character:
     Honey -    Subtle honey character
 
 EOS
-    puts question
-    answer = $stdin.gets.downcase.chomp!
-    QuestionSet.build answer
+    QuestionSet.route question, 'sweetness'
   end
 
-  def QuestionSet.return_to_grain #*
+  def QuestionSet.return_to_grain
     question = <<EOS
 
 Would you like to further modify this recipe's grain bill?
@@ -205,9 +187,7 @@ Would you like to further modify this recipe's grain bill?
     Menu -   Return to Modify menu
 
 EOS
-    puts question
-    answer = $stdin.gets.downcase.chomp!
-    QuestionSet.build answer
+    QuestionSet.route question, 'return_to_grain'
   end
 
   def QuestionSet.roast
@@ -218,9 +198,7 @@ Choose a desired roast character:
     Black -  More pronounced roast, light coffee notes
 
 EOS
-    puts question
-    answer = $stdin.gets.downcase.chomp!
-    QuestionSet.build answer
+    QuestionSet.route question, 'roast'
   end
 
   def QuestionSet.wheat
@@ -229,9 +207,7 @@ EOS
 Base malt composition has been altered to provide more wheat character.
 
 EOS
-    puts question
-    answer = $stdin.gets.downcase.chomp!
-    QuestionSet.build answer
+    QuestionSet.route question, 'wheat'
   end
 
   def QuestionSet.rye
@@ -240,9 +216,7 @@ EOS
 Base malt composition has been altered to provide more rye character.
 
 EOS
-    puts question
-    answer = $stdin.gets.downcase.chomp!
-    QuestionSet.build answer
+    QuestionSet.route question, 'rye'
   end
 
   def QuestionSet.gravity
@@ -254,9 +228,7 @@ Would you like to increase or decrease the standard 6.5% gravity of your saison:
 
 EOS
 
-    puts question
-    answer = $stdin.gets.downcase.chomp!
-    QuestionSet.build answer
+    QuestionSet.route question, 'gravity'
   end
 
   def QuestionSet.modified
@@ -272,9 +244,7 @@ What is your desired final gravity?
     8.5%
 
 EOS
-    puts question
-    answer = $stdin.gets.downcase.chomp!
-    QuestionSet.build answer
+    QuestionSet.route question, 'increase'
   end
 
   def QuestionSet.decrease
@@ -286,9 +256,7 @@ What is your desired final gravity?
     3.5%
 
 EOS
-  puts question
-  answer = $stdin.gets.downcase.chomp!
-  QuestionSet.build answer
+  QuestionSet.route question, 'decrease'
   end
 
   def QuestionSet.hops
@@ -302,9 +270,7 @@ How would you like to change the hop character?
     Aroma(US) -     Increase aroma (American hop character)
 
 EOS
-    puts question
-    answer = $stdin.gets.downcase.chomp!
-    QuestionSet.build answer
+    QuestionSet.route question, 'hops'
   end
 
   def QuestionSet.addl_hop_changes #***
@@ -315,9 +281,7 @@ Would you like to make any other changes to your hop bill?
     No
 
 EOS
-    puts question
-    answer = $stdin.gets.downcase.chomp!
-    QuestionSet.build answer
+    QuestionSet.route question, 'addl_hop_changes'
   end
 
   def QuestionSet.other
@@ -331,9 +295,7 @@ What type of additional ingredient would you like to add?
     Menu -        Return to Recipes menu
 
 EOS
-    puts question
-    answer = $stdin.gets.downcase.chomp!
-    QuestionSet.build answer
+    QuestionSet.route question, 'other'
   end
 
   def QuestionSet.spices
@@ -347,9 +309,7 @@ What spice would you like to add to the recipe?
     Ginger
 
 EOS
-    puts question
-    answer = $stdin.gets.downcase.chomp!
-    QuestionSet.build answer
+    QuestionSet.route question, 'spices'
   end
 
   def QuestionSet.more_spices #***
@@ -360,9 +320,7 @@ Would you like to add additional spices?
     No
 
 EOS
-    puts question
-    answer = $stdin.gets.downcase.chomp!
-    QuestionSet.build answer
+    QuestionSet.route question, 'more_spices'
   end
 
   def QuestionSet.fruit
@@ -375,9 +333,7 @@ What fruit would like to add to the recipe?
     Currants
 
 EOS
-    puts question
-    answer = $stdin.gets.downcase.chomp!
-    QuestionSet.build answer
+    QuestionSet.route question, 'fruit'
   end
 
   def QuestionSet.more_fruit #***
@@ -388,9 +344,7 @@ Would you like to add additional fruits?
     No
 
 EOS
-    puts question
-    answer = $stdin.gets.downcase.chomp!
-    QuestionSet.build answer
+    QuestionSet.route question, 'more_fruit'
   end
 
   def QuestionSet.botanicals
@@ -402,23 +356,7 @@ What botanical would you like to add to the recipe?
     Rose Hips
 
 EOS
-    puts question
-    answer = $stdin.gets.downcase.chomp!
-    QuestionSet.build answer
-  end
-
-  def QuestionSet.adjuncts
-    question = <<EOS
-
-What adjunct would you like to add to the recipe?
-    Corn Sugar -       Adds to gravity without adding body or flavor.
-    Turbinado Sugar -  Can contribute slight molasses character.
-    Rice -             Used to lighten body/flavor.
-
-EOS
-    puts question
-    answer = $stdin.gets.downcase.chomp!
-    QuestionSet.build answer
+    QuestionSet.route question, 'botanicals'
   end
 
   def QuestionSet.more_botanicals #***
@@ -430,9 +368,19 @@ Would you like to add additional botanicals?
     Menu -        Return to Recipes menu
 
 EOS
-    puts question
-    answer = $stdin.gets.downcase.chomp!
-    QuestionSet.build answer
+    QuestionSet.route question, 'more_botanicals'
+  end
+
+  def QuestionSet.adjuncts
+    question = <<EOS
+
+What adjunct would you like to add to the recipe?
+    Corn Sugar -       Adds to gravity without adding body or flavor.
+    Turbinado Sugar -  Can contribute slight molasses character.
+    Rice -             Used to lighten body/flavor.
+
+EOS
+    QuestionSet.route question, 'adjuncts'
   end
 
 end
