@@ -94,7 +94,6 @@ class IngredientController
 
   def four
     # subtract 3 lbs base malt
-
   end
 
   def bitterness

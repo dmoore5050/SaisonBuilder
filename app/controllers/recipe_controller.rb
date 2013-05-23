@@ -1,6 +1,6 @@
 class RecipeController
 
-  def initialize params
+  def initialize(params)
     @params = params
   end
 
@@ -15,7 +15,7 @@ class RecipeController
   def list_recipes
     recipes = Recipe.all
     recipes.each_with_index do |recipe, i|
-      puts "#{i+1}. #{recipe.name}"
+      puts "#{i + 1}. #{recipe.name}"
     end
   end
 

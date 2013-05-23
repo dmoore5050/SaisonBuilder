@@ -6,8 +6,7 @@ module QuestionSet
   OPTION_ARRAY = %w( menu use modify yeast change_primary add_primary blend add_another_strain brett_only brett_secondary grain sweetness roast brown black wheat rye hops flavor_hops aroma_hops gravity other done spices fruit botanicals adjuncts more_botanicals)
   COMPONENTS_ARRAY = %w( dupont french american blend_brett_c blend_brett_b blend_brett_l only_brett_c only_brett_b only_brett_l only_brett_b_trois secondary_brett_b secondary_brett_c secondary_brett_l caramel honey eight seven five four bitterness floral_spicy piney_citrus spicy floral citrus coriander citrus_zest white_peppercorns thai_basil ginger peaches blackberries mango currants hibiscus lavender rose_hips corn_sugar turbinado_sugar rice)
 
-  def QuestionSet.route(question, trackback)
-
+  def self.route(question, trackback)
     puts question
     answer = $stdin.gets.downcase.chomp!
     answer[' '] = '_' if answer.include? ' '
@@ -28,7 +27,7 @@ module QuestionSet
 
   end
 
-  def QuestionSet.menu
+  def self.menu
     question = <<EOS
 
 Please choose one of the following options:
@@ -39,7 +38,7 @@ EOS
     QuestionSet.route question, 'menu'
   end
 
-  def QuestionSet.use
+  def self.use
     question = <<EOS
 
 Choose a saison recipe:
@@ -53,7 +52,7 @@ EOS
     QuestionSet.route question, 'use'
   end
 
-  def QuestionSet.modify
+  def self.modify
     question = <<EOS
 
 What aspect of the recipe would you like to change?
@@ -68,7 +67,7 @@ EOS
     QuestionSet.route question, 'modify'
   end
 
-  def QuestionSet.yeast
+  def self.yeast
     question = <<EOS
 
 Please choose one:
@@ -83,7 +82,7 @@ EOS
     QuestionSet.route question, 'primary'
   end
 
-  def QuestionSet.change_primary
+  def self.change_primary
     question = <<EOS
 
 Please choose a new primary yeast:
@@ -95,7 +94,7 @@ EOS
     QuestionSet.route question, 'change_primary'
   end
 
-  def QuestionSet.add_primary
+  def self.add_primary
     question = <<EOS
 
 Please choose an additional primary yeast:
@@ -107,7 +106,7 @@ EOS
     QuestionSet.route question, 'add_primary'
   end
 
-  def QuestionSet.blend
+  def self.blend
     question = <<EOS
 
 Please choose a strain of Brettanomyces:
@@ -119,7 +118,7 @@ EOS
     QuestionSet.route question, 'blend'
   end
 
-  def QuestionSet.add_another_strain
+  def self.add_another_strain
     question = <<EOS
 
 Would you like to add an additional strain of Brett to blend?
@@ -130,7 +129,7 @@ EOS
     QuestionSet.route question, 'add_another_strain'
   end
 
-  def QuestionSet.brett_only
+  def self.brett_only
     question = <<EOS
 
 Please choose a strain of Brettanomyces
@@ -145,7 +144,7 @@ EOS
     QuestionSet.route question, 'brett_only'
   end
 
-  def QuestionSet.brett_secondary
+  def self.brett_secondary
     question = <<EOS
 
 Please choose a strain of Brettanomyces:
@@ -157,7 +156,7 @@ EOS
     QuestionSet.route question, 'brett_secondary'
   end
 
-  def QuestionSet.grain
+  def self.grain
     question = <<EOS
 
 How would you like to alter malt character:
@@ -171,7 +170,7 @@ EOS
     QuestionSet.route question, 'grain'
   end
 
-  def QuestionSet.sweetness
+  def self.sweetness
     question = <<EOS
 
 Choose a desired sweetness character:
@@ -182,7 +181,7 @@ EOS
     QuestionSet.route question, 'sweetness'
   end
 
-  def QuestionSet.return_to_grain
+  def self.return_to_grain
     question = <<EOS
 
 Would you like to further modify this recipe's grain bill?
@@ -193,7 +192,7 @@ EOS
     QuestionSet.route question, 'return_to_grain'
   end
 
-  def QuestionSet.roast
+  def self.roast
     question = <<EOS
 
 Choose a desired roast character:
@@ -204,7 +203,7 @@ EOS
     QuestionSet.route question, 'roast'
   end
 
-  def QuestionSet.wheat
+  def self.wheat
    question = <<EOS
 
 Base malt composition has been altered to provide more wheat character.
@@ -213,7 +212,7 @@ EOS
     QuestionSet.route question, 'wheat'
   end
 
-  def QuestionSet.rye
+  def self.rye
    question = <<EOS
 
 Base malt composition has been altered to provide more rye character.
@@ -222,7 +221,7 @@ EOS
     QuestionSet.route question, 'rye'
   end
 
-  def QuestionSet.gravity
+  def self.gravity
     question = <<EOS
 
 Would you like to increase or decrease the standard 6% gravity of your saison?
@@ -234,12 +233,12 @@ EOS
     QuestionSet.route question, 'gravity'
   end
 
-  def QuestionSet.modified
+  def self.modified
     puts ' '
     puts 'The recipe has been modified to reflect these changes.'
   end
 
-   def QuestionSet.increase
+  def self.increase
     question = <<EOS
 
 What is your desired final gravity?
@@ -250,7 +249,7 @@ EOS
     QuestionSet.route question, 'increase'
   end
 
-  def QuestionSet.decrease
+  def self.decrease
     question = <<EOS
 
 What is your desired final gravity?
@@ -261,7 +260,7 @@ EOS
   QuestionSet.route question, 'decrease'
   end
 
-  def QuestionSet.hops
+  def self.hops
     question = <<EOS
 
 How would you like to change the hop character?
@@ -273,7 +272,7 @@ EOS
     QuestionSet.route question, 'hops'
   end
 
-  def QuestionSet.flavor_hops
+  def self.flavor_hops
     question = <<EOS
 What kind of hop flavor would you like to add?
     Floral spicy -       Increase flavor/aroma (European hop character)
@@ -281,19 +280,20 @@ What kind of hop flavor would you like to add?
 
 EOS
     QuestionSet.route question, 'flavor_hops'
-end
+  end
 
-  def QuestionSet.aroma_hops
+  def self.aroma_hops
     question = <<EOS
 What kind of hop flavor would you like to add?
     Floral -  Increase aroma (Western European)
     Spicy -   Increase aroma (Eastern European)
     Citrus -  Increase aroma (American)
+
 EOS
     QuestionSet.route question, 'aroma_hops'
-end
+  end
 
-  def QuestionSet.addl_hop_changes #***
+  def self.addl_hop_changes # ***
     question = <<EOS
 
 Would you like to make any other changes to your hop bill?
@@ -304,7 +304,7 @@ EOS
     QuestionSet.route question, 'addl_hop_changes'
   end
 
-  def QuestionSet.other
+  def self.other
     question = <<EOS
 
 What type of additional ingredient would you like to add?
@@ -318,7 +318,7 @@ EOS
     QuestionSet.route question, 'other'
   end
 
-  def QuestionSet.spices
+  def self.spices
     question = <<EOS
 
 What spice would you like to add to the recipe?
@@ -332,7 +332,7 @@ EOS
     QuestionSet.route question, 'spices'
   end
 
-  def QuestionSet.more_spices #***
+  def self.more_spices # ***
     question = <<EOS
 
 Would you like to add additional spices?
@@ -343,7 +343,7 @@ EOS
     QuestionSet.route question, 'more_spices'
   end
 
-  def QuestionSet.fruit
+  def self.fruit
     question = <<EOS
 
 What fruit would like to add to the recipe?
@@ -356,7 +356,7 @@ EOS
     QuestionSet.route question, 'fruit'
   end
 
-  def QuestionSet.more_fruit #***
+  def self.more_fruit # ***
     question = <<EOS
 
 Would you like to add additional fruits?
@@ -367,7 +367,7 @@ EOS
     QuestionSet.route question, 'more_fruit'
   end
 
-  def QuestionSet.botanicals
+  def self.botanicals
     question = <<EOS
 
 What botanical would you like to add to the recipe?
@@ -379,7 +379,7 @@ EOS
     QuestionSet.route question, 'botanicals'
   end
 
-  def QuestionSet.more_botanicals #***
+  def self.more_botanicals # ***
     question = <<EOS
 
 Would you like to add additional botanicals?
@@ -391,7 +391,7 @@ EOS
     QuestionSet.route question, 'more_botanicals'
   end
 
-  def QuestionSet.adjuncts
+  def self.adjuncts
     question = <<EOS
 
 What adjunct would you like to add to the recipe?

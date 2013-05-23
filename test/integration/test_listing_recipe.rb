@@ -6,7 +6,7 @@ class TestListingrecipes < MiniTest::Unit::TestCase
   def test_listing_when_there_are_no_recipes
     assert Recipe.all.empty?
     actual = `ruby saisonbuilder list`
-    assert_equal "", actual
+    assert_equal '', actual
   end
 
   def test_listing_multiple_recipes

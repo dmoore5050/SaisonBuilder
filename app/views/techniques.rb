@@ -1,7 +1,7 @@
 
 module Techniques
 
-  def Techniques.render_list
+  def self.render_list
     techniques_list = <<EOS
 
     SECONDARY FERMENTATION - extended fermentation of a beer that

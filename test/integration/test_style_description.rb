@@ -5,7 +5,7 @@ class TestStyleDescription < MiniTest::Unit::TestCase
 
   def test_prints_style_description
     actual = `ruby saisonbuilder style`
-    expected =   style_description = <<EOS
+    expected = <<EOS
 
     Saison, or Farmhouse ale, is a style of beer native to the
 Wallonia region of Belgium, and is know for its exceptional breadth
