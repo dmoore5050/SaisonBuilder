@@ -2,8 +2,8 @@ require_relative '../../bootstrap_ar'
 
 module QuestionSet
 
-  RECIPE_ARRAY = %w( classic hoppy_classic rye_saison new_world black_saison )
-  OPTION_ARRAY = %w( menu use yeast change_primary add_primary blend add_another_strain brett_only brett_secondary grain sweetness roast brown black wheat rye hops flavor_hops aroma_hops gravity other done spices fruit botanicals adjuncts more_botanicals)
+  RECIPE_NAME_ARRAY = %w( classic hoppy_classic rye_saison new_world black_saison )
+  OPTION_ARRAY = %w( menu list yeast change_primary add_primary blend add_another_strain brett_only brett_secondary grain sweetness roast brown black wheat rye hops flavor_hops aroma_hops gravity other done spices fruit botanicals adjuncts more_botanicals)
   COMPONENTS_ARRAY = %w( dupont french american blend_brett_c blend_brett_b blend_brett_l only_brett_c only_brett_b only_brett_l only_brett_b_trois secondary_brett_b secondary_brett_c secondary_brett_l caramel honey eight seven five four bitterness floral_spicy piney_citrus spicy floral citrus coriander citrus_zest white_peppercorns thai_basil ginger peaches blackberries mango currants hibiscus lavender rose_hips corn_sugar turbinado_sugar rice)
 
   def self.route(question, trackback)
@@ -15,10 +15,10 @@ module QuestionSet
       return
     elsif answer == 'modify'
       modify_trigger = 'mod' # trigger for routing, could be any string
-      QuestionSet.recipe_list modify_trigger
+      QuestionSet.list modify_trigger
     elsif OPTION_ARRAY.include? answer
       QuestionSet.send("#{answer}")
-    elsif RECIPE_ARRAY.include? answer
+    elsif RECIPE_NAME_ARRAY.include? answer
       puts "print recipe...#{answer}"
     elsif COMPONENTS_ARRAY.include? answer
       puts "execute method....#{answer}"
@@ -34,14 +34,14 @@ module QuestionSet
     question = <<EOS
 
 Please choose one of the following options:
-     Use -     Use an existing recipe
+     List -    View a list of existing recipes
      Modify -  Modify an existing base recipe
 
 EOS
     QuestionSet.route question, 'menu'
   end
 
-  def self.recipe_list(modify_trigger = nil)
+  def self.list(modify_trigger = nil)
     question = <<EOS
 
 Choose a saison recipe:
@@ -60,19 +60,18 @@ EOS
   end
 
   def self.create_modified_recipe(question)
-    recipe_name_array = %w( classic hoppy_classic rye_saison new_world black_saison)
     puts question
     answer = $stdin.gets.downcase.chomp!
     answer[' '] = '_' if answer.include? ' '
 
-    if recipe_name_array.include? answer
+    if RECIPE_NAME_ARRAY.include? answer
       puts 'dup the recipe' # placeholder - include actual dup here!!!
       QuestionSet.modify
     else
       puts "\n'#{answer}' is not a valid option. Please choose from the recipes listed."
       puts "Type 'Menu' to return to Recipes menu, or 'Quit' to exit SaisonBuilder."
       modify_trigger = 'mod' # trigger for routing, could be any string
-      QuestionSet.recipe_list modify_trigger
+      QuestionSet.list modify_trigger
     end
   end
 
