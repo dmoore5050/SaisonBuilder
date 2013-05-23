@@ -23,8 +23,10 @@ when 'ingredients'
   ingredient_controller.list_ingredients
 when 'build'
   QuestionSet.menu
+when 'add'
+  recipe_controller.create
 when 'view'
-  recipe_controller.vew
+  recipe_controller.view
 when 'list'
   recipe_controller.list_recipes
 when 'delete'
