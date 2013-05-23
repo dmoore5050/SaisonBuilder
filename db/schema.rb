@@ -16,23 +16,23 @@ ActiveRecord::Schema.define(:version => 20130522142100) do
   create_table "ingredients", :force => true do |t|
     t.string  "name"
     t.string  "description"
-    t.integer "type_code"
+    t.string  "type_code"
     t.integer "yeast_code_wyeast"
     t.integer "yeast_code_wl"
   end
 
   create_table "recipe_ingredients", :force => true do |t|
-    t.string "recipe_id"
-    t.string "ingredient_id"
-    t.string "quantity"
-    t.string "usage"
-    t.string "duration"
+    t.string  "recipe_id"
+    t.string  "ingredient_id"
+    t.integer "quantity"
+    t.string  "usage"
+    t.string  "duration"
   end
 
   create_table "recipes", :force => true do |t|
-    t.string "name"
-    t.string "boil_length"
-    t.string "primary_fermentation_temp"
+    t.string  "name"
+    t.integer "boil_length"
+    t.string  "primary_fermentation_temp"
   end
 
 end
