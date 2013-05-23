@@ -16,7 +16,7 @@ class IngredientController
     puts ' '
     ingredients.each_with_index do |ingredient, i|
       ingredient_name = "#{i + 1}. #{ingredient.name}:"
-      puts ingredient_name.ljust(26) + "#{ingredient.description}"
+      puts ingredient_name.capitalize.ljust(26) + "#{ingredient.description}"
     end
   end
 
