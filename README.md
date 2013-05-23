@@ -1,5 +1,5 @@
-Saison Builder: a @NashSoftware capstone project
-================================================
+SaisonBuilder: <br /> a @NashSoftware capstone project
+======================================================
 
 Purpose
 -------
@@ -12,25 +12,39 @@ The goal of this project is to create an app to help novice and veteran experts 
 Project Status
 --------------
 Basic database add-remove-list functionality in place.
+Migrations/models in place.
+The following commands are fully functional:
+
+* sb
+* sb style
+* sb techniques
+* sb ingredients
+* sb list
+* sb delete
+
+'sb build' and 'sb view' are both partially implemented.
 
 Features
 --------
-The primary feature of this app will be the ability to pick and choose from a broad spectrum of ingredients and techniques to design an all-grain Saison recipe to the user's custom specifications and skill level.
+The primary feature of this app will be the ability to use or modify a library of saison recipes to the user's custom specifications.
 
-Dynamically generated recipes can then be saved in a user-specific library for later retrieval.
+In the future, saison builder will include the ability to dynamically generate recipes that can then be saved in a user-specific library for later retrieval.
 
-Additionally, a small library of pre-generated recipes will be available.
+Additionally, a small library style and technique definitions will be included.
 
 Usage Instructions
 ------------------
 Planned usage is as follows:
 
-To begin using the app, type either:
+To begin using the app, cd to the SaisonBuilder directory and type:
 
-    > saison_builder
-or
+    > ruby saisonbuilder
 
-    > sb
+Optionally, add the following to your .zshrc or .bash_profile files to open
+with a single 'sb' or 'saisonbuilder' command:
+
+    > alias sb='ruby ~/your/file/path/saisonbuilder'
+    > alias saisonbuilder='ruby ~/your/file/path/saisonbuilder'
 
 This will bring up a menu displaying the following options:
 
@@ -39,9 +53,8 @@ This will bring up a menu displaying the following options:
     > Learn about brewing techniques:  sb techniques
     > Learn about ingredients:         sb ingredients
     > View recipe library:             sb list
-    > Build a new recipe:              sb add <recipe_name>
-    > Access an existing recipe:       sb open <recipe_name>
-    > Modify an existing recipe:       sb modify <recipe_name>
+    > Modify a recipe:                 sb build <recipe_name>
+    > View an existing recipe:         sb view <recipe_name>
     > Delete an existing recipe:       sb delete <recipe_name>
 
 **The user is then guided through a series of questions to determine and/or modify an appropriate recipe.**

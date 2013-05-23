@@ -22,10 +22,9 @@ Learn about the saison style:    sb style
 Learn about brewing techniques:  sb techniques
 Learn about ingredients:         sb ingredients
 View recipe library:             sb list
-Build a new recipe:              sb build <recipe_name>
-Modify an existing recipe:       sb modify <recipe_name>
-Delete an existing recipe:       sb delete <recipe_name>
+Modify a recipe:                 sb build <recipe_name>
 View an existing recipe:         sb view <recipe_name>
+Delete an existing recipe:       sb delete <recipe_name>
 EOS
 
     expected = logo + menu
