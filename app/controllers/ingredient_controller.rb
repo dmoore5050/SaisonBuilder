@@ -15,8 +15,15 @@ class IngredientController
     ingredients = Ingredient.all
     puts ' '
     ingredients.each_with_index do |ingredient, i|
-      ingredient_name = "#{i+1}. #{ingredient.name}:"
+      ingredient_name = "#{i + 1}. #{ingredient.name}:"
       puts ingredient_name.ljust(26) + "#{ingredient.description}"
+    end
+  end
+
+  def delete
+    matching_ingredients = Ingredient.where(name: params[:ingredient][:name]).all
+    matching_ingredients.each do |ingredient|
+      ingredient.destroy
     end
   end
 
