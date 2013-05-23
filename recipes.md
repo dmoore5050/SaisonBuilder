@@ -10,7 +10,7 @@
 >1 lbs Dextrose
 >
 >1.5 oz Styrian Goldings @ 60 mins <br />
->1 oz Saaz @ 15 mins
+>0.5 oz Saaz @ 15 mins
 >
 >Dupont (Wyeast 3724/WLP 565)
 
@@ -44,6 +44,7 @@
 >6 lbs Continental Pilsner <br />
 >3 lbs Rye Malt <br />
 >1 lbs Munich
+>1 lb dextrose
 >
 >1.75 oz Hallertau @ 60 mins <br />
 >1 oz Hallertau @ 1 min
@@ -79,8 +80,8 @@
 >Mash 90 mins @ 149F<br />
 >Boil length: 60 min
 >
->7 lbs Pale 2-row malt <br />
->3 lbs Munich <br />
+>8 lbs Pale 2-row malt <br />
+>2 lbs Munich <br />
 >0.4 lbs Carafa 2 special <br />
 >0.4 lbs Chocolate malt
 >
