@@ -20,9 +20,10 @@ The following commands are fully functional:
 * sb techniques
 * sb ingredients
 * sb list
+* sb view <'recipe name'>
 * sb delete
 
-'sb build' and 'sb view' are both partially implemented.
+'sb build' is partially implemented.
 
 Features
 --------
@@ -30,7 +31,7 @@ The primary feature of this app will be the ability to use or modify a library o
 
 In the future, saison builder will include the ability to dynamically generate recipes that can then be saved in a user-specific library for later retrieval.
 
-Additionally, a small library style and technique definitions will be included.
+Additionally, a small library of style and technique definitions will be included.
 
 Usage Instructions
 ------------------
@@ -59,11 +60,9 @@ This will bring up a menu displaying the following options:
 
 **The user is then guided through a series of questions to determine and/or modify an appropriate recipe.**
 
-(work in progress)
-
 Demo
 ----
-Once it's released, please download the app and try it out - it's free!
+Please download the app and try it out - it's free!
 
 Known Bugs
 ----------
@@ -78,6 +77,15 @@ Changelog
 
 5/10/2013 - Created initial repository with README
 5/13/2013 - Refined/fleshed out README and user_stories
+5/14/2013 - Added initial gemfile, rakefile, bootstrap_ar, model, tests.
+5/15/2013 - Added initial migration, db structure.
+5/18/2013 - Added default recipe and ingredient list markdowns.
+5/19/2013 - Implemented main menu, style, and techniques commands, seeding ingredients.
+5/20/2013 - Implemented initial controllers, question_set module.
+5/21/2013 - Implemented initial REPL.
+5/22/2013 - Restructured and simplified database schema entirely. Began work on seeding initial recipes.
+5/23/2013 - Completed initial recipe seeding. Implemented view recipe command.
+5/24/2013 - Fixed display bugs, streamlined recipe seeding and view method.
 
 License
 -------
