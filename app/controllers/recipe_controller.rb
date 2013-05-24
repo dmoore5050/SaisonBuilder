@@ -33,7 +33,6 @@ class RecipeController
     ingredient_list = RecipeIngredient.where("recipe_id = #{matching_id}").all
     rendered_recipe = ''
     recipe_head = %Q(
-
 Name:          #{matching_recipe.name.capitalize}
 Batch size:    5 gallons
 Mash:          90 mins @ 149F
@@ -42,8 +41,8 @@ Boil length:   #{matching_recipe.boil_length} mins
 )
     rendered_recipe << recipe_head
 
-  ingredient_types = %w(grain adjunct hop spice botanical yeast)
-  ingredient_types.each do | type |
+  ingredient_print_order = %w(grain adjunct hop spice botanical yeast)
+  ingredient_print_order.each do | type |
     rendered_recipe << render_ingredient_bill(type, ingredient_list)
   end
 
@@ -59,7 +58,6 @@ Primary Fermentation Temp:  #{matching_recipe.primary_fermentation_temp}
 
     ingredient_list.each do | ingredient |
       ingr_record = Ingredient.where("id = #{ingredient.ingredient_id}").first
-
       if ingr_record.type_code == match_code
         ingredient_bill << build_line_item(match_code, ingredient, ingr_record)
       end
@@ -70,10 +68,10 @@ Primary Fermentation Temp:  #{matching_recipe.primary_fermentation_temp}
   def build_line_item(match_code, ingredient, ingr_record)
     measure = quantity_unit match_code
 
-    line_item = "#{ingredient.quantity} #{measure} #{ingr_record.name.titleize}"
+    line_item = "#{ingredient.quantity} #{measure} #{ingr_record.name.titleize}".ljust(25)
+    line_item << "Add during: #{ingredient.usage.capitalize}" unless ingredient.usage.nil?
     line_item << ", @ #{ingredient.duration}" unless ingredient.duration.nil?
-    line_item << ", #{ingredient.usage.capitalize}. " unless ingredient.usage.nil?
-    line_item << "White Labs WLP#{ingr_record.yeast_code_wl}" unless ingr_record.yeast_code_wl.nil?
+    line_item << ". Mfg. code(s): White Labs WLP#{ingr_record.yeast_code_wl}" unless ingr_record.yeast_code_wl.nil?
     line_item << ", Wyeast #{ingr_record.yeast_code_wyeast}" unless ingr_record.yeast_code_wyeast.nil?
     line_item << "\n"
     line_item
@@ -82,7 +80,7 @@ Primary Fermentation Temp:  #{matching_recipe.primary_fermentation_temp}
   def quantity_unit(match_code)
     case match_code
     when 'hop' || 'spice' || 'botanicals' then 'oz'
-    when 'yeast' then 'package'
+    when 'yeast' then 'pkg'
     else 'lbs'
     end
   end
