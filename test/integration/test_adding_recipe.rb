@@ -24,7 +24,7 @@ class TestAddingRecipe < MiniTest::Unit::TestCase
   def test_duplicate_names_outputs_error_message
     Recipe.create(name: 'foo')
     results = `ruby saisonbuilder add foo`
-    assert results.include?('That recipe name is already assigned'), "Actually was '#{results}'"
+    assert results.include?(' is already assigned'), "Actually was '#{results}'"
   end
 
 end

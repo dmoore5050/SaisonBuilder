@@ -15,7 +15,7 @@ class IngredientController
     ingredients = Ingredient.all
     puts ' '
     ingredients.each_with_index do |ingredient, i|
-      ingredient_name = "#{i + 1}. #{ingredient.name}:"
+      ingredient_name = "#{i + 1}. #{ingredient.name.capitalize}:"
       puts ingredient_name.capitalize.ljust(26) + "#{ingredient.description}"
     end
   end
@@ -80,7 +80,7 @@ class IngredientController
   end
 
   def caramel
-    # add 0.5lb caramunich 60
+    # add 0.5 lb caramunich 60
   end
 
   def honey

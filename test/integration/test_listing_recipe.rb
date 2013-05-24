@@ -14,8 +14,8 @@ class TestListingrecipes < MiniTest::Unit::TestCase
     Recipe.create(name: 'bar')
     actual = `ruby saisonbuilder list`
     expected = <<EOS
-1. foo
-2. bar
+1. Foo
+2. Bar
 EOS
     assert_equal expected, actual
   end

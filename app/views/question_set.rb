@@ -8,8 +8,7 @@ module QuestionSet
 
   def self.route(question, trackback)
     puts question
-    answer = $stdin.gets.downcase.chomp!
-    answer[' '] = '_' if answer.include? ' '
+    answer = $stdin.gets.downcase.chomp!.tr(' ','_')
 
     if answer.include?('q') || answer.include?('x')
       return
@@ -52,7 +51,7 @@ Choose a saison recipe:
     Black Saison -   Complex malt character, mild roast, spicy yeast character
 
 EOS
-    unless modify_trigger.nil?
+    if !modify_trigger.nil?
       QuestionSet.create_modified_recipe question
     else
       QuestionSet.route question, 'use'

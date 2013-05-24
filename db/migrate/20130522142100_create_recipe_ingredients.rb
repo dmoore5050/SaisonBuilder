@@ -4,7 +4,7 @@ class CreateRecipeIngredients < ActiveRecord::Migration
     create_table :recipe_ingredients do |t|
       t.string :recipe_id
       t.string :ingredient_id
-      t.integer :quantity
+      t.float :quantity
       t.string :usage
       t.string :duration
     end
