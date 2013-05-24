@@ -14,7 +14,7 @@ class RecipeController
 
   def list_recipes
     recipes = Recipe.all
-    puts ' '
+    puts "\n"
     recipes.each_with_index do |recipe, i|
       puts "#{i + 1}. #{recipe.name.titleize}"
     end

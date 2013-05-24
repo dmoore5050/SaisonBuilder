@@ -7,8 +7,10 @@ connect_to database
 
 command = nil
 command = ARGV[0].downcase unless ARGV[0].nil?
+name = ARGV[1]
+name = ARGV[1] + ' ' + ARGV[2] unless ARGV[2].nil?
 
-params = { command: command, recipe: { name: ARGV[1] } }
+params = { command: command, recipe: { name: name } }
 recipe_controller = RecipeController.new(params)
 ingredient_controller = IngredientController.new
 
