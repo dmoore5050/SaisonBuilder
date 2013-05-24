@@ -115,11 +115,9 @@ recipe_array = [
 recipe_array.each do | recipe_arguments, ingredient_profiles |
   name, boil_length, ferm_temp = recipe_arguments
   the_recipe = Recipe.create(name: name, boil_length: boil_length, primary_fermentation_temp: ferm_temp)
-  the_recipe.save
   ingredient_profiles.each_with_object(the_recipe) do | ingredient |
     ingredient_name, usage, quantity, duration = ingredient
     ingr = Ingredient.where(name: ingredient_name).first
-    the_recipe_ingredient = the_recipe.recipe_ingredients.create(usage: usage, quantity: quantity, duration: duration, ingredient_id: ingr.id)
-    the_recipe_ingredient.save
+    the_recipe_ingredient = the_recipe.recipe_ingredients.create(usage: usage, quantity: quantity, duration: duration, ingredient_id: ingr)
   end
 end
