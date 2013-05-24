@@ -8,7 +8,7 @@ module QuestionSet
 
   def self.route(question, trackback)
     puts question
-    answer = $stdin.gets.downcase.chomp!.tr(' ','_')
+    answer = $stdin.gets.downcase.chomp!.tr(' ', '_')
 
     if answer.include?('q') || answer.include?('x')
       return

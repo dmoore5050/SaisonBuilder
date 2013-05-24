@@ -1,7 +1,7 @@
 module Helper
 
   def titleize
-    self.split(' ').collect {|word| word.capitalize}.join(" ")
+    self.split(' ').map { |word| word.capitalize }.join(' ')
   end
 
 end

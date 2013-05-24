@@ -46,7 +46,6 @@ ingredient_list.each do | name, description, type_code, yeast_code_wl, yeast_cod
   Ingredient.create(name: name, description: description, type_code: type_code, yeast_code_wyeast: yeast_code_wyeast, yeast_code_wl: yeast_code_wl)
 end
 
- # ROUGH DRAFT
 recipe_array = [
   [
     ['classic', 90, '85F'],

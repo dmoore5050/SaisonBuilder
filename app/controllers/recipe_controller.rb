@@ -14,6 +14,7 @@ class RecipeController
 
   def list_recipes
     recipes = Recipe.all
+    puts ' '
     recipes.each_with_index do |recipe, i|
       puts "#{i + 1}. #{recipe.name.titleize}"
     end
@@ -56,31 +57,34 @@ Primary Fermentation Temp:  #{matching_recipe.primary_fermentation_temp}
   def render_ingredient_bill(match_code, ingredient_list)
     ingredient_bill = ''
 
-    case match_code
-    when 'hop' || 'spice' || 'botanicals' then measure = 'oz'
-    when 'yeast' then measure = 'package'
-    else measure = 'lbs'
-    end
-
     ingredient_list.each do | ingredient |
-      ingredient_record = Ingredient.where("id = #{ingredient.ingredient_id}").first
-      # puts match_code + ' ' + ingredient_record.type_code
-      if ingredient_record.type_code == match_code
-        line_item = "#{ingredient.quantity} #{measure} #{ingredient_record.name.titleize}"
-        if !ingredient.duration.nil?
-          line_item << ", @ #{ingredient.duration} "
-        elsif !ingredient.usage.nil?
-          line_item << ", #{ingredient.usage.capitalize} "
-        elsif !ingredient_record.yeast_code_wl.nil?
-          line_item << "White Labs WLP#{ingredient_record.yeast_code_wl}"
-        elsif !ingredient_record.yeast_code_wyeast.nil?
-          line_item << ", Wyeast #{ingredient_record.yeast_code_wyeast}"
-        end
-        line_item << "\n"
-        ingredient_bill << line_item
+      ingr_record = Ingredient.where("id = #{ingredient.ingredient_id}").first
+
+      if ingr_record.type_code == match_code
+        ingredient_bill << build_line_item(match_code, ingredient, ingr_record)
       end
     end
     ingredient_bill
+  end
+
+  def build_line_item(match_code, ingredient, ingr_record)
+    measure = quantity_unit match_code
+
+    line_item = "#{ingredient.quantity} #{measure} #{ingr_record.name.titleize}"
+    line_item << ", @ #{ingredient.duration}" unless ingredient.duration.nil?
+    line_item << ", #{ingredient.usage.capitalize}. " unless ingredient.usage.nil?
+    line_item << "White Labs WLP#{ingr_record.yeast_code_wl}" unless ingr_record.yeast_code_wl.nil?
+    line_item << ", Wyeast #{ingr_record.yeast_code_wyeast}" unless ingr_record.yeast_code_wyeast.nil?
+    line_item << "\n"
+    line_item
+  end
+
+  def quantity_unit(match_code)
+    case match_code
+    when 'hop' || 'spice' || 'botanicals' then 'oz'
+    when 'yeast' then 'package'
+    else 'lbs'
+    end
   end
 
   private
