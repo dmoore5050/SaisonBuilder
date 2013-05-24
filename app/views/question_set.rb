@@ -59,12 +59,28 @@ EOS
   end
 
   def self.create_modified_recipe(question)
+
     puts question
     answer = $stdin.gets.downcase.chomp!
     answer[' '] = '_' if answer.include? ' '
 
     if RECIPE_NAME_ARRAY.include? answer
-      puts 'dup the recipe' # placeholder - include actual dup here!!!
+
+      puts "\nPlease give your new recipe a unique name:\n\n"
+      new_name = $stdin.gets.downcase.chomp!
+      formatted_answer = answer.tr('_', ' ')
+      base_recipe = Recipe.where(name: formatted_answer).first
+      new_recipe = base_recipe.dup
+      new_recipe[:name] = new_name
+      new_recipe.save
+
+      ingr_array = RecipeIngredient.where(recipe_id: base_recipe.id)
+      ingr_array.each do | recipe_ingr_record |
+        new_recipe_ingr = recipe_ingr_record.dup
+        new_recipe_ingr[:recipe_id] = new_recipe.id
+        new_recipe_ingr.save
+      end
+
       QuestionSet.modify
     else
       puts "\n'#{answer}' is not a valid option. Please choose from the recipes listed."
