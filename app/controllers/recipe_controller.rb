@@ -24,12 +24,17 @@ class RecipeController
 
   def delete
     matching_recipes = Recipe.where(name: params[:recipe][:name]).all
-    matching_recipes.each do |recipe|
+    matching_recipes.each do | recipe |
+      ingr_array = RecipeIngredient.where( recipe_id: recipe.id).all
+      ingr_array.each do | recipe_ingredient |
+        recipe_ingredient.destroy
+      end
       recipe.destroy
     end
   end
 
   def view
+    puts params[:recipe] # in for test purposes
     matching_recipe = Recipe.where(name: params[:recipe][:name]).first
     matching_id = matching_recipe.id
     ingredient_list = RecipeIngredient.where("recipe_id = #{matching_id}").all
