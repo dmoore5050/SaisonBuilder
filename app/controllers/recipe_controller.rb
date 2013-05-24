@@ -18,6 +18,8 @@ class RecipeController
     recipes.each_with_index do |recipe, i|
       puts "#{i + 1}. #{recipe.name.titleize}"
     end
+    puts "\nTo view a recipe, type 'sb view <recipe name>."
+    puts "Example: $ sb view black saison"
   end
 
   def delete
@@ -68,13 +70,12 @@ Primary Fermentation Temp:  #{matching_recipe.primary_fermentation_temp}
   def build_line_item(match_code, ingredient, ingr_record)
     measure = quantity_unit match_code
 
-    line_item = "#{ingredient.quantity} #{measure} #{ingr_record.name.titleize}".ljust(25)
+    line_item = "#{ingredient.quantity} #{measure} #{ingr_record.name.titleize}".ljust(28)
     line_item << "Add during: #{ingredient.usage.capitalize}" unless ingredient.usage.nil?
     line_item << ", @ #{ingredient.duration}" unless ingredient.duration.nil?
     line_item << ". Mfg. code(s): White Labs WLP#{ingr_record.yeast_code_wl}" unless ingr_record.yeast_code_wl.nil?
     line_item << ", Wyeast #{ingr_record.yeast_code_wyeast}" unless ingr_record.yeast_code_wyeast.nil?
     line_item << "\n"
-    line_item
   end
 
   def quantity_unit(match_code)

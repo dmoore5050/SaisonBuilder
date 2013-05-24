@@ -3,7 +3,7 @@ In order to find a saison recipe that I can brew,<br>
 And that will help me establish a baseline for the Saison style:<br>
 
  * To access initial menu, user runs > saison_builder
- * If the user is a first-time app user, User answers baseline skill survey, after which menu displays 
+ * If the user is a first-time app user, User answers baseline skill survey, after which menu displays
  * To view preloaded recipes, user runs `saison_builder list`
  * User chooses a recipe based on style descriptions provided by typing `saison_builder open <recipe_name>`
  * User views provided saison recipe, and chooses to use it, OR
@@ -14,9 +14,9 @@ And that will help me establish a baseline for the Saison style:<br>
 As an experienced homebrewer/inexperienced Saison drinker/brewer,<br>
 In order to find a solid base saison recipe,<br>
 That I can modify freely to meet my tastes:<br>
- 
+
  * To access initial menu, user runs `saison_builder`
- * If the user is a first-time app user, User answers baseline skill survey, after which menu displays 
+ * If the user is a first-time app user, User answers baseline skill survey, after which menu displays
  * To view preloaded recipes, user runs `saison_builder list`
  * User chooses a recipe based on style descriptions provided
  * User views provided saison recipe, and chooses to use it, OR
@@ -54,7 +54,7 @@ As a user who wishes to learn more about the saison style,<br>
 Or about specific ingredients or brewing techniques:<br>
 
  * User runs saison_builder to access initial menu
- * If the user is a first-time app user, User answers baseline skill survey, after which menu displays 
+ * If the user is a first-time app user, User answers baseline skill survey, after which menu displays
  * To display options for additional reading, user runs `saison_builder learn`
  * To open style guide, user runs `saison_builder style`
  * To learn about specific saison-brewing techniques, user runs `saison_builder techniques`
@@ -63,36 +63,3 @@ Or about specific ingredients or brewing techniques:<br>
  * User then selects an ingredient area to learn about by running `saison_builder ingredients <technique_name>`
 
 <hr>
-
-
-#Rough draft:
-
-####as a _ homebrewing newbie ...
-* in order to _ find an easy to brew recipe
- * that is _ a classic style example
- * that is _ hop-centric, rustic
- * that is _ bright, citrusy
- * that uses _ rye
- * that uses _ wheat
-
-####as a _ experienced homebrewer/saison_newbie ...
-* in order to _ find a quick recipe
- * that is _ a classic style example (Dupont, pils, bit of munich, restrained saaz)
- * that is _ hop-centric (Dupont strain, backload saaz)
- * that is _ bright, citrusy (3711, zest, sorachi/motueka)
-* in order to _ experiment with Brett
- * that has _ subtle brett presence (hybrid yeast, or finish with Brett)
- * that is _ hop-centric w/ subtle brett (hybrid yeast, or finish with Brett, saaz backload)
- * that is _ bright, citrusy (3711, zest, sorachi/motueka, brett C?)
- * that is _ solely fermented with Brett (variant...)
-
-####as a _ saison_vet/adjunct newbie ...
-* in order to _ focus on a specific adjunct flavor
- * that is _ floral (classic base, floral addition)
- * that is _ spiced (specific spices)
-
-####as a _ saison/adjunct vet
-* in order to _ find a unique/experimental combination of ingredients
- * that is _ floral/brett-finished/rye
- * that is _ all brett/fruit/zest
- * that is _ black_saison/brett-finished/spiced

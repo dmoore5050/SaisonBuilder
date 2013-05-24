@@ -5,8 +5,13 @@ class TestListingrecipes < MiniTest::Unit::TestCase
 
   def test_listing_when_there_are_no_recipes
     assert Recipe.all.empty?
+    expected = <<EOS
+
+\nTo view a recipe, type 'sb view <recipe name>.
+Example: $ sb view black saison
+EOS
     actual = `ruby saisonbuilder list`
-    assert_equal "\n", actual
+    assert_equal expected, actual
   end
 
   def test_listing_multiple_recipes
@@ -17,6 +22,8 @@ class TestListingrecipes < MiniTest::Unit::TestCase
 
 1. Foo
 2. Bar
+\nTo view a recipe, type 'sb view <recipe name>.
+Example: $ sb view black saison
 EOS
     assert_equal expected, actual
   end

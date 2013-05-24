@@ -20,7 +20,7 @@ The following commands are fully functional:
 * sb techniques
 * sb ingredients
 * sb list
-* sb view <'recipe name'>
+* sb view <recipe name>
 * sb delete
 
 'sb build' is partially implemented.
