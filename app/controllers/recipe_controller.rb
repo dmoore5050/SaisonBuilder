@@ -25,7 +25,7 @@ class RecipeController
   def delete
     matching_recipes = Recipe.where(name: params[:recipe][:name]).all
     matching_recipes.each do | recipe |
-      ingr_array = RecipeIngredient.where( recipe_id: recipe.id).all
+      ingr_array = RecipeIngredient.where(recipe_id: recipe.id).all
       ingr_array.each do | recipe_ingredient |
         recipe_ingredient.destroy
       end
