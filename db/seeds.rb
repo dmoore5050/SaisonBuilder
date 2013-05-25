@@ -55,7 +55,7 @@ recipe_array = [
       ['corn sugar', 'peak krausen', 1, nil],
       ['styrian goldings', 'boil', 1.5, '60 min'],
       ['saaz', 'boil', 0.5, '15 min'],
-      ['dupont strain', 'primary', 1, nil, 565, 3724]
+      ['dupont strain', 'primary', 1, nil]
     ]
   ],
   [
@@ -69,7 +69,7 @@ recipe_array = [
       ['hallertau', 'boil', 1, '15 min'],
       ['styrian goldings', 'boil', 0.7, '1 min'],
       ['saaz', 'dryhop', 1, '5 days'],
-      ['dupont strain', 'primary', 1, nil, 565, 3724]
+      ['dupont strain', 'primary', 1, nil]
     ]
   ],
   [
@@ -81,7 +81,7 @@ recipe_array = [
       ['corn sugar', 'peak krausen', 1, nil],
       ['hallertau', 'boil', 1.75, '60 min'],
       ['hallertau', 'boil', 1, '1 min'],
-      ['french saison', 'primary', 1, nil, 656, 3711]
+      ['french saison', 'primary', 1, nil]
     ]
   ],
   [
@@ -96,7 +96,7 @@ recipe_array = [
       ['motueka', 'boil', 1, '1 min'],
       ['amarillo', 'dryhop', 1, '5 days'],
       ['simcoe', 'dryhop', 1, '5 days'],
-      ['french saison', 'primary', 1, nil, 656, 3711]
+      ['french saison', 'primary', 1, nil]
     ]
   ],
   [
@@ -107,7 +107,7 @@ recipe_array = [
       ['carafa 2 special', nil, 0.4, nil],
       ['chocolate malt', nil, 0.4, nil],
       ['hallertau', 'boil', 1.5, '60 min'],
-      ['american farmhouse', 'primary', 1, nil, 670],
+      ['american farmhouse', 'primary', 1, nil],
     ]
   ]
 ]

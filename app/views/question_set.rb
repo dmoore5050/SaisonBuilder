@@ -5,10 +5,11 @@ class QuestionSet
   attr_reader :record
 
   RECIPE_NAME_ARRAY = %w( classic hoppy_classic rye_saison new_world black_saison )
-  OPTION_ARRAY = %w( menu list_recipes modify yeast change_primary add_primary blend brett_only brett_secondary grain sweetness roast brown black wheat rye hops flavor_hops aroma_hops gravity other spices fruit botanicals adjuncts more_botanicals)
+  OPTION_ARRAY = %w( menu list_recipes modify yeast primary blend brett_only brett_secondary grain sweetness roast brown black wheat rye hops flavor_hops aroma_hops gravity other spices fruit botanicals adjuncts more_botanicals)
   COMPONENTS_ARRAY = %w( dupont french american blend_brett_c blend_brett_b blend_brett_l only_brett_c only_brett_b only_brett_l only_brett_b_trois secondary_brett_b secondary_brett_c secondary_brett_l caramel honey wheat rye brown black eight seven five four bitterness floral_spicy piney_citrus spicy floral citrus coriander citrus_zest white_peppercorns thai_basil ginger peaches blackberries mango currants hibiscus lavender rose_hips corn_sugar turbinado_sugar rice)
 
-  def init
+  def initialize(record = nil)
+    @record = record
   end
 
   def route(question, trackback)
@@ -27,7 +28,7 @@ class QuestionSet
       selected_recipe = RecipeController.new(params)
       selected_recipe.view
     elsif COMPONENTS_ARRAY.include? answer
-      component = IngredientController.new @record
+      component = IngredientController.new(@record)
       component.send("#{answer}")
     else
       puts "\n'#{answer}' is not a valid option. Please choose from the choices listed."
@@ -143,8 +144,7 @@ EOS
     question = <<EOS
 
 Please choose one:
-    Change Primary -   Change the primary yeast used
-    Add Primary -      Add an additional primary yeast
+    Primary -          Change the primary yeast used
     Blend -            Blend Brettanomyces with my primary yeast
     Brett Only -       Use only Brettanomyces for fermentation
     Brett Secondary -  Use Brett for secondary fermentation
@@ -154,28 +154,16 @@ EOS
     route question, 'primary'
   end
 
-  def change_primary
+  def primary
     question = <<EOS
 
 Please choose a new primary yeast:
     Dupont -    Dry, spicy, mildly tart/acidic.
     French -    Dry, spicy/peppery, more prominent fruit/citrus
-    American -  Trad'l saison yeast pre-blended with Brettanomyces.
+    American -  Trad'l saison yeast blended with Brettanomyces.
 
 EOS
-    route question, 'change_primary'
-  end
-
-  def add_primary
-    question = <<EOS
-
-Please choose an additional primary yeast:
-    Dupont -    Dry, spicy, mildly tart/acidic.
-    French -    Dry, spicy/peppery, more prominent fruit/citrus
-    American -  Trad'l saison yeast pre-blended with Brettanomyces.
-
-EOS
-    route question, 'add_primary'
+    route question, 'primary'
   end
 
   def blend
