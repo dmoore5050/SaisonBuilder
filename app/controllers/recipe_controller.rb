@@ -34,8 +34,12 @@ class RecipeController
   end
 
   def view
-    puts params[:recipe] # in for test purposes
     matching_recipe = Recipe.where(name: params[:recipe][:name]).first
+    if matching_recipe.nil?
+      puts "\nThat is not a vaild recipe name."
+      puts 'To view a list of possible recipes, type sb list'
+      return
+    end
     matching_id = matching_recipe.id
     ingredient_list = RecipeIngredient.where("recipe_id = #{matching_id}").all
     rendered_recipe = ''

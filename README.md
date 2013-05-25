@@ -1,11 +1,12 @@
-SaisonBuilder: <br /> a @NashSoftware capstone project
-======================================================
+SaisonBuilder:<br /> a [Nashville Software School](nashvillesoftwareschool.com) capstone project
+================================================
+
 
 Purpose
 -------
-This is my Unit 2 (Ruby) Capstone project for Nashville Software School Software Development Fundamentals course.
+SaisonBuilder is my Unit 2 (Ruby) Capstone project for Nashville Software School Software Development Fundamentals course.
 
-The constraints of the project are that they must use standard library Ruby with the exception of being able to use ActiveRecord as an ORM. The concept with this capstone is to demonstrate mastery of Ruby itself.
+The constraints of the project are that they must use standard library Ruby with the exception of using ActiveRecord as an ORM. The concept with this capstone is to demonstrate mastery of Ruby itself.
 
 The goal of this project is to create an app to help novice and veteran experts alike navigate the nearly-limitless options available when designing and brewing an all-grain Saison, or Belgian Farmhouse ale.
 
@@ -23,15 +24,19 @@ The following commands are fully functional:
 * sb view <recipe name>
 * sb delete
 
-'sb build' is partially implemented.
+####To do:
+
++ Implement stubbed-out ingredient methods for 'sb build'
++ Refactor
++ Bugfix
 
 Features
 --------
-The primary feature of this app will be the ability to use or modify a library of saison recipes to the user's custom specifications.
+The primary feature of this app will be the ability to use or modify a library of saison recipes to the user's custom specifications. Modification will be guided by a series of questions, allowing the user to make specific modifications to single elements of the recipe (ie, increase only a specific type of aroma hops, or add a specific spice).
 
 In the future, saison builder will include the ability to dynamically generate recipes that can then be saved in a user-specific library for later retrieval.
 
-Additionally, a small library of style and technique definitions will be included.
+Additionally, a small library of ingredients and style/technique definitions will be included.
 
 Usage Instructions
 ------------------
@@ -85,7 +90,18 @@ Changelog
 5/21/2013 - Implemented initial REPL.
 5/22/2013 - Restructured and simplified database schema entirely. Began work on seeding initial recipes.
 5/23/2013 - Completed initial recipe seeding. Implemented view recipe command.
-5/24/2013 - Fixed display bugs, streamlined recipe seeding and view method.
+5/24/2013 - Fixed display bugs, streamlined recipe seeding and view method. Modify now clones base recipe.
+
+Acknowledgements
+----------------
+
+I would like to thank the following staff and mentors who have lent advice and perspective on this project:
+
++ Eliza Brock
++ Hassan Shamim
++ Ben Bridges
++ Adam Scott
++ Jeff Felchner
 
 License
 -------
