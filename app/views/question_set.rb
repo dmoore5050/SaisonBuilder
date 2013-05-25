@@ -20,7 +20,8 @@ module QuestionSet
     elsif RECIPE_NAME_ARRAY.include? answer
       puts "print recipe...#{answer}"
     elsif COMPONENTS_ARRAY.include? answer
-      puts "execute method....#{answer}"
+      component = IngredientController.new
+      component.send("#{answer}")
     else
       puts "\n'#{answer}' is not a valid option. Please choose from the choices listed."
       puts "Type 'Menu' to return to Recipes menu, or 'Quit' to exit SaisonBuilder."
@@ -202,6 +203,20 @@ EOS
     QuestionSet.route question, 'brett_secondary'
   end
 
+  def self.yeast_redirect_menu
+    question = <<EOS
+
+Your recipe has been modified to reflect these changes.
+
+Are you finished modifying your recipe's yeast bill?
+    Yeast -   No, take me back to the Yeast modification menu.
+    Modify -  Yes, take me back to the Modify Recipe menu.
+    Quit -    I want to exit SaisonBuilder.
+EOS
+
+    QuestionSet.route question, 'yeast_redirect_menu'
+  end
+
   def self.grain
     question = <<EOS
 
@@ -227,17 +242,6 @@ EOS
     QuestionSet.route question, 'sweetness'
   end
 
-  def self.return_to_grain
-    question = <<EOS
-
-Would you like to further modify this recipe's grain bill?
-    Grain -  Return to Grain menu
-    Menu -   Return to Modify menu
-
-EOS
-    QuestionSet.route question, 'return_to_grain'
-  end
-
   def self.roast
     question = <<EOS
 
@@ -255,7 +259,7 @@ EOS
 Base malt composition has been altered to provide more wheat character.
 
 EOS
-    QuestionSet.route question, 'wheat'
+    QuestionSet.grain_redirect_menu
   end
 
   def self.rye
@@ -264,7 +268,21 @@ EOS
 Base malt composition has been altered to provide more rye character.
 
 EOS
-    QuestionSet.route question, 'rye'
+    QuestionSet.grain_redirect_menu
+  end
+
+  def self.grain_redirect_menu
+    question = <<EOS
+
+Your recipe has been modified to reflect these changes.
+
+Are you finished modifying your recipe's grain bill?
+    Grain -   No, take me back to the Grain modification menu.
+    Modify -  Yes, take me back to the Modify Recipe menu.
+    Quit -    I want to exit SaisonBuilder.
+EOS
+
+    QuestionSet.route question, 'grain_redirect_menu'
   end
 
   def self.gravity
@@ -277,11 +295,6 @@ Would you like to increase or decrease the standard 6% gravity of your saison?
 EOS
 
     QuestionSet.route question, 'gravity'
-  end
-
-  def self.modified
-    puts ' '
-    puts 'The recipe has been modified to reflect these changes.'
   end
 
   def self.increase
@@ -304,6 +317,19 @@ What is your desired final gravity?
 
 EOS
   QuestionSet.route question, 'decrease'
+  end
+
+  def self.gravity_redirect_menu
+    question = <<EOS
+
+Your recipe has been modified to reflect these changes.
+
+Are you finished modifying your recipe?
+    Modify -  No, take me back to the Modify Recipe menu.
+    Quit -    Yes, I want to exit SaisonBuilder.
+EOS
+
+    QuestionSet.route question, 'gravity_redirect_menu'
   end
 
   def self.hops
@@ -350,6 +376,20 @@ EOS
     QuestionSet.route question, 'addl_hop_changes'
   end
 
+  def self.hops_redirect_menu
+    question = <<EOS
+
+Your recipe has been modified to reflect these changes.
+
+Are you finished modifying your recipe's hops bill?
+    Hops -   No, take me back to the Hops modification menu.
+    Modify - Yes, take me back to the Modify Recipe menu.
+    Quit -   I want to exit SaisonBuilder.
+EOS
+
+    QuestionSet.route question, 'hops_redirect_menu'
+  end
+
   def self.other
     question = <<EOS
 
@@ -378,15 +418,19 @@ EOS
     QuestionSet.route question, 'spices'
   end
 
-  def self.more_spices # ***
+  def self.spices_redirect_menu
     question = <<EOS
 
-Would you like to add additional spices?
-    Yes
-    No
+Your recipe has been modified to reflect these changes.
 
+Are you finished adding Spices to your recipe?
+    Spices -   No, take me back to the spices modification menu.
+    Modify -   Yes, take me back to the Modify Recipe menu.
+    Other -    Yes, take me back to the Other Ingredients menu.
+    Quit -     I want to exit SaisonBuilder.
 EOS
-    QuestionSet.route question, 'more_spices'
+
+    QuestionSet.route question, 'spices_redirect_menu'
   end
 
   def self.fruit
@@ -402,15 +446,19 @@ EOS
     QuestionSet.route question, 'fruit'
   end
 
-  def self.more_fruit # ***
+  def self.fruit_redirect_menu
     question = <<EOS
 
-Would you like to add additional fruits?
-    Yes
-    No
+Your recipe has been modified to reflect these changes.
 
+Are you finished adding Fruit to your recipe?
+    Fruit -    No, take me back to the Fruit modification menu.
+    Other -    Yes, take me back to the Other Ingredients menu.
+    Modify -   Yes, take me back to the Modify Recipe menu.
+    Quit -     I want to exit SaisonBuilder.
 EOS
-    QuestionSet.route question, 'more_fruit'
+
+    QuestionSet.route question, 'fruit_redirect_menu'
   end
 
   def self.botanicals
@@ -425,16 +473,19 @@ EOS
     QuestionSet.route question, 'botanicals'
   end
 
-  def self.more_botanicals # ***
+  def self.botanicals_redirect_menu
     question = <<EOS
 
-Would you like to add additional botanicals?
-    Botanicals -  Return to Botanicals menu
-    Other -       Return to Other Ingredients menu
-    Menu -        Return to Recipes menu
+Your recipe has been modified to reflect these changes.
 
+Are you finished adding Botanicals to your recipe?
+    Botanicals -  No, take me back to the Botanicals modification menu.
+    Other -       Yes, take me back to the Other Ingredients menu.
+    Modify -      Yes, take me back to the Modify Recipe menu.
+    Quit -        I want to exit SaisonBuilder.
 EOS
-    QuestionSet.route question, 'more_botanicals'
+
+    QuestionSet.route question, 'botanicals_redirect_menu'
   end
 
   def self.adjuncts
@@ -447,6 +498,21 @@ What adjunct would you like to add to the recipe?
 
 EOS
     QuestionSet.route question, 'adjuncts'
+  end
+
+  def self.adjuncts_redirect_menu
+    question = <<EOS
+
+Your recipe has been modified to reflect these changes.
+
+Are you finished adding Adjuncts to your recipe?
+    Adjuncts -  No, take me back to the Adjuncts modification menu.
+    Other -     Yes, take me back to the Other Ingredients menu.
+    Modify -    Yes, take me back to the Modify Recipe menu.
+    Quit -      I want to exit SaisonBuilder.
+EOS
+
+    QuestionSet.route question, 'adjuncts_redirect_menu'
   end
 
 end

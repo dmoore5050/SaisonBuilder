@@ -36,7 +36,7 @@ class RecipeController
   def view
     matching_recipe = Recipe.where(name: params[:recipe][:name]).first
     if matching_recipe.nil?
-      puts "\nThat is not a vaild recipe name."
+      puts "\nThat is not a valid recipe name."
       puts 'To view a list of possible recipes, type sb list'
       return
     end
