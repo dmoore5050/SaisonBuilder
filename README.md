@@ -1,4 +1,4 @@
-SaisonBuilder:<br /> a [Nashville Software School](nashvillesoftwareschool.com) capstone project
+SaisonBuilder:<br /> a [Nashville Software School](http://www.nashvillesoftwareschool.com) capstone project
 ================================================
 
 
