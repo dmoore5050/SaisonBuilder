@@ -118,6 +118,6 @@ recipe_array.each do | recipe_arguments, ingredient_profiles |
   ingredient_profiles.each_with_object(the_recipe) do | ingredient |
     ingredient_name, usage, quantity, duration = ingredient
     ingr = Ingredient.where(name: ingredient_name).first
-    the_recipe_ingredient = the_recipe.recipe_ingredients.create(usage: usage, quantity: quantity, duration: duration, ingredient_id: ingr)
+    the_recipe.recipe_ingredients.create(usage: usage, quantity: quantity, duration: duration, ingredient_id: ingr)
   end
 end

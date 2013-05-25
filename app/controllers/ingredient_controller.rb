@@ -16,7 +16,7 @@ class IngredientController
   def list_ingredients
     ingredients = Ingredient.all
     puts ' '
-    ingredients.each_with_index do |ingredient, i|
+    ingredients.each_with_index do | ingredient, i |
       ingredient_name = "#{i + 1}. #{ingredient.name.capitalize}:"
       puts ingredient_name.capitalize.ljust(26) + "#{ingredient.description}"
     end
@@ -113,6 +113,30 @@ class IngredientController
 
   def honey
     # add 0.5 lb honey malt
+
+    QuestionSet.grain_redirect_menu
+  end
+
+  def wheat
+    # replace 2 lb base malt with wheat
+
+    QuestionSet.grain_redirect_menu
+  end
+
+  def rye
+    # replace 2 lb base malt with rye
+
+    QuestionSet.grain_redirect_menu
+  end
+
+  def brown
+    # add 0.4 lbs chocolate malt
+
+    QuestionSet.grain_redirect_menu
+  end
+
+  def black
+    # add 0.4 lbs chocolate malt/carafa special
 
     QuestionSet.grain_redirect_menu
   end

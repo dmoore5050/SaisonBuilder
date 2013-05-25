@@ -4,7 +4,7 @@ module QuestionSet
 
   RECIPE_NAME_ARRAY = %w( classic hoppy_classic rye_saison new_world black_saison )
   OPTION_ARRAY = %w( menu list yeast change_primary add_primary blend add_another_strain brett_only brett_secondary grain sweetness roast brown black wheat rye hops flavor_hops aroma_hops gravity other done spices fruit botanicals adjuncts more_botanicals)
-  COMPONENTS_ARRAY = %w( dupont french american blend_brett_c blend_brett_b blend_brett_l only_brett_c only_brett_b only_brett_l only_brett_b_trois secondary_brett_b secondary_brett_c secondary_brett_l caramel honey eight seven five four bitterness floral_spicy piney_citrus spicy floral citrus coriander citrus_zest white_peppercorns thai_basil ginger peaches blackberries mango currants hibiscus lavender rose_hips corn_sugar turbinado_sugar rice)
+  COMPONENTS_ARRAY = %w( dupont french american blend_brett_c blend_brett_b blend_brett_l only_brett_c only_brett_b only_brett_l only_brett_b_trois secondary_brett_b secondary_brett_c secondary_brett_l caramel honey wheat rye brown black eight seven five four bitterness floral_spicy piney_citrus spicy floral citrus coriander citrus_zest white_peppercorns thai_basil ginger peaches blackberries mango currants hibiscus lavender rose_hips corn_sugar turbinado_sugar rice)
 
   def self.route(question, trackback)
     puts question
@@ -212,6 +212,7 @@ Are you finished modifying your recipe's yeast bill?
     Yeast -   No, take me back to the Yeast modification menu.
     Modify -  Yes, take me back to the Modify Recipe menu.
     Quit -    I want to exit SaisonBuilder.
+
 EOS
 
     QuestionSet.route question, 'yeast_redirect_menu'
@@ -253,22 +254,28 @@ EOS
     QuestionSet.route question, 'roast'
   end
 
+  def self.brown
+    puts "\nAdding dark malt character to recipe..."
+    component = IngredientController.new
+    component.brown
+  end
+
+  def self.black
+    puts "\nAdding dark malt character to recipe..."
+    component = IngredientController.new
+    component.black
+  end
+
   def self.wheat
-   question = <<EOS
-
-Base malt composition has been altered to provide more wheat character.
-
-EOS
-    QuestionSet.grain_redirect_menu
+    puts "\nChanging base malt composition to add wheat character..."
+    component = IngredientController.new
+    component.wheat
   end
 
   def self.rye
-   question = <<EOS
-
-Base malt composition has been altered to provide more rye character.
-
-EOS
-    QuestionSet.grain_redirect_menu
+    puts "\nChanging base malt composition to add rye character..."
+    component = IngredientController.new
+    component.rye
   end
 
   def self.grain_redirect_menu
@@ -280,6 +287,7 @@ Are you finished modifying your recipe's grain bill?
     Grain -   No, take me back to the Grain modification menu.
     Modify -  Yes, take me back to the Modify Recipe menu.
     Quit -    I want to exit SaisonBuilder.
+
 EOS
 
     QuestionSet.route question, 'grain_redirect_menu'
@@ -327,6 +335,7 @@ Your recipe has been modified to reflect these changes.
 Are you finished modifying your recipe?
     Modify -  No, take me back to the Modify Recipe menu.
     Quit -    Yes, I want to exit SaisonBuilder.
+
 EOS
 
     QuestionSet.route question, 'gravity_redirect_menu'
@@ -365,17 +374,6 @@ EOS
     QuestionSet.route question, 'aroma_hops'
   end
 
-  def self.addl_hop_changes # ***
-    question = <<EOS
-
-Would you like to make any other changes to your hop bill?
-    Yes
-    No
-
-EOS
-    QuestionSet.route question, 'addl_hop_changes'
-  end
-
   def self.hops_redirect_menu
     question = <<EOS
 
@@ -385,6 +383,7 @@ Are you finished modifying your recipe's hops bill?
     Hops -   No, take me back to the Hops modification menu.
     Modify - Yes, take me back to the Modify Recipe menu.
     Quit -   I want to exit SaisonBuilder.
+
 EOS
 
     QuestionSet.route question, 'hops_redirect_menu'
@@ -428,6 +427,7 @@ Are you finished adding Spices to your recipe?
     Modify -   Yes, take me back to the Modify Recipe menu.
     Other -    Yes, take me back to the Other Ingredients menu.
     Quit -     I want to exit SaisonBuilder.
+
 EOS
 
     QuestionSet.route question, 'spices_redirect_menu'
@@ -456,6 +456,7 @@ Are you finished adding Fruit to your recipe?
     Other -    Yes, take me back to the Other Ingredients menu.
     Modify -   Yes, take me back to the Modify Recipe menu.
     Quit -     I want to exit SaisonBuilder.
+
 EOS
 
     QuestionSet.route question, 'fruit_redirect_menu'
@@ -483,6 +484,7 @@ Are you finished adding Botanicals to your recipe?
     Other -       Yes, take me back to the Other Ingredients menu.
     Modify -      Yes, take me back to the Modify Recipe menu.
     Quit -        I want to exit SaisonBuilder.
+
 EOS
 
     QuestionSet.route question, 'botanicals_redirect_menu'
@@ -510,6 +512,7 @@ Are you finished adding Adjuncts to your recipe?
     Other -     Yes, take me back to the Other Ingredients menu.
     Modify -    Yes, take me back to the Modify Recipe menu.
     Quit -      I want to exit SaisonBuilder.
+
 EOS
 
     QuestionSet.route question, 'adjuncts_redirect_menu'
