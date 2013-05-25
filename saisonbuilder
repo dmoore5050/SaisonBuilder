@@ -13,6 +13,7 @@ name = ARGV[1] + ' ' + ARGV[2] unless ARGV[2].nil?
 params = { command: command, recipe: { name: name } }
 recipe_controller = RecipeController.new(params)
 ingredient_controller = IngredientController.new
+question_set = QuestionSet.new
 
 case command
 when nil
@@ -24,7 +25,7 @@ when 'techniques'
 when 'ingredients'
   ingredient_controller.list_ingredients
 when 'build'
-  QuestionSet.menu
+  question_set.menu
 when 'add'
   recipe_controller.create
 when 'view'

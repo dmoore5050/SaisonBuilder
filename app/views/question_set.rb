@@ -1,12 +1,17 @@
 require_relative '../../bootstrap_ar'
 
-module QuestionSet
+class QuestionSet
+
+  attr_reader :record
 
   RECIPE_NAME_ARRAY = %w( classic hoppy_classic rye_saison new_world black_saison )
-  OPTION_ARRAY = %w( menu list_recipes modify yeast change_primary add_primary blend add_another_strain brett_only brett_secondary grain sweetness roast brown black wheat rye hops flavor_hops aroma_hops gravity other done spices fruit botanicals adjuncts more_botanicals)
+  OPTION_ARRAY = %w( menu list_recipes modify yeast change_primary add_primary blend brett_only brett_secondary grain sweetness roast brown black wheat rye hops flavor_hops aroma_hops gravity other spices fruit botanicals adjuncts more_botanicals)
   COMPONENTS_ARRAY = %w( dupont french american blend_brett_c blend_brett_b blend_brett_l only_brett_c only_brett_b only_brett_l only_brett_b_trois secondary_brett_b secondary_brett_c secondary_brett_l caramel honey wheat rye brown black eight seven five four bitterness floral_spicy piney_citrus spicy floral citrus coriander citrus_zest white_peppercorns thai_basil ginger peaches blackberries mango currants hibiscus lavender rose_hips corn_sugar turbinado_sugar rice)
 
-  def self.route(question, trackback)
+  def init
+  end
+
+  def route(question, trackback)
     puts question
     answer = $stdin.gets.downcase.chomp!.tr(' ', '_')
 
@@ -14,23 +19,29 @@ module QuestionSet
       return
     elsif answer == 'modify_recipe'
       modify_trigger = 'mod' # trigger for routing, could be any string
-      QuestionSet.list_recipes modify_trigger
+      list_recipes modify_trigger
     elsif OPTION_ARRAY.include? answer
-      QuestionSet.send("#{answer}")
+      send("#{answer}")
     elsif RECIPE_NAME_ARRAY.include? answer
-      puts "print recipe...#{answer}"
+      params = { recipe: { name: answer.tr('_',' ') } }
+      selected_recipe = RecipeController.new(params)
+      selected_recipe.view
     elsif COMPONENTS_ARRAY.include? answer
-      component = IngredientController.new
+      component = IngredientController.new @record
       component.send("#{answer}")
     else
       puts "\n'#{answer}' is not a valid option. Please choose from the choices listed."
       puts "Type 'Menu' to return to Recipes menu, or 'Quit' to exit SaisonBuilder."
-      QuestionSet.send("#{trackback}")
+      send("#{trackback}")
     end
 
   end
 
-  def self.menu
+  def pass_record
+    @record
+  end
+
+  def menu
     question = <<EOS
 
 Please choose one of the following options:
@@ -38,10 +49,10 @@ Please choose one of the following options:
      Modify Recipe -  Modify an existing base recipe
 
 EOS
-    QuestionSet.route question, 'menu'
+    route question, 'menu'
   end
 
-  def self.list_recipes(modify_trigger = nil)
+  def list_recipes(modify_trigger = nil)
     question = <<EOS
 
 Choose a saison recipe:
@@ -52,41 +63,42 @@ Choose a saison recipe:
     Black Saison -   Complex malt character, mild roast, spicy yeast character
 
 EOS
-    QuestionSet.check_modify_trigger modify_trigger, question
+    check_modify_trigger modify_trigger, question
   end
 
-  def self.check_modify_trigger(modify_trigger, question)
+  def check_modify_trigger(modify_trigger, question)
     if !modify_trigger.nil?
-      QuestionSet.create_modified_recipe question
+      create_modified_recipe question
     else
-      QuestionSet.route question, 'use'
+      route question, 'list_recipes'
     end
   end
 
-  def self.create_modified_recipe(question)
+  def create_modified_recipe(question)
     puts question
     answer = $stdin.gets.downcase.chomp!
 
     if RECIPE_NAME_ARRAY.include? answer.tr(' ', '_')
-      QuestionSet.clone_recipe answer
-      QuestionSet.modify
+      clone_recipe answer
+      modify
     else
-      QuestionSet.invalid_recipe_message answer
+      invalid_recipe_message answer
     end
   end
 
-  def self.clone_recipe(answer)
+  def clone_recipe(answer)
     puts "\nPlease give your new recipe a unique name:\n\n"
     new_name = $stdin.gets.downcase.chomp!
     base_recipe = Recipe.where(name: answer).first
     new_recipe = base_recipe.dup
-    QuestionSet.check_unique_name new_name, new_recipe, answer
+    check_unique_name new_name, new_recipe, answer
+    @record = new_recipe
     new_recipe.save
 
-    QuestionSet.clone_recipe_ingredients base_recipe, new_recipe
+    clone_recipe_ingredients base_recipe, new_recipe
   end
 
-  def self.clone_recipe_ingredients(base_recipe, new_recipe)
+  def clone_recipe_ingredients(base_recipe, new_recipe)
     ingr_array = RecipeIngredient.where(recipe_id: base_recipe.id)
     ingr_array.each do | recipe_ingr_record |
       new_recipe_ingr = recipe_ingr_record.dup
@@ -95,24 +107,24 @@ EOS
     end
   end
 
-  def self.check_unique_name(new_name, new_recipe, answer)
+  def check_unique_name(new_name, new_recipe, answer)
     name_check = Recipe.where(name: new_name).first
     if name_check.nil?
       new_recipe[:name] = new_name
     else
-      puts "That name is taken. Please choose another.\n"
-      QuestionSet.clone_recipe answer
+      puts "#{answer} is taken. Please choose another.\n"
+      clone_recipe answer
     end
   end
 
-  def self.invalid_recipe_message(answer)
+  def invalid_recipe_message(answer)
     puts "\n'#{answer}' is not a valid option. Please choose from the recipes listed."
     puts "Type 'Menu' to return to Recipes menu, or 'Quit' to exit SaisonBuilder."
     modify_trigger = 'mod' # trigger for routing, actual string is arbitrary
-    QuestionSet.list_recipes modify_trigger
+    list_recipes modify_trigger
   end
 
-  def self.modify
+  def modify
     question = <<EOS
 
 What aspect of the recipe would you like to change?
@@ -124,10 +136,10 @@ What aspect of the recipe would you like to change?
     Quit -     I'm finished modifying this recipe
 
 EOS
-    QuestionSet.route question, 'modify'
+    route question, 'modify'
   end
 
-  def self.yeast
+  def yeast
     question = <<EOS
 
 Please choose one:
@@ -136,13 +148,13 @@ Please choose one:
     Blend -            Blend Brettanomyces with my primary yeast
     Brett Only -       Use only Brettanomyces for fermentation
     Brett Secondary -  Use Brett for secondary fermentation
-    Done -             Return to Modify Recipe menu
+    Modify -           Return to Modify Recipe menu
 
 EOS
-    QuestionSet.route question, 'primary'
+    route question, 'primary'
   end
 
-  def self.change_primary
+  def change_primary
     question = <<EOS
 
 Please choose a new primary yeast:
@@ -151,10 +163,10 @@ Please choose a new primary yeast:
     American -  Trad'l saison yeast pre-blended with Brettanomyces.
 
 EOS
-    QuestionSet.route question, 'change_primary'
+    route question, 'change_primary'
   end
 
-  def self.add_primary
+  def add_primary
     question = <<EOS
 
 Please choose an additional primary yeast:
@@ -163,10 +175,10 @@ Please choose an additional primary yeast:
     American -  Trad'l saison yeast pre-blended with Brettanomyces.
 
 EOS
-    QuestionSet.route question, 'add_primary'
+    route question, 'add_primary'
   end
 
-  def self.blend
+  def blend
     question = <<EOS
 
 Please choose a strain of Brettanomyces:
@@ -175,21 +187,10 @@ Please choose a strain of Brettanomyces:
     Blend Brett L -  Intense Brett character, barnyard, horseblanket, dank
 
 EOS
-    QuestionSet.route question, 'blend'
+    route question, 'blend'
   end
 
-  def self.add_another_strain
-    question = <<EOS
-
-Would you like to add an additional strain of Brett to blend?
-    Add Another Strain -  (return to Brettanomyces menu)
-    Yeast -   (return to Yeast menu)
-
-EOS
-    QuestionSet.route question, 'add_another_strain'
-  end
-
-  def self.brett_only
+  def brett_only
     question = <<EOS
 
 Please choose a strain of Brettanomyces
@@ -201,10 +202,10 @@ Please choose a strain of Brettanomyces
     Only Brett L -        Intense, dank, musty, horseblanket
 
 EOS
-    QuestionSet.route question, 'brett_only'
+    route question, 'brett_only'
   end
 
-  def self.brett_secondary
+  def brett_secondary
     question = <<EOS
 
 Please choose a strain of Brettanomyces:
@@ -213,10 +214,10 @@ Please choose a strain of Brettanomyces:
     Secondary Brett L -  Intense Brett character, barnyard, horseblanket, dank
 
 EOS
-    QuestionSet.route question, 'brett_secondary'
+    route question, 'brett_secondary'
   end
 
-  def self.yeast_redirect_menu
+  def yeast_redirect_menu
     question = <<EOS
 
 Your recipe has been modified to reflect these changes.
@@ -227,10 +228,10 @@ Are you finished modifying your recipe's yeast bill?
     Quit -    I want to exit SaisonBuilder.
 
 EOS
-    QuestionSet.route question, 'yeast_redirect_menu'
+    route question, 'yeast_redirect_menu'
   end
 
-  def self.grain
+  def grain
     question = <<EOS
 
 How would you like to alter malt character:
@@ -238,13 +239,13 @@ How would you like to alter malt character:
     Roast -      Increase roast
     Wheat -      Increase wheat character (doughy)
     Rye -        Increase rye character (earthy, robust)
-    Done -       I'm finished modifying malt character (return to Modify menu)
+    Modify -     I'm finished modifying malt character (return to Modify menu)
 
 EOS
-    QuestionSet.route question, 'grain'
+    route question, 'grain'
   end
 
-  def self.sweetness
+  def sweetness
     question = <<EOS
 
 Choose a desired sweetness character:
@@ -252,10 +253,10 @@ Choose a desired sweetness character:
     Honey -    Subtle honey character
 
 EOS
-    QuestionSet.route question, 'sweetness'
+    route question, 'sweetness'
   end
 
-  def self.roast
+  def roast
     question = <<EOS
 
 Choose a desired roast character:
@@ -263,34 +264,34 @@ Choose a desired roast character:
     Black -  More pronounced roast, light coffee notes
 
 EOS
-    QuestionSet.route question, 'roast'
+    route question, 'roast'
   end
 
-  def self.brown
+  def brown
     puts "\nAdding dark malt character to recipe..."
     component = IngredientController.new
     component.brown
   end
 
-  def self.black
+  def black
     puts "\nAdding dark malt character to recipe..."
     component = IngredientController.new
     component.black
   end
 
-  def self.wheat
+  def wheat
     puts "\nChanging base malt composition to add wheat character..."
     component = IngredientController.new
     component.wheat
   end
 
-  def self.rye
+  def rye
     puts "\nChanging base malt composition to add rye character..."
     component = IngredientController.new
     component.rye
   end
 
-  def self.grain_redirect_menu
+  def grain_redirect_menu
     question = <<EOS
 
 Your recipe has been modified to reflect these changes.
@@ -301,10 +302,10 @@ Are you finished modifying your recipe's grain bill?
     Quit -    I want to exit SaisonBuilder.
 
 EOS
-    QuestionSet.route question, 'grain_redirect_menu'
+    route question, 'grain_redirect_menu'
   end
 
-  def self.gravity
+  def gravity
     question = <<EOS
 
 Would you like to increase or decrease the standard 6% gravity of your saison?
@@ -312,10 +313,10 @@ Would you like to increase or decrease the standard 6% gravity of your saison?
     Decrease
 
 EOS
-    QuestionSet.route question, 'gravity'
+    route question, 'gravity'
   end
 
-  def self.increase
+  def increase
     question = <<EOS
 
 What is your desired final gravity?
@@ -323,10 +324,10 @@ What is your desired final gravity?
     Seven - 7% ABV
 
 EOS
-    QuestionSet.route question, 'increase'
+    route question, 'increase'
   end
 
-  def self.decrease
+  def decrease
     question = <<EOS
 
 What is your desired final gravity?
@@ -334,10 +335,10 @@ What is your desired final gravity?
     Four - 4% ABV
 
 EOS
-    QuestionSet.route question, 'decrease'
+    route question, 'decrease'
   end
 
-  def self.gravity_redirect_menu
+  def gravity_redirect_menu
     question = <<EOS
 
 Your recipe has been modified to reflect these changes.
@@ -347,10 +348,10 @@ Are you finished modifying your recipe?
     Quit -    Yes, I want to exit SaisonBuilder.
 
 EOS
-    QuestionSet.route question, 'gravity_redirect_menu'
+    route question, 'gravity_redirect_menu'
   end
 
-  def self.hops
+  def hops
     question = <<EOS
 
 How would you like to change the hop character?
@@ -359,20 +360,20 @@ How would you like to change the hop character?
     Aroma hops -   Increase aroma
 
 EOS
-    QuestionSet.route question, 'hops'
+    route question, 'hops'
   end
 
-  def self.flavor_hops
+  def flavor_hops
     question = <<EOS
 What kind of hop flavor would you like to add?
     Floral spicy -  Increase flavor/aroma (European hop character)
     Piney citrus -  Increase flavor/aroma (American hop character)
 
 EOS
-    QuestionSet.route question, 'flavor_hops'
+    route question, 'flavor_hops'
   end
 
-  def self.aroma_hops
+  def aroma_hops
     question = <<EOS
 What kind of hop flavor would you like to add?
     Floral -  Increase aroma (Western European)
@@ -380,10 +381,10 @@ What kind of hop flavor would you like to add?
     Citrus -  Increase aroma (American)
 
 EOS
-    QuestionSet.route question, 'aroma_hops'
+    route question, 'aroma_hops'
   end
 
-  def self.hops_redirect_menu
+  def hops_redirect_menu
     question = <<EOS
 
 Your recipe has been modified to reflect these changes.
@@ -394,10 +395,10 @@ Are you finished modifying your recipe's hops bill?
     Quit -   I want to exit SaisonBuilder.
 
 EOS
-    QuestionSet.route question, 'hops_redirect_menu'
+    route question, 'hops_redirect_menu'
   end
 
-  def self.other
+  def other
     question = <<EOS
 
 What type of additional ingredient would you like to add?
@@ -408,10 +409,10 @@ What type of additional ingredient would you like to add?
     Menu -        Return to Recipes menu
 
 EOS
-    QuestionSet.route question, 'other'
+    route question, 'other'
   end
 
-  def self.spices
+  def spices
     question = <<EOS
 
 What spice would you like to add to the recipe?
@@ -422,10 +423,10 @@ What spice would you like to add to the recipe?
     Ginger
 
 EOS
-    QuestionSet.route question, 'spices'
+    route question, 'spices'
   end
 
-  def self.spices_redirect_menu
+  def spices_redirect_menu
     question = <<EOS
 
 Your recipe has been modified to reflect these changes.
@@ -437,10 +438,10 @@ Are you finished adding Spices to your recipe?
     Quit -     I want to exit SaisonBuilder.
 
 EOS
-    QuestionSet.route question, 'spices_redirect_menu'
+    route question, 'spices_redirect_menu'
   end
 
-  def self.fruit
+  def fruit
     question = <<EOS
 
 What fruit would like to add to the recipe?
@@ -450,10 +451,10 @@ What fruit would like to add to the recipe?
     Currants
 
 EOS
-    QuestionSet.route question, 'fruit'
+    route question, 'fruit'
   end
 
-  def self.fruit_redirect_menu
+  def fruit_redirect_menu
     question = <<EOS
 
 Your recipe has been modified to reflect these changes.
@@ -465,10 +466,10 @@ Are you finished adding Fruit to your recipe?
     Quit -     I want to exit SaisonBuilder.
 
 EOS
-    QuestionSet.route question, 'fruit_redirect_menu'
+    route question, 'fruit_redirect_menu'
   end
 
-  def self.botanicals
+  def botanicals
     question = <<EOS
 
 What botanical would you like to add to the recipe?
@@ -477,10 +478,10 @@ What botanical would you like to add to the recipe?
     Rose Hips
 
 EOS
-    QuestionSet.route question, 'botanicals'
+    route question, 'botanicals'
   end
 
-  def self.botanicals_redirect_menu
+  def botanicals_redirect_menu
     question = <<EOS
 
 Your recipe has been modified to reflect these changes.
@@ -492,10 +493,10 @@ Are you finished adding Botanicals to your recipe?
     Quit -        I want to exit SaisonBuilder.
 
 EOS
-    QuestionSet.route question, 'botanicals_redirect_menu'
+    route question, 'botanicals_redirect_menu'
   end
 
-  def self.adjuncts
+  def adjuncts
     question = <<EOS
 
 What adjunct would you like to add to the recipe?
@@ -504,10 +505,10 @@ What adjunct would you like to add to the recipe?
     Rice -             Used to lighten body/flavor.
 
 EOS
-    QuestionSet.route question, 'adjuncts'
+    route question, 'adjuncts'
   end
 
-  def self.adjuncts_redirect_menu
+  def adjuncts_redirect_menu
     question = <<EOS
 
 Your recipe has been modified to reflect these changes.
@@ -519,7 +520,7 @@ Are you finished adding Adjuncts to your recipe?
     Quit -      I want to exit SaisonBuilder.
 
 EOS
-    QuestionSet.route question, 'adjuncts_redirect_menu'
+    route question, 'adjuncts_redirect_menu'
   end
 
 end

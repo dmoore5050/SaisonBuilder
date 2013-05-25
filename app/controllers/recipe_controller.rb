@@ -30,13 +30,14 @@ class RecipeController
         recipe_ingredient.destroy
       end
       recipe.destroy
+      puts "\n#{params[:recipe][:name].capitalize} has been deleted."
     end
   end
 
   def view
     matching_recipe = Recipe.where(name: params[:recipe][:name]).first
     if matching_recipe.nil?
-      puts "\nThat is not a valid recipe name."
+      puts "\n#{params[:recipe][:name]} is not a valid recipe name."
       puts 'To view a list of possible recipes, type sb list'
       return
     end
