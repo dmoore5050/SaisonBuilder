@@ -62,32 +62,40 @@ EOS
 
     puts question
     answer = $stdin.gets.downcase.chomp!
-    answer[' '] = '_' if answer.include? ' '
 
-    if RECIPE_NAME_ARRAY.include? answer
-
-      puts "\nPlease give your new recipe a unique name:\n\n"
-      new_name = $stdin.gets.downcase.chomp!
-      formatted_answer = answer.tr('_', ' ')
-      base_recipe = Recipe.where(name: formatted_answer).first
-      new_recipe = base_recipe.dup
-      new_recipe[:name] = new_name
-      new_recipe.save
-
-      ingr_array = RecipeIngredient.where(recipe_id: base_recipe.id)
-      ingr_array.each do | recipe_ingr_record |
-        new_recipe_ingr = recipe_ingr_record.dup
-        new_recipe_ingr[:recipe_id] = new_recipe.id
-        new_recipe_ingr.save
-      end
-
+    if RECIPE_NAME_ARRAY.include? answer.tr(' ', '_')
+      QuestionSet.clone_recipe answer
       QuestionSet.modify
     else
-      puts "\n'#{answer}' is not a valid option. Please choose from the recipes listed."
-      puts "Type 'Menu' to return to Recipes menu, or 'Quit' to exit SaisonBuilder."
-      modify_trigger = 'mod' # trigger for routing, could be any string
-      QuestionSet.list modify_trigger
+      QuestionSet.invalid_recipe_message
     end
+  end
+
+  def self.clone_recipe(answer)
+    puts "\nPlease give your new recipe a unique name:\n\n"
+    new_name = $stdin.gets.downcase.chomp!
+    base_recipe = Recipe.where(name: answer).first
+    new_recipe = base_recipe.dup
+    new_recipe[:name] = new_name
+    new_recipe.save
+
+    QuestionSet.clone_recipe_ingredients base_recipe, new_recipe
+  end
+
+  def self.clone_recipe_ingredients(base_recipe, new_recipe)
+    ingr_array = RecipeIngredient.where(recipe_id: base_recipe.id)
+    ingr_array.each do | recipe_ingr_record |
+      new_recipe_ingr = recipe_ingr_record.dup
+      new_recipe_ingr[:recipe_id] = new_recipe.id
+      new_recipe_ingr.save
+    end
+  end
+
+  def self.invalid_recipe_message
+    puts "\n'#{answer}' is not a valid option. Please choose from the recipes listed."
+    puts "Type 'Menu' to return to Recipes menu, or 'Quit' to exit SaisonBuilder."
+    modify_trigger = 'mod' # trigger for routing, actual string is arbitrary
+    QuestionSet.list modify_trigger
   end
 
   def self.modify
