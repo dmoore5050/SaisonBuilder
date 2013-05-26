@@ -496,7 +496,7 @@ EOS
     route question, 'adjuncts'
   end
 
-  def adjuncts_redirect_menu
+  def adjunct_redirect_menu
     question = <<EOS
 
 Your recipe has been modified to reflect these changes.
@@ -508,7 +508,7 @@ Are you finished adding Adjuncts to your recipe?
     Quit -      I want to exit SaisonBuilder.
 
 EOS
-    route question, 'adjuncts_redirect_menu'
+    route question, 'adjunct_redirect_menu'
   end
 
 end
