@@ -37,6 +37,7 @@ class IngredientController
   def switch_primary_yeast(name)
     primary_yeast = RecipeIngredient.where(recipe_id: @record, usage: 'primary').first
     usage, quantity =  primary_yeast.usage, primary_yeast.quantity
+    primary_yeast.destroy
 
     add_new_ingredient name, usage, quantity
   end
