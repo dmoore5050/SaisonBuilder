@@ -34,136 +34,119 @@ class IngredientController
     end
   end
 
-  def dupont
+  def switch_primary_yeast(name)
     primary_yeast = RecipeIngredient.where(recipe_id: @record, usage: 'primary').first
-    usage, quantity, duration =  primary_yeast.usage, primary_yeast.quantity, primary_yeast.duration
-    primary_yeast.destroy
+    usage, quantity =  primary_yeast.usage, primary_yeast.quantity
 
-    ingr = Ingredient.where(name: 'dupont strain').first
+    add_new_ingredient name, usage, quantity
+  end
+
+  def add_new_ingredient(name, usage, quantity, duration = nil)
+    ingr = Ingredient.where(name: name).first
     @record.recipe_ingredients.create(ingredient_id: ingr, usage: usage, quantity: quantity, duration: duration)
+  end
 
+  def dupont
+    new_primary_yeast = 'dupont strain'
+    switch_primary_yeast new_primary_yeast
     question_set.yeast_redirect_menu
   end
 
   def french
-    primary_yeast = RecipeIngredient.where(recipe_id: @record, usage: 'primary').first
-    usage, quantity, duration =  primary_yeast.usage, primary_yeast.quantity, primary_yeast.duration
-    primary_yeast.destroy
+    new_primary_yeast = 'french saison'
 
-    ingr = Ingredient.where(name: 'french saison').first
-    @record.recipe_ingredients.create(ingredient_id: ingr, usage: usage, quantity: quantity, duration: duration)
-
+    switch_primary_yeast new_primary_yeast
     question_set.yeast_redirect_menu
   end
 
   def american
-    primary_yeast = RecipeIngredient.where(recipe_id: @record, usage: 'primary').first
-    usage, quantity, duration =  primary_yeast.usage, primary_yeast.quantity, primary_yeast.duration
-    primary_yeast.destroy
+    new_primary_yeast = 'american farmhouse'
 
-    ingr = Ingredient.where(name: 'american farmhouse').first
-    @record.recipe_ingredients.create(ingredient_id: ingr, usage: usage, quantity: quantity, duration: duration)
-
+    switch_primary_yeast new_primary_yeast
     question_set.yeast_redirect_menu
   end
 
   def blend_brett_c
-    ingr = Ingredient.where(name: 'brett. clausenii').first
-    @record.recipe_ingredients.create(ingredient_id: ingr, usage: 'primary', quantity: '1', duration: nil)
+    name, usage, quantity = 'brett. clausenii', 'primary', 1
 
+    add_new_ingredient name, usage, quantity
     question_set.yeast_redirect_menu
   end
 
   def blend_brett_b
-    ingr = Ingredient.where(name: 'brett. brux.').first
-    @record.recipe_ingredients.create(ingredient_id: ingr, usage: 'primary', quantity: '1', duration: nil)
+    name, usage, quantity = 'brett. brux.', 'primary', 1
 
+    add_new_ingredient name, usage, quantity
     question_set.yeast_redirect_menu
   end
 
   def blend_brett_l
-    ingr = Ingredient.where(name: 'brett. lambicus').first
-    @record.recipe_ingredients.create(ingredient_id: ingr, usage: 'primary', quantity: '1', duration: nil)
+    name, usage, quantity = 'brett. lambicus', 'primary', 1
 
+    add_new_ingredient name, usage, quantity
     question_set.yeast_redirect_menu
   end
 
   def only_brett_c
-    primary_yeast = RecipeIngredient.where(recipe_id: @record, usage: 'primary').first
-    usage, quantity, duration =  primary_yeast.usage, primary_yeast.quantity, primary_yeast.duration
-    primary_yeast.destroy
+    new_primary_yeast = 'brett. clausenii'
 
-    ingr = Ingredient.where(name: 'brett. clausenii').first
-    @record.recipe_ingredients.create(ingredient_id: ingr, usage: usage, quantity: quantity, duration: duration)
-
+    switch_primary_yeast new_primary_yeast
     question_set.yeast_redirect_menu
   end
 
   def only_brett_b
-    primary_yeast = RecipeIngredient.where(recipe_id: @record, usage: 'primary').first
-    usage, quantity, duration =  primary_yeast.usage, primary_yeast.quantity, primary_yeast.duration
-    primary_yeast.destroy
+    new_primary_yeast = 'brett. brux.'
 
-    ingr = Ingredient.where(name: 'brett. brux.').first
-    @record.recipe_ingredients.create(ingredient_id: ingr, usage: usage, quantity: quantity, duration: duration)
-
+    switch_primary_yeast new_primary_yeast
     question_set.yeast_redirect_menu
   end
 
   def only_brett_b_trois
-    primary_yeast = RecipeIngredient.where(recipe_id: @record, usage: 'primary').first
-    usage, quantity, duration =  primary_yeast.usage, primary_yeast.quantity, primary_yeast.duration
-    primary_yeast.destroy
+    new_primary_yeast = 'brett. brux. trois'
 
-    ingr = Ingredient.where(name: 'brett. brux. trois').first
-    @record.recipe_ingredients.create(ingredient_id: ingr, usage: usage, quantity: quantity, duration: duration)
-
+    switch_primary_yeast new_primary_yeast
     question_set.yeast_redirect_menu
   end
 
   def only_brett_l
-    primary_yeast = RecipeIngredient.where(recipe_id: @record, usage: 'primary').first
-    usage, quantity, duration =  primary_yeast.usage, primary_yeast.quantity, primary_yeast.duration
-    primary_yeast.destroy
+    new_primary_yeast = 'brett. lambicus'
 
-    ingr = Ingredient.where(name: 'brett. lambicus').first
-    @record.recipe_ingredients.create(ingredient_id: ingr, usage: usage, quantity: quantity, duration: duration)
-
+    switch_primary_yeast new_primary_yeast
     question_set.yeast_redirect_menu
   end
 
   def secondary_brett_c
-    ingr = Ingredient.where(name: 'brett. clausenii').first
-    @record.recipe_ingredients.create(ingredient_id: ingr, usage: 'secondary', quantity: '1', duration: nil)
+    name, usage, quantity = 'brett. clausenii', 'secondary', 1
 
+    add_new_ingredient name, usage, quantity
     question_set.yeast_redirect_menu
   end
 
   def secondary_brett_b
-    ingr = Ingredient.where(name: 'brett. brux.').first
-    @record.recipe_ingredients.create(ingredient_id: ingr, usage: 'secondary', quantity: '1', duration: nil)
+    name, usage, quantity = 'brett. brux.', 'secondary', 1
 
+    add_new_ingredient name, usage, quantity
     question_set.yeast_redirect_menu
   end
 
   def secondary_brett_l
-    ingr = Ingredient.where(name: 'brett. lambicus').first
-    @record.recipe_ingredients.create(ingredient_id: ingr, usage: 'secondary', quantity: '1', duration: nil)
+    name, usage, quantity = 'brett. lambicus', 'secondary', 1
 
+    add_new_ingredient name, usage, quantity
     question_set.yeast_redirect_menu
   end
 
   def caramel
-    ingr = Ingredient.where(name: 'caramunich').first
-    @record.recipe_ingredients.create(ingredient_id: ingr, usage: nil, quantity: '0.5', duration: nil)
+    name, usage, quantity = 'caramunich', nil, 0.5
 
+    add_new_ingredient name, usage, quantity
     question_set.grain_redirect_menu
   end
 
   def honey
-    ingr = Ingredient.where(name: 'honey malt').first
-    @record.recipe_ingredients.create(ingredient_id: ingr, usage: nil, quantity: '0.5', duration: nil)
+    name, usage, quantity = 'honey malt', nil, 0.5
 
+    add_new_ingredient name, usage, quantity
     question_set.grain_redirect_menu
   end
 
@@ -172,10 +155,9 @@ class IngredientController
     base_malt.quantity -= 2
     base_malt.save
 
-    ingr = Ingredient.where(name: 'white wheat malt').first
-    @record.recipe_ingredients.create(ingredient_id: ingr, usage: nil, quantity: '2', duration: nil)
+    name, usage, quantity = 'white wheat malt', nil, 2
 
-
+    add_new_ingredient name, usage, quantity
     question_set.grain_redirect_menu
   end
 
@@ -184,26 +166,26 @@ class IngredientController
     base_malt.quantity -= 2
     base_malt.save
 
-    ingr = Ingredient.where(name: 'rye malt').first
-    @record.recipe_ingredients.create(ingredient_id: ingr, usage: nil, quantity: '2', duration: nil)
+    name, usage, quantity = 'rye malt', nil, 2
 
+    add_new_ingredient name, usage, quantity
     question_set.grain_redirect_menu
   end
 
   def brown
-    ingr = Ingredient.where(name: 'chocolate malt').first
-    @record.recipe_ingredients.create(ingredient_id: ingr, usage: nil, quantity: '0.4', duration: nil)
+    name, usage, quantity = 'chocolate malt', nil, 0.4
 
+    add_new_ingredient name, usage, quantity
     question_set.grain_redirect_menu
   end
 
   def black
-    ingr = Ingredient.where(name: 'chocolate malt').first
-    @record.recipe_ingredients.create(ingredient_id: ingr, usage: nil, quantity: '0.4', duration: nil)
-    addl_ingr = Ingredient.where(name: 'carafa 2 special').first
-    @record.recipe_ingredients.create(ingredient_id: addl_ingr, usage: nil, quantity: '0.4', duration: nil)
+    args = [['chocolate malt', nil, '0.4'],['carafa 2 special', nil, '0.4']]
 
-
+    args.each do | argument_set |
+      name, usage, quantity = argument_set
+      add_new_ingredient name, usage, quantity
+    end
     question_set.grain_redirect_menu
   end
 
@@ -214,8 +196,9 @@ class IngredientController
 
     sugar = RecipeIngredient.where(recipe_id: @record.id, ingredient_id: 36..37).first
     if sugar.nil?
-      ingr = Ingredient.where(name: 'corn sugar').first
-      @record.recipe_ingredients.create(ingredient_id: ingr, usage: 'Peak krausen', quantity: '2', duration: nil)
+      name, usage, quantity = 'corn sugar', 'Peak krausen', 2
+
+      add_new_ingredient name, usage, quantity
     else
       sugar.quantity += 1
       sugar.save
@@ -249,149 +232,148 @@ class IngredientController
   end
 
   def bitterness
-    ingr = Ingredient.where(name: 'styrian goldings').first
-    @record.recipe_ingredients.create(ingredient_id: ingr, usage: 'boil', quantity: '0.5', duration: '60 min')
+    name, usage, quantity, duration = 'styrian goldings', 'boil', 0.5, '60 min'
 
+    add_new_ingredient name, usage, quantity, duration
     question_set.hops_redirect_menu
   end
 
   def floral_spicy
-    ingr = Ingredient.where(name: 'hallertau').first
-    @record.recipe_ingredients.create(ingredient_id: ingr, usage: 'boil', quantity: '1', duration: '20 min')
+    name, usage, quantity, duration = 'hallertau', 'boil', 1, '20 min'
 
+    add_new_ingredient name, usage, quantity, duration
     question_set.hops_redirect_menu
   end
 
   def piney_citrus
-    ingr = Ingredient.where(name: 'simcoe').first
-    @record.recipe_ingredients.create(ingredient_id: ingr, usage: 'boil', quantity: '0.5', duration: '20 min')
+    name, usage, quantity, duration = 'simcoe', 'boil', 0.5, '20 min'
 
+    add_new_ingredient name, usage, quantity, duration
     question_set.hops_redirect_menu
   end
 
   def floral
-    ingr = Ingredient.where(name: 'hallertau').first
-    @record.recipe_ingredients.create(ingredient_id: ingr, usage: 'dryhop', quantity: '1', duration: '5 days')
+    name, usage, quantity, duration = 'hallertau', 'dryhop', 1, '5 days'
 
+    add_new_ingredient name, usage, quantity, duration
     question_set.hops_redirect_menu
   end
 
   def spicy
-    ingr = Ingredient.where(name: 'saaz').first
-    @record.recipe_ingredients.create(ingredient_id: ingr, usage: 'dryhop', quantity: '1', duration: '5 days')
+    name, usage, quantity, duration = 'saaz', 'dryhop', 1, '5 days'
 
+    add_new_ingredient name, usage, quantity, duration
     question_set.hops_redirect_menu
   end
 
   def citrus
-    ingr = Ingredient.where(name: 'amarillo').first
-    @record.recipe_ingredients.create(ingredient_id: ingr, usage: 'dryhop', quantity: '1', duration: '5 days')
+    name, usage, quantity, duration = 'amarillo', 'dryhop', 1, '5 days'
 
+    add_new_ingredient name, usage, quantity, duration
     question_set.hops_redirect_menu
   end
 
   def coriander
-    ingr = Ingredient.where(name: 'coriander').first
-    @record.recipe_ingredients.create(ingredient_id: ingr, usage: 'boil', quantity: '1', duration: '10 min')
+    name, usage, quantity, duration = 'coriander', 'boil', 1, '10 mins'
 
+    add_new_ingredient name, usage, quantity, duration
     question_set.spices_redirect_menu
   end
 
   def citrus_zest
-    ingr = Ingredient.where(name: 'citrus zest').first
-    @record.recipe_ingredients.create(ingredient_id: ingr, usage: 'boil', quantity: '1', duration: '10 min')
+    name, usage, quantity, duration = 'citrus zest', 'boil', 1, '10 mins'
 
+    add_new_ingredient name, usage, quantity, duration
     question_set.spices_redirect_menu
   end
 
   def white_peppercorns
-    ingr = Ingredient.where(name: 'white peppercorns').first
-    @record.recipe_ingredients.create(ingredient_id: ingr, usage: 'boil', quantity: '0.05', duration: '5 min')
+    name, usage, quantity, duration = 'white peppercorns', 'boil', 0.05, '5 mins'
 
+    add_new_ingredient name, usage, quantity, duration
     question_set.spices_redirect_menu
   end
 
   def thai_basil
-    ingr = Ingredient.where(name: 'thai basil').first
-    @record.recipe_ingredients.create(ingredient_id: ingr, usage: 'boil', quantity: '2', duration: '5 min')
+    name, usage, quantity, duration = 'thai basil', 'boil', 2, '5 mins'
 
+    add_new_ingredient name, usage, quantity, duration
     question_set.spices_redirect_menu
   end
 
   def ginger
-    ingr = Ingredient.where(name: 'ginger').first
-    @record.recipe_ingredients.create(ingredient_id: ingr, usage: 'boil', quantity: '2', duration: '10 min')
+    name, usage, quantity, duration = 'ginger', 'boil', 2, '10 mins'
 
+    add_new_ingredient name, usage, quantity, duration
     question_set.spices_redirect_menu
   end
 
   def peaches
-    ingr = Ingredient.where(name: 'peaches').first
-    @record.recipe_ingredients.create(ingredient_id: ingr, usage: 'secondary', quantity: '5', duration: 'Until fermentation completed')
+    name, usage, quantity, duration = 'peaches', 'secondary', 4, 'Until fermentation completed'
 
+    add_new_ingredient name, usage, quantity, duration
     question_set.fruit_redirect_menu
   end
 
   def blackberries
-    ingr = Ingredient.where(name: 'blackberries').first
-    @record.recipe_ingredients.create(ingredient_id: ingr, usage: 'secondary', quantity: '5', duration: 'Until fermentation completed')
+    name, usage, quantity, duration = 'blackberries', 'secondary', 4, 'Until fermentation completed'
 
+    add_new_ingredient name, usage, quantity, duration
     question_set.fruit_redirect_menu
   end
 
   def mango
-    ingr = Ingredient.where(name: 'mango').first
-    @record.recipe_ingredients.create(ingredient_id: ingr, usage: 'secondary', quantity: '5', duration: 'Until fermentation completed')
+    name, usage, quantity, duration = 'mango', 'secondary', 4, 'Until fermentation completed'
 
+    add_new_ingredient name, usage, quantity, duration
     question_set.fruit_redirect_menu
   end
 
   def currants
-    ingr = Ingredient.where(name: 'currants').first
-    @record.recipe_ingredients.create(ingredient_id: ingr, usage: 'secondary', quantity: '2', duration: 'Until fermentation completed')
+    name, usage, quantity, duration = 'currants', 'secondary', 2, 'Until fermentation completed'
 
+    add_new_ingredient name, usage, quantity, duration
     question_set.fruit_redirect_menu
   end
 
   def hibiscus
-    ingr = Ingredient.where(name: 'hibiscus').first
-    @record.recipe_ingredients.create(ingredient_id: ingr, usage: 'secondary', quantity: '2', duration: '5 days')
+    name, usage, quantity, duration = 'hibiscus', 'secondary', 2, '5 days'
 
+    add_new_ingredient name, usage, quantity, duration
     question_set.botanicals_redirect_menu
   end
 
   def lavender
-    ingr = Ingredient.where(name: 'lavender').first
-    @record.recipe_ingredients.create(ingredient_id: ingr, usage: 'secondary', quantity: '0.5', duration: '5 days')
+    name, usage, quantity, duration = 'lavender', 'secondary', 0.5, '5 days'
 
+    add_new_ingredient name, usage, quantity, duration
     question_set.botanicals_redirect_menu
   end
 
   def rose_hips
-    ingr = Ingredient.where(name: 'rose hips').first
-    @record.recipe_ingredients.create(ingredient_id: ingr, usage: 'boil', quantity: '0.5', duration: '5 min')
+    name, usage, quantity, duration = 'rose hips', 'boil', 0.5, '5 min'
 
+    add_new_ingredient name, usage, quantity, duration
     question_set.botanicals_redirect_menu
   end
 
   def corn_sugar
-    ingr = Ingredient.where(name: 'corn sugar').first
-    @record.recipe_ingredients.create(ingredient_id: ingr, usage: 'Peak krausen', quantity: '1', duration: nil)
+    name, usage, quantity = 'corn sugar', 'Peak Krausen', 1
 
+    add_new_ingredient name, usage, quantity
     question_set.adjunct_redirect_menu
   end
 
   def turbinado_sugar
-    ingr = Ingredient.where(name: 'turbinado sugar').first
-    @record.recipe_ingredients.create(ingredient_id: ingr, usage: 'Peak krausen', quantity: '1', duration: nil)
-
+    name, usage, quantity = 'turbinado sugar', 'Peak Krausen', 1
+    add_new_ingredient name, usage, quantity
     question_set.adjunct_redirect_menu
   end
 
   def rice
-    ingr = Ingredient.where(name: 'rice').first
-    @record.recipe_ingredients.create(ingredient_id: ingr, usage: 'Precook, mash', quantity: '1', duration: nil)
+    name, usage, quantity = 'rice', 'Precook, mash', 1
 
+    add_new_ingredient name, usage, quantity
     question_set.adjunct_redirect_menu
   end
 
