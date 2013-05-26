@@ -71,9 +71,7 @@ Please download the app and try it out - it's free!
 
 Known Bugs
 ----------
-When naming clone recipe, if name is derivative of base recipe (ie, 'new world test'), it overwrites base recipe.
-
-Cannot delete recipes with 3 word names.
+There will be bugs.
 
 Author
 ------
