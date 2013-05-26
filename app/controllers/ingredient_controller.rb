@@ -35,7 +35,7 @@ class IngredientController
   end
 
   def dupont
-    primary_yeast = RecipeIngredient.where(recipe_id: @record.id, usage: 'primary').first
+    primary_yeast = RecipeIngredient.where(recipe_id: @record, usage: 'primary').first
     usage, quantity, duration =  primary_yeast.usage, primary_yeast.quantity, primary_yeast.duration
     primary_yeast.destroy
 
@@ -46,7 +46,7 @@ class IngredientController
   end
 
   def french
-    primary_yeast = RecipeIngredient.where(recipe_id: @record.id, usage: 'primary').first
+    primary_yeast = RecipeIngredient.where(recipe_id: @record, usage: 'primary').first
     usage, quantity, duration =  primary_yeast.usage, primary_yeast.quantity, primary_yeast.duration
     primary_yeast.destroy
 
@@ -57,7 +57,7 @@ class IngredientController
   end
 
   def american
-    primary_yeast = RecipeIngredient.where(recipe_id: @record.id, usage: 'primary').first
+    primary_yeast = RecipeIngredient.where(recipe_id: @record, usage: 'primary').first
     usage, quantity, duration =  primary_yeast.usage, primary_yeast.quantity, primary_yeast.duration
     primary_yeast.destroy
 
@@ -89,7 +89,7 @@ class IngredientController
   end
 
   def only_brett_c
-    primary_yeast = RecipeIngredient.where(recipe_id: @record.id, usage: 'primary').first
+    primary_yeast = RecipeIngredient.where(recipe_id: @record, usage: 'primary').first
     usage, quantity, duration =  primary_yeast.usage, primary_yeast.quantity, primary_yeast.duration
     primary_yeast.destroy
 
@@ -100,7 +100,7 @@ class IngredientController
   end
 
   def only_brett_b
-    primary_yeast = RecipeIngredient.where(recipe_id: @record.id, usage: 'primary').first
+    primary_yeast = RecipeIngredient.where(recipe_id: @record, usage: 'primary').first
     usage, quantity, duration =  primary_yeast.usage, primary_yeast.quantity, primary_yeast.duration
     primary_yeast.destroy
 
@@ -111,7 +111,7 @@ class IngredientController
   end
 
   def only_brett_b_trois
-    primary_yeast = RecipeIngredient.where(recipe_id: @record.id, usage: 'primary').first
+    primary_yeast = RecipeIngredient.where(recipe_id: @record, usage: 'primary').first
     usage, quantity, duration =  primary_yeast.usage, primary_yeast.quantity, primary_yeast.duration
     primary_yeast.destroy
 
@@ -122,7 +122,7 @@ class IngredientController
   end
 
   def only_brett_l
-    primary_yeast = RecipeIngredient.where(recipe_id: @record.id, usage: 'primary').first
+    primary_yeast = RecipeIngredient.where(recipe_id: @record, usage: 'primary').first
     usage, quantity, duration =  primary_yeast.usage, primary_yeast.quantity, primary_yeast.duration
     primary_yeast.destroy
 
@@ -168,13 +168,24 @@ class IngredientController
   end
 
   def wheat
-    # replace 2 lb base malt with wheat
+    base_malt = RecipeIngredient.where(recipe_id: @record, quantity: 6..25).first
+    base_malt.quantity -= 2
+    base_malt.save
+
+    ingr = Ingredient.where(name: 'white wheat malt').first
+    @record.recipe_ingredients.create(ingredient_id: ingr, usage: nil, quantity: '2', duration: nil)
+
 
     question_set.grain_redirect_menu
   end
 
   def rye
-    # replace 2 lb base malt with rye
+    base_malt = RecipeIngredient.where(recipe_id: @record, quantity: 6..25).first
+    base_malt.quantity -= 2
+    base_malt.save
+
+    ingr = Ingredient.where(name: 'rye malt').first
+    @record.recipe_ingredients.create(ingredient_id: ingr, usage: nil, quantity: '2', duration: nil)
 
     question_set.grain_redirect_menu
   end
@@ -197,25 +208,42 @@ class IngredientController
   end
 
   def eight
-    # add 1.5 lb base malt, 1 lb sugar
+    base_malt = RecipeIngredient.where(recipe_id: @record, quantity: 6..25).first
+    base_malt.quantity += 1.5
+    base_malt.save
+
+    sugar = RecipeIngredient.where(recipe_id: @record.id, ingredient_id: 36..37).first
+    if sugar.nil?
+      ingr = Ingredient.where(name: 'corn sugar').first
+      @record.recipe_ingredients.create(ingredient_id: ingr, usage: 'Peak krausen', quantity: '2', duration: nil)
+    else
+      sugar.quantity += 1
+      sugar.save
+    end
 
     question_set.gravity_redirect_menu
   end
 
   def seven
-    # add 1.5 lb base malt
+    base_malt = RecipeIngredient.where(recipe_id: @record, quantity: 6..25).first
+    base_malt.quantity += 1.5
+    base_malt.save
 
     question_set.gravity_redirect_menu
   end
 
   def five
-    # subtract 1.5 lb base malt
+    base_malt = RecipeIngredient.where(recipe_id: @record, quantity: 6..25).first
+    base_malt.quantity -= 1.5
+    base_malt.save
 
     question_set.gravity_redirect_menu
   end
 
   def four
-    # subtract 3 lbs base malt
+    base_malt = RecipeIngredient.where(recipe_id: @record, quantity: 6..25).first
+    base_malt.quantity -= 3
+    base_malt.save
 
     question_set.gravity_redirect_menu
   end

@@ -19,7 +19,7 @@ class RecipeController
       puts "#{i + 1}. #{recipe.name.titleize}"
     end
     puts "\nTo view a recipe, type 'sb view <recipe name>."
-    puts "Example: $ sb view black saison"
+    puts "Example: sb view black saison"
   end
 
   def delete
@@ -30,7 +30,7 @@ class RecipeController
         recipe_ingredient.destroy
       end
       recipe.destroy
-      puts "\n#{params[:recipe][:name].capitalize} has been deleted."
+      puts "\n#{params[:recipe][:name].titleize} has been deleted."
     end
   end
 
@@ -54,6 +54,7 @@ Boil length:   #{matching_recipe.boil_length} mins
     rendered_recipe << recipe_head
 
   ingredient_print_order = %w(grain adjunct hop spice botanical yeast)
+
   ingredient_print_order.each do | type |
     rendered_recipe << render_ingredient_bill(type, ingredient_list)
   end
