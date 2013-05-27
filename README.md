@@ -8,7 +8,7 @@ SaisonBuilder is my Unit 2 (Ruby) Capstone project for Nashville Software School
 
 The constraints of the project are that they must use standard library Ruby with the exception of using ActiveRecord as an ORM. The concept with this capstone is to demonstrate mastery of Ruby itself.
 
-The goal of this project is to create an app to help novice and veteran experts alike navigate the nearly-limitless options available when designing and brewing an all-grain Saison, or Belgian Farmhouse ale.
+The goal of this project is to create an app to help novice and veteran homebrewers alike navigate the nearly-limitless options available when designing and brewing an all-grain Saison, or Belgian Farmhouse ale.
 
 Project Status
 --------------
@@ -25,16 +25,16 @@ The following commands are fully functional:
 * sb delete <recipe name>
 * sb build
 
-####To do:
+###To do:
 
 + Refactor
 + Bugfix
 
 Features
 --------
-The primary feature of this app will be the ability to use or modify a library of saison recipes to the user's custom specifications. Modification will be guided by a series of questions, allowing the user to make specific modifications to single elements of the recipe (ie, increase only a specific type of aroma hops, or add a specific spice).
+The primary feature of this app is the ability to use or modify a library of saison recipes to the user's custom specifications. Modification are guided by a series of questions, allowing the user to make specific modifications to single elements of the recipe (ie, increase only a specific type of aroma hops, or add a specific spice). Modified recipes are then stored as a new recipe in the library.
 
-Additionally, a small library of ingredients and style/technique definitions will be included.
+Additionally, a small library of ingredients and style/technique definitions is included.
 
 In the future, saison builder will include the ability to dynamically generate recipes from the ground up that can then be saved in a library for later retrieval.
 
@@ -46,24 +46,27 @@ To begin using the app, cd to the SaisonBuilder directory and type:
 
     > ruby saisonbuilder
 
-Optionally, add the following to your .zshrc or .bash_profile files to open
-with a single 'sb' or 'saisonbuilder' command:
+Optionally, add the following to your .zshrc or .bash_profile files in your root directory to open with a single 'sb' or 'saisonbuilder' command:
 
     > alias sb='ruby ~/your/file/path/saisonbuilder'
     > alias saisonbuilder='ruby ~/your/file/path/saisonbuilder'
 
-This will bring up a menu displaying the following options:
+In either case, executing the command will bring up a menu displaying the following options:
 
-    > Return to this menu:             sb
-    > Learn about the saison style:    sb style
-    > Learn about brewing techniques:  sb techniques
-    > Learn about ingredients:         sb ingredients
-    > View recipe library:             sb list
-    > Build a recipe:                  sb build
-    > View an existing recipe:         sb view <recipe_name>
-    > Delete an existing recipe:       sb delete <recipe_name>
+    > Return to this menu:             ruby saisonbuilder
+    > Learn about the saison style:    ruby saisonbuilder style
+    > Learn about brewing techniques:  ruby saisonbuilder techniques
+    > List available ingredients:      ruby saisonbuilder ingredients
+    > View recipe library:             ruby saisonbuilder list
+    > Build a recipe:                  ruby saisonbuilder build
+    > View an existing recipe:         ruby saisonbuilder view <recipe_name>
+    > Delete an existing recipe:       ruby saisonbuilder delete <recipe_name>
 
-**The user is then guided through a series of questions to determine and/or modify an appropriate recipe.**
+Most of these options are self-exlanatory. The one exception is the command that forms the core of SaisonBuilder's functionality:
+
+    > Build a recipe:                  ruby saisonbuilder build
+
+When executed, sb build guides the user through a series of questions that allow the user to change practically any aspect(s) of any of the five base recipes. After the user is finished modifying the recipe, the saved recipe is then accessible through the library, to be viewed or further modified by the user.
 
 Demo
 ----
