@@ -27,7 +27,6 @@ The following commands are fully functional:
 
 ####To do:
 
-+ Move recipe change methods from ingredient\_controller to recipe_controller
 + Refactor
 + Bugfix
 

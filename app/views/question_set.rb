@@ -6,8 +6,8 @@ class QuestionSet
 
   unless (const_defined?(:RECIPE_NAME_ARRAY)) #gets rid of 'constant initialize' error
     RECIPE_NAME_ARRAY = %w( classic hoppy_classic rye_saison new_world black_saison )
-    OPTION_ARRAY = %w( menu list_recipes modify yeast primary blend brett_only brett_secondary grain sweetness roast brown black wheat rye hops flavor_hops aroma_hops gravity increase decrease other spices fruit botanicals adjuncts more_botanicals)
-    COMPONENTS_ARRAY = %w( dupont french american blend_brett_c blend_brett_b blend_brett_l only_brett_c only_brett_b only_brett_l only_brett_b_trois secondary_brett_b secondary_brett_c secondary_brett_l caramel honey wheat rye brown black eight seven five four bitterness floral_spicy piney_citrus spicy floral citrus coriander citrus_zest white_peppercorns thai_basil ginger peaches blackberries mango currants hibiscus lavender rose_hips corn_sugar turbinado_sugar rice)
+    OPTION_ARRAY = %w( menu list_recipes modify yeast primary blend brett_only brett_secondary grain sweetness roast brown black wheat rye hops flavor aroma gravity increase decrease other spices fruit botanicals adjuncts more_botanicals)
+    COMPONENTS_ARRAY = %w( dupont french american blend_brett_c blend_brett_b blend_brett_l only_brett_c only_brett_b only_brett_l only_brett_b_trois secondary_brett_b secondary_brett_c secondary_brett_l caramel honey wheat rye brown black eight seven five four bittering floral_spicy piney_citrus spicy floral citrus coriander citrus_zest white_peppercorns thai_basil ginger peaches blackberries mango currants hibiscus lavender rose_hips corn_sugar turbinado_sugar rice)
   end
 
   def initialize(record = nil)
@@ -34,10 +34,10 @@ class QuestionSet
       send("#{answer}")
     elsif RECIPE_NAME_ARRAY.include? answer
       params = { recipe: { name: answer.tr('_', ' ') } }
-      selected_recipe = RecipeController.new(params)
+      selected_recipe = RecipeController.new params
       selected_recipe.view
     elsif COMPONENTS_ARRAY.include? answer
-      component = IngredientController.new @record
+      component = RecipeController.new params, @record
       component.send("#{answer}")
     else
       puts "\n'#{answer}' is not a valid option. Please choose from the choices listed."
@@ -352,27 +352,27 @@ EOS
     question = <<EOS
 
 How would you like to change the hop character?
-    Bitterness -   Increase bitterness
-    Flavor hops -  Increase flavor/aroma
-    Aroma hops -   Increase aroma
+    Bittering -  Increase bitterness
+    Flavor -     Increase flavor, some aroma
+    Aroma -      Increase aroma
 
 EOS
     route question, 'hops'
   end
 
-  def flavor_hops
+  def flavor
     question = <<EOS
 What kind of hop flavor would you like to add?
     Floral spicy -  Increase flavor/aroma (European hop character)
     Piney citrus -  Increase flavor/aroma (American hop character)
 
 EOS
-    route question, 'flavor_hops'
+    route question, 'flavor'
   end
 
-  def aroma_hops
+  def aroma
     question = <<EOS
-What kind of hop flavor would you like to add?
+What kind of hop aroma would you like to add?
     Floral -  Increase aroma (Western European)
     Spicy -   Increase aroma (Eastern European)
     Citrus -  Increase aroma (American)
@@ -387,9 +387,9 @@ EOS
 Your recipe has been modified to reflect these changes.
 
 Are you finished modifying your recipe's hops bill?
-    Hops -   No, take me back to the Hops modification menu.
-    Modify - Yes, take me back to the Modify Recipe menu.
-    Quit -   I want to exit SaisonBuilder.
+    Hops -    No, take me back to the Hops modification menu.
+    Modify -  Yes, take me back to the Modify Recipe menu.
+    Quit -    I want to exit SaisonBuilder.
 
 EOS
     route question, 'hops_redirect_menu'
