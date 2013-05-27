@@ -3,12 +3,15 @@ require_relative '../test_helper'
 class TestListingrecipes < MiniTest::Unit::TestCase
   include DatabaseCleaner
 
-  def test_listing_when_there_are_no_recipes
-    assert Recipe.all.empty?
+  def test_list_is_populated
+    assert !Recipe.all.empty?
     expected = <<EOS
 
-\nTo view a recipe, type 'sb view <recipe name>.
-Example: $ sb view black saison
+1. Classic
+2. New World
+
+To view a recipe, type: sb view <recipe name>.
+Example: sb view black saison
 EOS
     actual = `ruby saisonbuilder list`
     assert_equal expected, actual
@@ -20,10 +23,13 @@ EOS
     actual = `ruby saisonbuilder list`
     expected = <<EOS
 
-1. Foo
-2. Bar
-\nTo view a recipe, type 'sb view <recipe name>.
-Example: $ sb view black saison
+1. Classic
+2. New World
+3. Foo
+4. Bar
+
+To view a recipe, type: sb view <recipe name>.
+Example: sb view black saison
 EOS
     assert_equal expected, actual
   end

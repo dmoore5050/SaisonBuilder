@@ -4,9 +4,9 @@ class TestAddingRecipe < MiniTest::Unit::TestCase
   include DatabaseCleaner
 
   def test_takes_arguments_and_saves_them
-    assert_equal 0, Recipe.count
+    assert_equal 2, Recipe.count
     `ruby saisonbuilder add foo`
-    assert_equal 1, Recipe.count
+    assert_equal 3, Recipe.count
   end
 
   def test_takes_arguments_and_uses_them

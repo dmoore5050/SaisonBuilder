@@ -49,6 +49,7 @@ class IngredientController
 
   def dupont
     new_primary_yeast = 'dupont strain'
+
     switch_primary_yeast new_primary_yeast
     question_set.yeast_redirect_menu
   end
@@ -181,7 +182,7 @@ class IngredientController
   end
 
   def black
-    args = [['chocolate malt', nil, '0.4'],['carafa 2 special', nil, '0.4']]
+    args = [['chocolate malt', nil, '0.4'], ['carafa 2 special', nil, '0.4']]
 
     args.each do | argument_set |
       name, usage, quantity = argument_set
@@ -367,6 +368,7 @@ class IngredientController
 
   def turbinado_sugar
     name, usage, quantity = 'turbinado sugar', 'Peak Krausen', 1
+
     add_new_ingredient name, usage, quantity
     question_set.adjunct_redirect_menu
   end

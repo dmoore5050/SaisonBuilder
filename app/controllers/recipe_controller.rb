@@ -18,7 +18,7 @@ class RecipeController
     recipes.each_with_index do |recipe, i|
       puts "#{i + 1}. #{recipe.name.titleize}"
     end
-    puts "\nTo view a recipe, type 'sb view <recipe name>."
+    puts "\nTo view a recipe, type: sb view <recipe name>."
     puts "Example: sb view black saison"
   end
 
@@ -37,7 +37,7 @@ class RecipeController
   def view
     matching_recipe = Recipe.where(name: params[:recipe][:name]).first
     if matching_recipe.nil?
-      puts "\n#{params[:recipe][:name]} is not a valid recipe name."
+      puts "\n#{params[:recipe][:name].titleize} is not a valid recipe name."
       puts 'To view a list of possible recipes, type sb list'
       return
     end
@@ -45,7 +45,7 @@ class RecipeController
     ingredient_list = RecipeIngredient.where("recipe_id = #{matching_id}").all
     rendered_recipe = ''
     recipe_head = %Q(
-Name:          #{matching_recipe.name.capitalize}
+Name:          #{matching_recipe.name.titleize}
 Batch size:    5 gallons
 Mash:          90 mins @ 149F
 Boil length:   #{matching_recipe.boil_length} mins

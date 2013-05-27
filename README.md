@@ -22,11 +22,12 @@ The following commands are fully functional:
 * sb ingredients
 * sb list
 * sb view <recipe name>
-* sb delete
+* sb delete <recipe name>
+* sb build
 
 ####To do:
 
-+ Implement stubbed-out ingredient methods for 'sb build'
++ Move recipe change methods from ingredient\_controller to recipe_controller
 + Refactor
 + Bugfix
 
