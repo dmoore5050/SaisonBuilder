@@ -34,9 +34,9 @@ Features
 --------
 The primary feature of this app will be the ability to use or modify a library of saison recipes to the user's custom specifications. Modification will be guided by a series of questions, allowing the user to make specific modifications to single elements of the recipe (ie, increase only a specific type of aroma hops, or add a specific spice).
 
-In the future, saison builder will include the ability to dynamically generate recipes that can then be saved in a user-specific library for later retrieval.
-
 Additionally, a small library of ingredients and style/technique definitions will be included.
+
+In the future, saison builder will include the ability to dynamically generate recipes from the ground up that can then be saved in a library for later retrieval.
 
 Usage Instructions
 ------------------
@@ -88,7 +88,7 @@ Changelog
 5/19/2013 - Implemented main menu, style, and techniques commands, seeding ingredients.
 5/20/2013 - Implemented initial controllers, question_set module.
 5/21/2013 - Implemented initial REPL.
-5/22/2013 - Restructured and simplified database schema entirely. Began work on seeding initial recipes.
+5/22/2013 - Restructured and simplified database schema. Began work on seeding initial recipes.
 5/23/2013 - Completed initial recipe seeding. Implemented view recipe command.
 5/24/2013 - Fixed display bugs, streamlined recipe seeding and view method. Modify now clones base recipe.
 5/25/2013 - Added majority of modify recipe ingredient methods.
