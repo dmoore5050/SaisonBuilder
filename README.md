@@ -83,20 +83,20 @@ Dustin Moore
 Changelog
 ---------
 
-5/10/2013 - Created initial repository with README
-5/13/2013 - Refined/fleshed out README and user_stories
-5/14/2013 - Added initial gemfile, rakefile, bootstrap_ar, model, tests.
-5/15/2013 - Added initial migration, db structure.
-5/18/2013 - Added default recipe and ingredient list markdowns.
-5/19/2013 - Implemented main menu, style, and techniques commands, seeding ingredients.
-5/20/2013 - Implemented initial controllers, question_set module.
-5/21/2013 - Implemented initial REPL.
-5/22/2013 - Restructured and simplified database schema. Began work on seeding initial recipes.
-5/23/2013 - Completed initial recipe seeding. Implemented view recipe command.
-5/24/2013 - Fixed display bugs, streamlined recipe seeding and view method. Modify now clones base recipe.
-5/25/2013 - Added majority of modify recipe ingredient methods.
-5/26/2013 - Added last mod recipe ingr methods, and refactored those methods.
-5/27/2013 - Shifted recipe_ingredient mod methods into recipe.
++ 5/10/2013 - Created initial repository with README
++ 5/13/2013 - Refined/fleshed out README and user_stories
++ 5/14/2013 - Added initial gemfile, rakefile, bootstrap_ar, model, tests.
++ 5/15/2013 - Added initial migration, db structure.
++ 5/18/2013 - Added default recipe and ingredient list markdowns.
++ 5/19/2013 - Implemented main menu, style, and techniques commands, seeding ingredients.
++ 5/20/2013 - Implemented initial controllers, question_set module.
++ 5/21/2013 - Implemented initial REPL.
++ 5/22/2013 - Restructured and simplified database schema. Began work on seeding initial recipes.
++ 5/23/2013 - Completed initial recipe seeding. Implemented view recipe command.
++ 5/24/2013 - Fixed display bugs, streamlined recipe seeding and view method. Modify now clones base recipe.
++ 5/25/2013 - Added majority of modify recipe ingredient methods.
++ 5/26/2013 - Added last mod recipe ingr methods, and refactored those methods.
++ 5/27/2013 - Shifted recipe_ingredient mod methods into recipe.
 
 Acknowledgements
 ----------------
