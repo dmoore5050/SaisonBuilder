@@ -37,7 +37,7 @@ class QuestionSet
       selected_recipe = RecipeController.new params
       selected_recipe.view
     elsif COMPONENTS_ARRAY.include? answer
-      component = RecipeController.new params, @record
+      component = RecipeController.new nil, @record
       component.send("#{answer}")
     else
       puts "\n'#{answer}' is not a valid option. Please choose from the choices listed."
@@ -126,7 +126,7 @@ EOS
       new_recipe[:name] = new_name
       new_recipe[:description] = descr
     else
-      puts "#{answer} is taken. Please choose another.\n"
+      puts "#{answer} is alreday in use. Please choose another.\n"
       clone_recipe answer
     end
   end
@@ -270,25 +270,25 @@ EOS
 
   def brown
     puts "\nAdding dark malt character to recipe..."
-    component = IngredientController.new @record
+    component = RecipeController.new nil, @record
     component.brown
   end
 
   def black
     puts "\nAdding dark malt character to recipe..."
-    component = IngredientController.new @record
+    component = RecipeController.new nil, @record
     component.black
   end
 
   def wheat
     puts "\nChanging base malt composition to add wheat character..."
-    component = IngredientController.new @record
+    component = RecipeController.new nil, @record
     component.wheat
   end
 
   def rye
     puts "\nChanging base malt composition to add rye character..."
-    component = IngredientController.new @record
+    component = RecipeController.new nil, @record
     component.rye
   end
 

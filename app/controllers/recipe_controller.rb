@@ -21,7 +21,7 @@ class RecipeController
     puts "\n"
     recipes.each_with_index do |recipe, i|
       formatted_name = recipe.name + ":"
-      puts "#{i + 1}. #{formatted_name.titleize.ljust(18)}#{recipe.description}"
+      puts "#{i + 1}. #{formatted_name.titleize.ljust(21)}#{recipe.description}"
     end
     puts "\nTo view a recipe, type: sb view <recipe name>."
     puts "Example: sb view black saison"
@@ -232,7 +232,7 @@ Primary Fermentation Temp:  #{matching_recipe.primary_fermentation_temp}
     base_malt.quantity -= 3
     base_malt.save
 
-    args = [['wheat malt', nil, 3], ['rice hulls', nil, 0.25]]
+    args = [['wheat malt', nil, 3], ['rice hulls', nil, 0.2]]
 
     args.each do | argument_set |
       name, usage, quantity = argument_set
@@ -246,7 +246,7 @@ Primary Fermentation Temp:  #{matching_recipe.primary_fermentation_temp}
     base_malt.quantity -= 3
     base_malt.save
 
-    args = [['rye malt', nil, 3], ['rice hulls', nil, 0.25]]
+    args = [['rye malt', nil, 3], ['rice hulls', nil, 0.2]]
 
     args.each do | argument_set |
       name, usage, quantity = argument_set
