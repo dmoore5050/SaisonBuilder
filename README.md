@@ -59,7 +59,7 @@ This will bring up a menu displaying the following options:
     > Learn about brewing techniques:  sb techniques
     > Learn about ingredients:         sb ingredients
     > View recipe library:             sb list
-    > Modify a recipe:                 sb build <recipe_name>
+    > Build a recipe:                  sb build
     > View an existing recipe:         sb view <recipe_name>
     > Delete an existing recipe:       sb delete <recipe_name>
 
@@ -91,6 +91,9 @@ Changelog
 5/22/2013 - Restructured and simplified database schema entirely. Began work on seeding initial recipes.
 5/23/2013 - Completed initial recipe seeding. Implemented view recipe command.
 5/24/2013 - Fixed display bugs, streamlined recipe seeding and view method. Modify now clones base recipe.
+5/25/2013 - Added majority of modify recipe ingredient methods.
+5/26/2013 - Added last mod recipe ingr methods, and refactored those methods.
+5/27/2013 - Shifted recipe_ingredient mod methods into recipe.
 
 Acknowledgements
 ----------------
