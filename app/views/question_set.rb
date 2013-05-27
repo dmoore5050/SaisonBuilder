@@ -5,7 +5,7 @@ class QuestionSet
   attr_reader :record
 
   unless (const_defined?(:RECIPE_NAME_ARRAY)) #gets rid of 'constant initialize' error
-    RECIPE_NAME_ARRAY = %w( classic hoppy_classic rye_saison new_world black_saison )
+    RECIPE_NAME_ARRAY = %w( classic hoppy_classic rye_saison new_world black_saison pacific_6_grain)
     OPTION_ARRAY = %w( menu list_recipes modify yeast primary blend brett_only brett_secondary grain sweetness roast brown black wheat rye hops flavor aroma gravity increase decrease other spices fruit botanicals adjuncts more_botanicals)
     COMPONENTS_ARRAY = %w( dupont french american blend_brett_c blend_brett_b blend_brett_l only_brett_c only_brett_b only_brett_l only_brett_b_trois secondary_brett_b secondary_brett_c secondary_brett_l caramel honey wheat rye brown black eight seven five four bittering floral_spicy piney_citrus spicy floral citrus coriander citrus_zest white_peppercorns thai_basil ginger peaches blackberries mango currants hibiscus lavender rose_hips corn_sugar turbinado_sugar rice)
   end
@@ -66,11 +66,12 @@ EOS
     question = <<EOS
 
 Choose a saison recipe:
-    Classic -        Dry, rustic, yeast-centric, unadorned
-    Hoppy Classic -  Dry, grassy, peppery, earthy
-    Rye Saison -     Earthy malt character, restrained hops, yeast-forward
-    New World -      Dry, bright, citrus, fruit, peppery
-    Black Saison -   Complex malt character, mild roast, spicy yeast character
+    Classic -          Dry, rustic, yeast-centric, light pear, unadorned
+    Hoppy Classic -    Dry, grassy, peppery, light pear, earthy
+    Rye Saison -       Earthy malt character, restrained hops, yeast-forward
+    New World -        Dry, bright, citrus, fruit, peppery
+    Black Saison -     Complex malt character, mild roast, spicy yeast character
+    Pacific 6 Grain -  Bright, clean citrus, crisp, underlying malt complexity
 
 EOS
     check_modify_trigger modify_trigger, question
@@ -99,9 +100,11 @@ EOS
   def clone_recipe(answer)
     puts "\nPlease give your new recipe a unique name:\n\n"
     new_name = $stdin.gets.downcase.chomp!
+    puts "\nPlease enter a short description for your new recipe:\n\n"
+    descr = $stdin.gets.downcase.chomp!
     base_recipe = Recipe.where(name: answer).first
     new_recipe = base_recipe.dup
-    check_unique_name new_name, new_recipe, answer
+    check_unique_name new_name, new_recipe, descr, answer
     @record = new_recipe
     new_recipe.save
 
@@ -117,10 +120,11 @@ EOS
     end
   end
 
-  def check_unique_name(new_name, new_recipe, answer)
+  def check_unique_name(new_name, new_recipe, descr, answer)
     name_check = Recipe.where(name: new_name).first
     if name_check.nil?
       new_recipe[:name] = new_name
+      new_recipe[:description] = descr
     else
       puts "#{answer} is taken. Please choose another.\n"
       clone_recipe answer

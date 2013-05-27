@@ -6,11 +6,13 @@ ingredient_list = [
   ['pale malt', 'Pale base malt, commonly used in American examples.', 'grain'],
   ['munich', 'Base malt, adds richness. Use to supplement wheat, rye, pilsner, or pale malt.', 'grain'],
   ['rye malt', 'Base malt, adds earthy, rtic malt character.', 'grain'],
-  ['white wheat malt', 'Base malt, added to modify malt character. Doughy, mild.', 'grain'],
+  ['wheat malt', 'Base malt, added to modify malt character. Doughy, mild.', 'grain'],
   ['caramunich', 'Caramel malt, adds mild caramel/toffee flavors and sweetness.', 'grain'],
   ['honey malt', 'Specialty malt. Adds distinctive honey-like sweetness.', 'grain'],
   ['chocolate malt', 'Kilned specialty malt. Adds nutty, chocolate flavor and color.', 'grain'],
   ['carafa 2 special', 'Kilned specialty malt. Adds color, mild roasty flavors w/o harshness.', 'grain'],
+  ['rice hulls', 'Imparts no flavor or sugar. Used to prevent stuck sparges when using wheat or rye.', 'grain'],
+  ['flaked oats', 'Contributes silky mouthfeel, and mildy nutty flavor if toasted.', 'grain'],
   ['amarillo', 'New-world hop, floral, tangerine citrus character.', 'hop'],
   ['hallertau', 'Old-world, floral, spicy, refined.', 'hop'],
   ['saaz', 'Old-world, spicy, earthy.', 'hop'],
@@ -48,7 +50,7 @@ end
 
 recipe_array = [
   [
-    ['classic', 90, '85F'],
+    ['classic', 90, '85F', 'Dry, rustic, yeast-centric, light pear, unadorned.'],
     [
       ['pilsner', nil, 9, nil],
       ['munich', nil, 1, nil],
@@ -59,10 +61,10 @@ recipe_array = [
     ]
   ],
   [
-    ['hoppy classic', 90, '85F'],
+    ['hoppy classic', 90, '85F', 'Dry, grassy, peppery, light pear, earthy.'],
     [
       ['pilsner', nil, 9, nil],
-      ['white wheat malt', nil, 0.5, nil],
+      ['wheat malt', nil, 0.5, nil],
       ['munich', nil, 0.5, nil],
       ['corn sugar', 'peak krausen', 1, nil],
       ['styrian goldings', 'boil', 1.3, '60 min'],
@@ -73,7 +75,7 @@ recipe_array = [
     ]
   ],
   [
-    ['rye saison', 90, '65-72F'],
+    ['rye saison', 90, '65-72F', 'Earthy malt character, restrained hops, yeast-forward.'],
     [
       ['pilsner', nil, 6, nil],
       ['rye malt', nil, 3, nil],
@@ -85,10 +87,10 @@ recipe_array = [
     ]
   ],
   [
-    ['new world', 60, '65-72F'],
+    ['new world', 60, '65-72F', 'Dry, bright, citrus, fruit, peppery.'],
     [
       ['pale malt', nil, 7, nil],
-      ['white wheat malt', nil, 2, nil],
+      ['wheat malt', nil, 2, nil],
       ['munich', nil, 1, nil],
       ['turbinado sugar', 'peak krausen', 1, nil],
       ['hallertau', 'boil', 1.5, '60 min'],
@@ -100,7 +102,7 @@ recipe_array = [
     ]
   ],
   [
-    ['black saison', 60, '65-72F'],
+    ['black saison', 60, '65-72F', 'Complex malt character, mild roast, spicy yeast character.'],
     [
       ['pale malt', nil, 8, nil],
       ['munich', nil, 2, nil],
@@ -109,12 +111,28 @@ recipe_array = [
       ['hallertau', 'boil', 1.5, '60 min'],
       ['american farmhouse', 'primary', 1, nil],
     ]
+  ],
+  [
+    ['pacific 6 grain', 60, '65-72F', 'Bright, clean citrus, crisp, underlying malt complexity.'],
+    [
+      ['pilsner', nil, 5, nil],
+      ['rye', nil, 3, nil],
+      ['wheat malt', nil, 1, nil],
+      ['flaked oats', nil, 0.5, nil],
+      ['munich', nil, 0.5, nil],
+      ['rice hulls', nil, 0.15, nil],
+      ['corn sugar', nil, 1, nil],
+      ['hallertau', 'boil', 1.25, '60 min'],
+      ['motueka', 'boil', 1, '20 min'],
+      ['motueka', 'boil', 1, '0 min'],
+      ['french saison', 'primary', 1, nil],
+    ]
   ]
 ]
 
 recipe_array.each do | recipe_arguments, ingredient_profiles |
-  name, boil_length, ferm_temp = recipe_arguments
-  the_recipe = Recipe.create(name: name, boil_length: boil_length, primary_fermentation_temp: ferm_temp)
+  name, boil_length, ferm_temp, description = recipe_arguments
+  the_recipe = Recipe.create(name: name, boil_length: boil_length, primary_fermentation_temp: ferm_temp, description: description)
   ingredient_profiles.each_with_object(the_recipe) do | ingredient |
     ingredient_name, usage, quantity, duration = ingredient
     ingr = Ingredient.where(name: ingredient_name).first

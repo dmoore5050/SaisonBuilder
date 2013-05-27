@@ -20,7 +20,8 @@ class RecipeController
     recipes = Recipe.all
     puts "\n"
     recipes.each_with_index do |recipe, i|
-      puts "#{i + 1}. #{recipe.name.titleize}"
+      formatted_name = recipe.name + ":"
+      puts "#{i + 1}. #{formatted_name.titleize.ljust(18)}#{recipe.description}"
     end
     puts "\nTo view a recipe, type: sb view <recipe name>."
     puts "Example: sb view black saison"
@@ -28,22 +29,20 @@ class RecipeController
 
   def delete
     matching_recipe = Recipe.where(name: params[:recipe][:name]).first
-    if matching_recipes.nil?
+    if matching_recipe.nil?
       puts "\n#{params[:recipe][:name].titleize} is not a valid recipe name."
       puts 'To view a list of possible recipes, type sb list'
       return
     end
-    matching_recipes.each do | recipe |
-      ingr_array = RecipeIngredient.where(recipe_id: recipe.id).all
-      ingr_array.each do | recipe_ingredient |
-        recipe_ingredient.destroy
-      end
-      recipe.destroy
-      case
-      when recipe.destroyed?
-        puts "\n#{params[:recipe][:name].titleize} has been deleted."
-      else puts "Failure: #{recipe.errors.full_messages.join(", ")}"
-      end
+    ingr_array = RecipeIngredient.where(recipe_id: matching_recipe.id).all
+    ingr_array.each do | recipe_ingredient |
+      recipe_ingredient.destroy
+    end
+    matching_recipe.destroy
+    case
+    when matching_recipe.destroyed?
+      puts "\n#{params[:recipe][:name].titleize} has been deleted."
+    else puts "Failure: #{recipe.errors.full_messages.join(", ")}"
     end
   end
 
@@ -230,35 +229,44 @@ Primary Fermentation Temp:  #{matching_recipe.primary_fermentation_temp}
 
   def wheat
     base_malt = RecipeIngredient.where(recipe_id: @record, quantity: 6..25).first
-    base_malt.quantity -= 2
+    base_malt.quantity -= 3
     base_malt.save
 
-    name, usage, quantity = 'white wheat malt', nil, 2
+    args = [['wheat malt', nil, 3], ['rice hulls', nil, 0.25]]
 
-    add_new_ingredient name, usage, quantity
+    args.each do | argument_set |
+      name, usage, quantity = argument_set
+      add_new_ingredient name, usage, quantity
+    end
     question_set.grain_redirect_menu
   end
 
   def rye
     base_malt = RecipeIngredient.where(recipe_id: @record, quantity: 6..25).first
-    base_malt.quantity -= 2
+    base_malt.quantity -= 3
     base_malt.save
 
-    name, usage, quantity = 'rye malt', nil, 2
+    args = [['rye malt', nil, 3], ['rice hulls', nil, 0.25]]
 
-    add_new_ingredient name, usage, quantity
+    args.each do | argument_set |
+      name, usage, quantity = argument_set
+      add_new_ingredient name, usage, quantity
+    end
     question_set.grain_redirect_menu
   end
 
   def brown
-    name, usage, quantity = 'chocolate malt', nil, 0.4
+    name, usage, quantity = [['chocolate malt', nil, 0.4], ['flaked oats', nil, 1]]
 
-    add_new_ingredient name, usage, quantity
+    args.each do | argument_set |
+      name, usage, quantity = argument_set
+      add_new_ingredient name, usage, quantity
+    end
     question_set.grain_redirect_menu
   end
 
   def black
-    args = [['chocolate malt', nil, '0.4'], ['carafa 2 special', nil, '0.4']]
+    args = [['chocolate malt', nil, 0.4], ['carafa 2 special', nil, 0.4], ['flaked oats', nil, 1]]
 
     args.each do | argument_set |
       name, usage, quantity = argument_set

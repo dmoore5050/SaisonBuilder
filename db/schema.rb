@@ -33,6 +33,7 @@ ActiveRecord::Schema.define(:version => 20130522142100) do
     t.string  "name"
     t.integer "boil_length"
     t.string  "primary_fermentation_temp"
+    t.string  "description"
   end
 
 end

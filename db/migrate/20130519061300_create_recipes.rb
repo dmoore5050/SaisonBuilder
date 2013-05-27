@@ -5,6 +5,7 @@ class CreateRecipes < ActiveRecord::Migration
       t.string :name
       t.integer :boil_length
       t.string :primary_fermentation_temp
+      t.string :description
     end
   end
 
