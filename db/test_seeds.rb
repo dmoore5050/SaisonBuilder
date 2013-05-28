@@ -23,7 +23,7 @@ end
 
 recipe_array = [
   [
-    ['classic', 90, '85F'],
+    ['classic', 90, '85F', 'Dry, rustic, yeast-centric, light pear, unadorned.'],
     [
       ['pilsner', nil, 9, nil],
       ['munich', nil, 1, nil],
@@ -34,7 +34,7 @@ recipe_array = [
     ]
   ],
   [
-    ['new world', 60, '65-72F'],
+    ['new world', 60, '65-72F', 'Dry, bright, citrus, fruit, peppery.'],
     [
       ['pale malt', nil, 7, nil],
       ['white wheat malt', nil, 2, nil],
@@ -51,8 +51,8 @@ recipe_array = [
 ]
 
 recipe_array.each do | recipe_arguments, ingredient_profiles |
-  name, boil_length, ferm_temp = recipe_arguments
-  the_recipe = Recipe.create(name: name, boil_length: boil_length, primary_fermentation_temp: ferm_temp)
+  name, boil_length, ferm_temp, description = recipe_arguments
+  the_recipe = Recipe.create(name: name, boil_length: boil_length, primary_fermentation_temp: ferm_temp, description: description)
   ingredient_profiles.each_with_object(the_recipe) do | ingredient |
     ingredient_name, usage, quantity, duration = ingredient
     ingr = Ingredient.where(name: ingredient_name).first

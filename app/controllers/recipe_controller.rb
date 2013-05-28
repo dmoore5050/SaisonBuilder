@@ -21,14 +21,18 @@ class RecipeController
     puts "\n"
     recipes.each_with_index do |recipe, i|
       formatted_name = recipe.name + ":"
-      puts "#{i + 1}. #{formatted_name.titleize.ljust(21)}#{recipe.description}"
+      if !recipe.description.nil?
+        puts "#{i + 1}. #{formatted_name.titleize.ljust(21)}#{recipe.description.capitalize}"
+      else
+        puts "#{i + 1}. #{recipe.name.titleize}"
+      end
     end
     puts "\nTo view a recipe, type: sb view <recipe name>."
     puts "Example: sb view black saison"
   end
 
   def delete
-    matching_recipe = Recipe.where(name: params[:recipe][:name]).first
+    matching_recipe = Recipe.where(name: params[:recipe][:name].downcase).first
     if matching_recipe.nil?
       puts "\n#{params[:recipe][:name].titleize} is not a valid recipe name."
       puts 'To view a list of possible recipes, type sb list'
@@ -47,7 +51,7 @@ class RecipeController
   end
 
   def view
-    matching_recipe = Recipe.where(name: params[:recipe][:name]).first
+    matching_recipe = Recipe.where(name: params[:recipe][:name].downcase).first
     if matching_recipe.nil?
       puts "\n#{params[:recipe][:name].titleize} is not a valid recipe name."
       puts 'To view a list of possible recipes, type sb list'
@@ -107,6 +111,14 @@ Primary Fermentation Temp:  #{matching_recipe.primary_fermentation_temp}
     when 'yeast' then 'pkg'
     else 'lbs'
     end
+  end
+
+  def remove(name, usage, duration)
+    matching_ingr = Ingredient.where(name: name)
+    dropped_ingredient = RecipeIngredient.where(recipe_id: @record, ingredient_id: matching_ingr, usage: usage, duration: duration).first
+    dropped_ingredient.destroy
+
+    question_set.remove_redirect_menu
   end
 
   def switch_primary_yeast(name)

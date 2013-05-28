@@ -14,6 +14,7 @@ Project Status
 --------------
 Basic database add-remove-list functionality in place.
 Migrations/models in place.
+Seed files in place.
 The following commands are fully functional:
 
 * sb
@@ -27,13 +28,12 @@ The following commands are fully functional:
 
 ###To do:
 
-+ Add remove-line-item capability to walkthrough
 + Refactor
 + Bugfix
 
 Features
 --------
-The primary feature of this app is the ability to use or modify a library of saison recipes to the user's custom specifications. Modification are guided by a series of questions, allowing the user to make specific modifications to single elements of the recipe (ie, increase only a specific type of aroma hops, or add a specific spice). Modified recipes are then stored as a new recipe in the library.
+The primary feature of this app is the ability to use or modify a library of saison recipes to the user's custom specifications. Modification are guided by a series of questions, allowing the user to make specific modifications to single elements of the recipe (ie, increase only a specific type of aroma hops, or remove a specific grain). Modified recipes are then stored as a new recipe in the library.
 
 Additionally, a small library of ingredients and style/technique definitions is included.
 

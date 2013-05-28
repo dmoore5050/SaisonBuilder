@@ -7,8 +7,8 @@ class TestListingrecipes < MiniTest::Unit::TestCase
     assert !Recipe.all.empty?
     expected = <<EOS
 
-1. Classic
-2. New World
+1. Classic:             Dry, rustic, yeast-centric, light pear, unadorned.
+2. New World:           Dry, bright, citrus, fruit, peppery.
 
 To view a recipe, type: sb view <recipe name>.
 Example: sb view black saison
@@ -23,8 +23,8 @@ EOS
     actual = `ruby saisonbuilder list`
     expected = <<EOS
 
-1. Classic
-2. New World
+1. Classic:             Dry, rustic, yeast-centric, light pear, unadorned.
+2. New World:           Dry, bright, citrus, fruit, peppery.
 3. Foo
 4. Bar
 

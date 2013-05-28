@@ -6,7 +6,7 @@ class QuestionSet
 
   unless (const_defined?(:RECIPE_NAME_ARRAY)) #gets rid of 'constant initialize' error
     RECIPE_NAME_ARRAY = %w( classic hoppy_classic rye_saison new_world black_saison pacific_6_grain)
-    OPTION_ARRAY = %w( menu list_recipes modify yeast primary blend brett_only brett_secondary grain sweetness roast brown black wheat rye hops flavor aroma gravity increase decrease other spices fruit botanicals adjuncts more_botanicals)
+    OPTION_ARRAY = %w( menu remove list_recipes modify yeast primary blend brett_only brett_secondary grain sweetness roast brown black wheat rye hops flavor aroma gravity increase decrease other spices fruit botanicals adjuncts more_botanicals)
     COMPONENTS_ARRAY = %w( dupont french american blend_brett_c blend_brett_b blend_brett_l only_brett_c only_brett_b only_brett_l only_brett_b_trois secondary_brett_b secondary_brett_c secondary_brett_l caramel honey wheat rye brown black eight seven five four bittering floral_spicy piney_citrus spicy floral citrus coriander citrus_zest white_peppercorns thai_basil ginger peaches blackberries mango currants hibiscus lavender rose_hips corn_sugar turbinado_sugar rice)
   end
 
@@ -126,7 +126,7 @@ EOS
       new_recipe[:name] = new_name
       new_recipe[:description] = descr
     else
-      puts "#{answer} is alreday in use. Please choose another.\n"
+      puts "#{answer} is already in use. Please choose another.\n"
       clone_recipe answer
     end
   end
@@ -142,6 +142,7 @@ EOS
     question = <<EOS
 
 What aspect of the recipe would you like to change?
+    Remove -   Remove an item from the recipe
     Yeast -    Change or add yeast
     Grain -    Change or add to grain bill
     Gravity -  Raise or lower gravity of recipe
@@ -151,6 +152,44 @@ What aspect of the recipe would you like to change?
 
 EOS
     route question, 'modify'
+  end
+
+  def remove
+    list, usage, duration, answer_array = "", nil, nil, []
+    build_remove_list list
+    question = %Q(
+Which item would you like to delete from the recipe?
+#{list}
+
+If usage and duration are present, please answer in the form of name, usage, duration.
+Ex: Amarillo, boil, 30 min
+)
+    puts question
+    name, usage, duration = $stdin.gets.downcase.chomp!.split(', ')
+    component = RecipeController.new nil, @record
+    component.remove name, usage, duration
+  end
+
+  def build_remove_list(list)
+    ingr_array = RecipeIngredient.where(recipe_id: @record).all
+    ingr_array.each do | ingredient |
+      ingredient_match = Ingredient.where(id: ingredient.ingredient_id).first
+      list << "    #{ingredient_match.name.titleize.ljust(21)}#{ingredient.usage} #{ingredient.duration}\n"
+    end
+  end
+
+  def remove_redirect_menu
+    question = <<EOS
+
+Your recipe has been modified to reflect these changes.
+
+Are you finished removing ingredients?
+    Remove -  No, I would like to remove another ingredient.
+    Modify -  Yes, take me back to the Modify Recipe menu.
+    Quit -    I want to exit SaisonBuilder.
+
+EOS
+    route question, 'remove_redirect_menu'
   end
 
   def yeast
