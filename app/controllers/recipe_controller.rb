@@ -32,12 +32,9 @@ class RecipeController
   end
 
   def delete
+    check_if_name_is_entered
     matching_recipe = Recipe.where(name: params[:recipe][:name].downcase).first
-    if matching_recipe.nil?
-      puts "\n#{params[:recipe][:name].titleize} is not a valid recipe name."
-      puts 'To view a list of possible recipes, type sb list'
-      return
-    end
+    check_if_name_matches_recipe matching_recipe
     ingr_array = RecipeIngredient.where(recipe_id: matching_recipe.id).all
     ingr_array.each do | recipe_ingredient |
       recipe_ingredient.destroy
@@ -50,15 +47,27 @@ class RecipeController
     end
   end
 
-  def view
-    matching_recipe = Recipe.where(name: params[:recipe][:name].downcase).first
+  def check_if_name_is_entered
+    if params[:recipe][:name].nil?
+      puts "\nYou did not specify a recipe name."
+      puts 'To view a list of possible recipes, type sb list'
+      abort
+    end
+  end
+
+  def check_if_name_matches_recipe(matching_recipe)
     if matching_recipe.nil?
       puts "\n#{params[:recipe][:name].titleize} is not a valid recipe name."
       puts 'To view a list of possible recipes, type sb list'
-      return
+      abort
     end
-    matching_id = matching_recipe.id
-    ingredient_list = RecipeIngredient.where("recipe_id = #{matching_id}").all
+  end
+
+  def view
+    check_if_name_is_entered
+    matching_recipe = Recipe.where(name: params[:recipe][:name].downcase).first
+    check_if_name_matches_recipe matching_recipe
+    ingredient_list = RecipeIngredient.where("recipe_id = #{matching_recipe.id}").all
     rendered_recipe = ''
     recipe_head = %Q(
 Name:          #{matching_recipe.name.titleize}
@@ -69,11 +78,10 @@ Boil length:   #{matching_recipe.boil_length} mins
 )
     rendered_recipe << recipe_head
 
-  ingredient_print_order = %w(grain adjunct hop spice botanical yeast)
-
-  ingredient_print_order.each do | type |
-    rendered_recipe << render_ingredient_bill(type, ingredient_list)
-  end
+    ingredient_print_order = %w(grain adjunct hop spice botanical yeast)
+    ingredient_print_order.each do | type |
+      rendered_recipe << render_ingredient_bill(type, ingredient_list)
+    end
 
     recipe_foot = %Q(
 Primary Fermentation Temp:  #{matching_recipe.primary_fermentation_temp}

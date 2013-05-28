@@ -33,11 +33,11 @@ The following commands are fully functional:
 
 Features
 --------
-The primary feature of this app is the ability to use or modify a library of saison recipes to the user's custom specifications. Modification are guided by a series of questions, allowing the user to make specific modifications to single elements of the recipe (ie, increase only a specific type of aroma hops, or remove a specific grain). Modified recipes are then stored as a new recipe in the library.
+The primary feature of this app is the ability to view one of six preloaded saison recipes, or to modify any of the six recipes to the user's custom specifications, and to save the modified recipe to the user's library. Modification are guided by a series of questions, allowing the user to make specific modifications to single elements of the recipe (ie, increase only a specific type of aroma hops, or remove a specific grain).
 
 Additionally, a small library of ingredients and style/technique definitions is included.
 
-In the future, saison builder will include the ability to dynamically generate recipes from the ground up that can then be saved in a library for later retrieval.
+In the future, saison builder will include the ability to generate recipes from the ground up, ingredient by ingredient, that can then be saved in a library for later use.
 
 Usage Instructions
 ------------------

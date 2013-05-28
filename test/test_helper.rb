@@ -10,6 +10,6 @@ module DatabaseCleaner
     super
     Recipe.destroy_all
     Ingredient.destroy_all
-    load "~/desktop/NSS/NSS_section_2/saison_app/db/test_seeds.rb"
+    load '~/desktop/NSS/NSS_section_2/saison_app/db/test_seeds.rb'
   end
 end
