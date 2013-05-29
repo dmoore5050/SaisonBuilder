@@ -6,10 +6,10 @@ database = ENV['FP_ENV'] || 'development'
 connect_to database
 
 command = nil
-command = ARGV.shift unless ARGV.nil?
-name = ARGV[0..-1].join(' ') unless ARGV.nil?
+command = ARGV.shift.downcase unless ARGV == []
+name = ARGV[0..-1].join(' ').downcase unless ARGV.nil?
 
-params = { command: command.downcase, recipe: { name: name.downcase } }
+params = { command: command, recipe: { name: name } }
 recipe_controller = RecipeController.new(params)
 ingredient_controller = IngredientController.new
 question_set = QuestionSet.new
