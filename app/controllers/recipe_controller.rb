@@ -67,7 +67,7 @@ class RecipeController
     check_if_name_is_entered
     matching_recipe = Recipe.where(name: params[:recipe][:name].downcase).first
     check_if_name_matches_recipe matching_recipe
-    ingredient_list = RecipeIngredient.where("recipe_id = #{matching_recipe.id}").all
+    ingredient_list = RecipeIngredient.where(recipe_id: matching_recipe.id).all
     rendered_recipe = ''
     recipe_head = %Q(
 Name:          #{matching_recipe.name.titleize}

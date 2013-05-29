@@ -22,33 +22,33 @@ Boil length:   90 mins
 Primary Fermentation Temp:  85F
 )
 
-    assert_equal(expected, actual)
+    assert_equal expected, actual
   end
 
-#   def test_prints_recipe_multiword_name
-#     actual = `ruby saisonbuilder view new world`
+  def test_prints_multiword_name_recipe
+    actual = `ruby saisonbuilder view new world`
 
-#     expected = %Q(
-# Name:          New World
-# Batch size:    5 gallons
-# Mash:          90 mins @ 149F
-# Boil length:   60 mins
+    expected = %Q(
+Name:          New World
+Batch size:    5 gallons
+Mash:          90 mins @ 149F
+Boil length:   60 mins
 
-# #{'7.0 lbs Pale Malt'.ljust(28)}
-# #{'2.0 lbs White Wheat Malt'.ljust(28)}
-# #{'1.0 lbs Munich'.ljust(28)}
-# 1.0 lbs Turbinado Sugar     Add during: Peak krausen
-# 1.5 oz Hallertau            Add during: Boil, @ 60 min
-# 1.0 oz Amarillo             Add during: Boil, @ 10 min
-# 1.0 oz Motueka              Add during: Boil, @ 1 min
-# 1.0 oz Amarillo             Add during: Dryhop, @ 5 days
-# 1.0 oz Simcoe               Add during: Dryhop, @ 5 days
-# 1.0 pkg French Saison       Add during: Primary. Mfg. code(s): White Labs WLP656, Wyeast 3711
+#{'7.0 lbs Pale Malt'.ljust(28)}
+#{'2.0 lbs White Wheat Malt'.ljust(28)}
+#{'1.0 lbs Munich'.ljust(28)}
+1.0 lbs Turbinado Sugar     Add during: Peak krausen
+1.5 oz Hallertau            Add during: Boil, @ 60 min
+1.0 oz Amarillo             Add during: Boil, @ 10 min
+1.0 oz Motueka              Add during: Boil, @ 1 min
+1.0 oz Amarillo             Add during: Dryhop, 5 days
+1.0 oz Simcoe               Add during: Dryhop, 5 days
+1.0 pkg French Saison       Add during: Primary. Mfg. code(s): White Labs WLP656, Wyeast 3711
 
-# Primary Fermentation Temp:  65-72F
-# )
+Primary Fermentation Temp:  65-72F
+)
 
-#     assert_equal(expected, actual)
-#   end
+    assert_equal expected, actual
+  end
 
 end

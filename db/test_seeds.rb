@@ -14,6 +14,7 @@ ingredient_list = [
   ['motueka', 'New-world, lemon-lime, bright citrus.', 'hop'],
   ['dupont strain', 'Ferment: ~85F, can be slow to finish. Spicy/peppery, mild fruit.', 'yeast', 565, 3724],
   ['french saison', 'Ferment: 65-72F. Aromatic fruit/citrus, peppery, clean.', 'yeast', 656, 3711],
+  ['turbinado sugar', 'Adjunct. Adds subtle molasses character.', 'adjunct'],
   ['corn sugar', 'Adjunct. Adds no flavor; add to raise gravity without boosting body.', 'adjunct']
 ]
 
