@@ -51,7 +51,7 @@ class RecipeController
     if params[:recipe][:name].nil?
       puts "\nYou did not specify a recipe name."
       puts 'To view a list of possible recipes, type sb list'
-      abort
+      exit
     end
   end
 
@@ -59,7 +59,7 @@ class RecipeController
     if matching_recipe.nil?
       puts "\n#{params[:recipe][:name].titleize} is not a valid recipe name."
       puts 'To view a list of possible recipes, type sb list'
-      abort
+      exit
     end
   end
 
@@ -78,7 +78,7 @@ Boil length:   #{matching_recipe.boil_length} mins
 )
     rendered_recipe << recipe_head
 
-    ingredient_print_order = %w(grain adjunct hop spice botanical yeast)
+    ingredient_print_order = %w(grain adjunct hop spice fruit botanical yeast)
     ingredient_print_order.each do | type |
       rendered_recipe << render_ingredient_bill(type, ingredient_list)
     end
@@ -104,10 +104,10 @@ Primary Fermentation Temp:  #{matching_recipe.primary_fermentation_temp}
 
   def build_line_item(match_code, ingredient, ingr_record)
     measure = quantity_unit match_code
-
+    usage_indicator = ingredient.usage == 'boil' ? '@ ' : nil
     line_item = "#{ingredient.quantity} #{measure} #{ingr_record.name.titleize}".ljust(28)
     line_item << "Add during: #{ingredient.usage.capitalize}" unless ingredient.usage.nil?
-    line_item << ", @ #{ingredient.duration}" unless ingredient.duration.nil?
+    line_item << ", #{usage_indicator}#{ingredient.duration}" unless ingredient.duration.nil?
     line_item << ". Mfg. code(s): White Labs WLP#{ingr_record.yeast_code_wl}" unless ingr_record.yeast_code_wl.nil?
     line_item << ", Wyeast #{ingr_record.yeast_code_wyeast}" unless ingr_record.yeast_code_wyeast.nil?
     line_item << "\n"

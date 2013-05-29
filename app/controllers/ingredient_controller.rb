@@ -16,8 +16,9 @@ class IngredientController
     ingredients = Ingredient.all
     puts ' '
     ingredients.each_with_index do | ingredient, i |
-      ingredient_name = "#{i + 1}. #{ingredient.name.capitalize}:"
-      puts ingredient_name.capitalize.ljust(26) + "#{ingredient.description}"
+      num = (i + 1) < 10 ? " #{i + 1}" : "#{i + 1}"
+      ingredient_name = "#{num}. #{ingredient.name.titleize}:"
+      puts ingredient_name.ljust(26) + "#{ingredient.description}"
     end
   end
 
