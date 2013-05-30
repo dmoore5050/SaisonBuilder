@@ -2,10 +2,36 @@ require_relative '../../bootstrap_ar'
 
 class RecipeController
 
+  attr_reader :params, :record, :question_set, :matching_recipe
+
+  INGREDIENT_PRINT_ORDER = %w(grain adjunct hop spice fruit botanical yeast)
+
   def initialize(params, record = nil)
       @params = params
       @record = record
       @question_set = QuestionSet.new record
+      set_matching_recipe
+  end
+
+  def set_matching_recipe
+    check_if_name_is_entered
+    @matching_recipe = Recipe.where(name: params[:recipe][:name]).first
+  end
+
+  def check_if_name_is_entered
+    if params[:recipe][:name].nil?
+      puts "\nYou did not specify a recipe name."
+      puts 'To view a list of possible recipes, type sb list'
+      exit
+    end
+  end
+
+  def check_if_name_matches_a_recipe(matching_recipe)
+    if matching_recipe.nil?
+      puts "\n#{params[:recipe][:name].titleize} is not a valid recipe name."
+      puts 'To view a list of possible recipes, type sb list'
+      exit
+    end
   end
 
   def create
@@ -20,43 +46,29 @@ class RecipeController
     recipes = Recipe.all
     puts "\n"
     recipes.each_with_index do |recipe, i|
-      formatted_name = recipe.name + ':'
-      if !recipe.description.nil?
-        puts "#{i + 1}. #{formatted_name.titleize.ljust(21)}#{recipe.description.capitalize}"
-      else
-        puts "#{i + 1}. #{recipe.name.titleize}"
-      end
+      puts build_list_item recipe, i
     end
     puts "\nTo view a recipe, type: sb view <recipe name>."
     puts 'Example: sb view black saison'
   end
 
+  def build_list_item(recipe, i)
+    formatted_name = recipe.name.titleize + ':'
+    num = i < 9 ? " #{i + 1}" : i + 1
+    case recipe.description
+    when nil then "#{num}. #{recipe.name.titleize}"
+    else "#{num}. #{formatted_name.ljust(21)}#{recipe.description.capitalize}"
+    end
+  end
+
   def delete
-    check_if_name_is_entered
-    matching_recipe = Recipe.where(name: params[:recipe][:name].downcase).first
-    check_if_name_matches_recipe matching_recipe
+    check_if_name_matches_a_recipe matching_recipe
     ingr_array = RecipeIngredient.where(recipe_id: matching_recipe.id).all
     ingr_array.each do | recipe_ingredient |
       recipe_ingredient.destroy
     end
     matching_recipe.destroy
     generate_recipe_destroyed_message matching_recipe
-  end
-
-  def check_if_name_is_entered
-    if params[:recipe][:name].nil?
-      puts "\nYou did not specify a recipe name."
-      puts 'To view a list of possible recipes, type sb list'
-      exit
-    end
-  end
-
-  def check_if_name_matches_recipe(matching_recipe)
-    if matching_recipe.nil?
-      puts "\n#{params[:recipe][:name].titleize} is not a valid recipe name."
-      puts 'To view a list of possible recipes, type sb list'
-      exit
-    end
   end
 
   def generate_recipe_destroyed_message(matching_recipe)
@@ -68,30 +80,32 @@ class RecipeController
   end
 
   def view
-    check_if_name_is_entered
-    matching_recipe = Recipe.where(name: params[:recipe][:name].downcase).first
-    check_if_name_matches_recipe matching_recipe
+    check_if_name_matches_a_recipe @matching_recipe
     ingredient_list = RecipeIngredient.where(recipe_id: matching_recipe.id).all
-    rendered_recipe = ''
-    recipe_head = %Q(
+
+    rendered_recipe = recipe_head matching_recipe
+    INGREDIENT_PRINT_ORDER.each do | type |
+      rendered_recipe += render_ingredient_bill(type, ingredient_list)
+    end
+    rendered_recipe += recipe_foot matching_recipe
+
+    puts rendered_recipe
+  end
+
+  def recipe_head(matching_recipe)
+    head = %Q(
 Name:          #{matching_recipe.name.titleize}
 Batch size:    5 gallons
 Mash:          90 mins @ 149F
 Boil length:   #{matching_recipe.boil_length} mins
 
 )
-    rendered_recipe << recipe_head
+  end
 
-    ingredient_print_order = %w(grain adjunct hop spice fruit botanical yeast)
-    ingredient_print_order.each do | type |
-      rendered_recipe << render_ingredient_bill(type, ingredient_list)
-    end
-
-    recipe_foot = %Q(
+  def recipe_foot(matching_recipe)
+    foot = %Q(
 Primary Fermentation Temp:  #{matching_recipe.primary_fermentation_temp}
 )
-    rendered_recipe << recipe_foot
-    puts rendered_recipe
   end
 
   def render_ingredient_bill(match_code, ingredient_list)
@@ -100,21 +114,21 @@ Primary Fermentation Temp:  #{matching_recipe.primary_fermentation_temp}
     ingredient_list.each do | ingredient |
       ingr_record = Ingredient.where("id = #{ingredient.ingredient_id}").first
       if ingr_record.type_code == match_code
-        ingredient_bill << build_line_item(match_code, ingredient, ingr_record)
+        ingredient_bill += build_recipe_line_item match_code, ingredient, ingr_record
       end
     end
     ingredient_bill
   end
 
-  def build_line_item(match_code, ingredient, ingr_record)
+  def build_recipe_line_item(match_code, ingredient, ingr_record)
     measure = quantity_unit match_code
     usage_indicator = ingredient.usage == 'boil' ? '@ ' : nil
     line_item = "#{ingredient.quantity} #{measure} #{ingr_record.name.titleize}".ljust(28)
-    line_item << "Add during: #{ingredient.usage.capitalize}" unless ingredient.usage.nil?
-    line_item << ", #{usage_indicator}#{ingredient.duration}" unless ingredient.duration.nil?
-    line_item << ". Mfg. code(s): White Labs WLP#{ingr_record.yeast_code_wl}" unless ingr_record.yeast_code_wl.nil?
-    line_item << ", Wyeast #{ingr_record.yeast_code_wyeast}" unless ingr_record.yeast_code_wyeast.nil?
-    line_item << "\n"
+    line_item += "Add during: #{ingredient.usage.capitalize}" unless ingredient.usage.nil?
+    line_item += ", #{usage_indicator}#{ingredient.duration}" unless ingredient.duration.nil?
+    line_item += ". Mfg. code(s): White Labs WLP#{ingr_record.yeast_code_wl}" unless ingr_record.yeast_code_wl.nil?
+    line_item += ", Wyeast #{ingr_record.yeast_code_wyeast}" unless ingr_record.yeast_code_wyeast.nil?
+    line_item += "\n"
   end
 
   def quantity_unit(match_code)
@@ -125,6 +139,10 @@ Primary Fermentation Temp:  #{matching_recipe.primary_fermentation_temp}
     end
   end
 
+  # ******************************************************* #
+  #            vv  INGREDIENT CHANGE METHODS  vv
+  # ******************************************************* #
+
   def remove(name, usage, duration)
     matching_ingr = Ingredient.where(name: name)
     dropped_ingredient = RecipeIngredient.where(recipe_id: @record, ingredient_id: matching_ingr, usage: usage, duration: duration).first
@@ -133,17 +151,17 @@ Primary Fermentation Temp:  #{matching_recipe.primary_fermentation_temp}
     question_set.remove_redirect_menu
   end
 
+  def add_new_ingredient(name, usage, quantity, duration = nil)
+    ingr = Ingredient.where(name: name).first
+    @record.recipe_ingredients.create(ingredient_id: ingr, usage: usage, quantity: quantity, duration: duration)
+  end
+
   def switch_primary_yeast(name)
     primary_yeast = RecipeIngredient.where(recipe_id: @record, usage: 'primary').first
     usage, quantity =  primary_yeast.usage, primary_yeast.quantity
     primary_yeast.destroy
 
     add_new_ingredient name, usage, quantity
-  end
-
-  def add_new_ingredient(name, usage, quantity, duration = nil)
-    ingr = Ingredient.where(name: name).first
-    @record.recipe_ingredients.create(ingredient_id: ingr, usage: usage, quantity: quantity, duration: duration)
   end
 
   def dupont
@@ -305,6 +323,12 @@ Primary Fermentation Temp:  #{matching_recipe.primary_fermentation_temp}
     base_malt.save
 
     sugar = RecipeIngredient.where(recipe_id: @record.id, ingredient_id: 36..37).first
+    add_addl_sugar_to_recipe sugar
+
+    question_set.gravity_redirect_menu
+  end
+
+  def add_addl_sugar_to_recipe(sugar)
     if sugar.nil?
       name, usage, quantity = 'corn sugar', 'Peak krausen', 2
 
@@ -313,8 +337,6 @@ Primary Fermentation Temp:  #{matching_recipe.primary_fermentation_temp}
       sugar.quantity += 1
       sugar.save
     end
-
-    question_set.gravity_redirect_menu
   end
 
   def seven

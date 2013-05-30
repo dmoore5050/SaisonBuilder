@@ -47,9 +47,9 @@ class QuestionSet
 
   end
 
-  def pass_record
-    @record
-  end
+  # ***************************************** #
+  #             vv  QUESTIONS vv
+  # ***************************************** #
 
   def menu
     question = <<EOS

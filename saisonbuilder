@@ -39,4 +39,6 @@ when 'list'
   recipe_controller.list_recipes
 when 'delete recipe'
   recipe_controller.delete
+else
+  puts "\nThat is not a valid command. Type sb to view a list of commands."
 end
