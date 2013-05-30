@@ -107,6 +107,7 @@ I would like to thank the following NSS staff/mentors who have lent advice and p
 + Ben Bridges
 + Adam Scott
 + Jeff Felchner
++ James Fryman
 
 Author
 ------

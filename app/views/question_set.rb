@@ -155,7 +155,7 @@ EOS
   end
 
   def remove
-    list, usage, duration = "", nil, nil
+    list, usage, duration = '', nil, nil
     build_remove_list list
     question = %Q(
 Which item would you like to delete from the recipe?

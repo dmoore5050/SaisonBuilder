@@ -20,7 +20,7 @@ class RecipeController
     recipes = Recipe.all
     puts "\n"
     recipes.each_with_index do |recipe, i|
-      formatted_name = recipe.name + ":"
+      formatted_name = recipe.name + ':'
       if !recipe.description.nil?
         puts "#{i + 1}. #{formatted_name.titleize.ljust(21)}#{recipe.description.capitalize}"
       else
@@ -28,7 +28,7 @@ class RecipeController
       end
     end
     puts "\nTo view a recipe, type: sb view <recipe name>."
-    puts "Example: sb view black saison"
+    puts 'Example: sb view black saison'
   end
 
   def delete

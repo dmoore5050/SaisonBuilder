@@ -14,7 +14,7 @@ class IngredientController
 
   def list_ingredients
     ingredients = Ingredient.all
-    puts ' '
+    puts "\n"
     ingredients.each_with_index do | ingredient, i |
       list_num = (i + 1) < 10 ? " #{i + 1}" : "#{i + 1}"
       ingredient_name = "#{list_num}. #{ingredient.name.titleize}:"
