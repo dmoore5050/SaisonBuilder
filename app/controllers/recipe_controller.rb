@@ -40,7 +40,7 @@ class RecipeController
       recipe_ingredient.destroy
     end
     matching_recipe.destroy
-    generate_recipe_destroyed_message
+    generate_recipe_destroyed_message matching_recipe
   end
 
   def check_if_name_is_entered
@@ -59,7 +59,7 @@ class RecipeController
     end
   end
 
-  def generate_recipe_destroyed_message
+  def generate_recipe_destroyed_message(matching_recipe)
     case
     when matching_recipe.destroyed?
       puts "\n#{params[:recipe][:name].titleize} has been deleted."

@@ -36,7 +36,7 @@ class IngredientController
       recipe_ingredient.destroy
     end
     matching_ingredient.destroy
-    generate_ingredient_destroyed_message
+    generate_ingredient_destroyed_message matching_ingredient
   end
 
   def check_if_name_is_entered
@@ -47,15 +47,15 @@ class IngredientController
     end
   end
 
-  def check_if_name_matches_recipe(matching_ingredient)
-    if matching_ingredent.nil?
+  def check_if_name_matches_ingredient(matching_ingredient)
+    if matching_ingredient.nil?
       puts "\n#{params[:recipe][:name].titleize} is not a valid ingredient name."
       puts 'To view a list of possible ingredients, type ingredient list'
       exit
     end
   end
 
-  def generate_ingredient_destroyed_message
+  def generate_ingredient_destroyed_message(matching_ingredient)
     case
     when matching_ingredient.destroyed?
       puts "\n#{params[:ingredient][:name].titleize} has been deleted."

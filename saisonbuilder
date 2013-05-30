@@ -7,7 +7,7 @@ connect_to database
 
 command = nil
 command = ARGV.shift.downcase unless ARGV == []
-command += ' ' + ARGV.shift.downcase if command == 'add'|| command == 'delete'
+command += ' ' + ARGV.shift.downcase if command == 'add' || command == 'delete'
 name = ARGV[0..-1].join(' ').downcase unless ARGV.nil?
 
 recipe_params = { command: command, recipe: { name: name } }
