@@ -40,11 +40,7 @@ class RecipeController
       recipe_ingredient.destroy
     end
     matching_recipe.destroy
-    case
-    when matching_recipe.destroyed?
-      puts "\n#{params[:recipe][:name].titleize} has been deleted."
-    else puts "Failure: #{recipe.errors.full_messages.join(", ")}"
-    end
+    generate_recipe_destroyed_message
   end
 
   def check_if_name_is_entered
@@ -60,6 +56,14 @@ class RecipeController
       puts "\n#{params[:recipe][:name].titleize} is not a valid recipe name."
       puts 'To view a list of possible recipes, type sb list'
       exit
+    end
+  end
+
+  def generate_recipe_destroyed_message
+    case
+    when matching_recipe.destroyed?
+      puts "\n#{params[:recipe][:name].titleize} has been deleted."
+    else puts "Failure: #{recipe.errors.full_messages.join(", ")}"
     end
   end
 
