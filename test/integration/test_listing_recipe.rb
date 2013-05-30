@@ -1,6 +1,6 @@
 require_relative '../test_helper'
 
-class TestListingrecipes < MiniTest::Unit::TestCase
+class TestListingRecipes < MiniTest::Unit::TestCase
   include DatabaseCleaner
 
   def test_list_is_populated
@@ -17,7 +17,7 @@ EOS
     assert_equal expected, actual
   end
 
-  def test_listing_multiple_recipes
+  def test_listing_additional_recipes
     Recipe.create(name: 'foo')
     Recipe.create(name: 'bar')
     actual = `ruby saisonbuilder list`
