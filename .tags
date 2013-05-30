@@ -1,0 +1,185 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_VERSION	5.8	//
+CreateIngredients	db/migrate/20130519093200_create_ingredients.rb	/^class CreateIngredients < ActiveRecord::Migration$/;"	c
+CreateRecipeIngredients	db/migrate/20130522142100_create_recipe_ingredients.rb	/^class CreateRecipeIngredients < ActiveRecord::Migration$/;"	c
+CreateRecipes	db/migrate/20130519061300_create_recipes.rb	/^class CreateRecipes < ActiveRecord::Migration$/;"	c
+DatabaseCleaner	test/test_helper.rb	/^module DatabaseCleaner$/;"	m
+Helper	app/lib/helper.rb	/^module Helper$/;"	m
+Ingredient	app/models/ingredient.rb	/^class Ingredient < ActiveRecord::Base$/;"	c
+IngredientController	app/controllers/ingredient_controller.rb	/^class IngredientController$/;"	c
+Menu	app/views/menu.rb	/^module Menu$/;"	m
+QuestionSet	app/views/question_set.rb	/^class QuestionSet$/;"	c
+Recipe	app/models/recipe.rb	/^class Recipe < ActiveRecord::Base$/;"	c
+RecipeController	app/controllers/recipe_controller.rb	/^class RecipeController$/;"	c
+RecipeIngredient	app/models/recipe_ingredient.rb	/^class RecipeIngredient < ActiveRecord::Base$/;"	c
+RecipeIngredientController	app/controllers/recipe_ingredient_controller.rb	/^class RecipeIngredientController$/;"	c
+Style	app/views/style.rb	/^module Style$/;"	m
+Techniques	app/views/techniques.rb	/^module Techniques$/;"	m
+TestAddingIngredient	test/integration/test_adding_ingredients.rb	/^class TestAddingIngredient < MiniTest::Unit::TestCase$/;"	c
+TestAddingRecipe	test/integration/test_adding_recipe.rb	/^class TestAddingRecipe < MiniTest::Unit::TestCase$/;"	c
+TestListingIngredients	test/integration/test_listing_ingredients.rb	/^class TestListingIngredients < MiniTest::Unit::TestCase$/;"	c
+TestListingRecipes	test/integration/test_listing_recipe.rb	/^class TestListingRecipes < MiniTest::Unit::TestCase$/;"	c
+TestPrintMenu	test/integration/test_print_initial_menu.rb	/^class TestPrintMenu < MiniTest::Unit::TestCase$/;"	c
+TestPrintRecipe	test/integration/test_print_recipe.rb	/^class TestPrintRecipe < MiniTest::Unit::TestCase$/;"	c
+TestPrintStyleDescription	test/integration/test_print_style_description.rb	/^class TestPrintStyleDescription < MiniTest::Unit::TestCase$/;"	c
+TestPrintTechniquesList	test/integration/test_print_techniques_list.rb	/^class TestPrintTechniquesList < MiniTest::Unit::TestCase$/;"	c
+TestRemovingIngredient	test/integration/test_removing_ingredient.rb	/^class TestRemovingIngredient < MiniTest::Unit::TestCase$/;"	c
+TestRemovingRecipe	test/integration/test_removing_recipe.rb	/^class TestRemovingRecipe < MiniTest::Unit::TestCase$/;"	c
+add_new_ingredient	app/controllers/recipe_controller.rb	/^  def add_new_ingredient(name, usage, quantity, duration = nil)$/;"	f	class:RecipeController
+adjunct_redirect_menu	app/views/question_set.rb	/^  def adjunct_redirect_menu$/;"	f	class:QuestionSet
+adjuncts	app/views/question_set.rb	/^  def adjuncts$/;"	f	class:QuestionSet
+american	app/controllers/recipe_controller.rb	/^  def american$/;"	f	class:RecipeController
+aroma	app/views/question_set.rb	/^  def aroma$/;"	f	class:QuestionSet
+before_setup	test/test_helper.rb	/^  def before_setup$/;"	f	class:DatabaseCleaner
+bittering	app/controllers/recipe_controller.rb	/^  def bittering$/;"	f	class:RecipeController
+black	app/controllers/recipe_controller.rb	/^  def black$/;"	f	class:RecipeController
+black	app/views/question_set.rb	/^  def black$/;"	f	class:QuestionSet
+blackberries	app/controllers/recipe_controller.rb	/^  def blackberries$/;"	f	class:RecipeController
+blend	app/views/question_set.rb	/^  def blend$/;"	f	class:QuestionSet
+blend_brett_b	app/controllers/recipe_controller.rb	/^  def blend_brett_b$/;"	f	class:RecipeController
+blend_brett_c	app/controllers/recipe_controller.rb	/^  def blend_brett_c$/;"	f	class:RecipeController
+blend_brett_l	app/controllers/recipe_controller.rb	/^  def blend_brett_l$/;"	f	class:RecipeController
+botanicals	app/views/question_set.rb	/^  def botanicals$/;"	f	class:QuestionSet
+botanicals_redirect_menu	app/views/question_set.rb	/^  def botanicals_redirect_menu$/;"	f	class:QuestionSet
+brett_only	app/views/question_set.rb	/^  def brett_only$/;"	f	class:QuestionSet
+brett_secondary	app/views/question_set.rb	/^  def brett_secondary$/;"	f	class:QuestionSet
+brown	app/controllers/recipe_controller.rb	/^  def brown$/;"	f	class:RecipeController
+brown	app/views/question_set.rb	/^  def brown$/;"	f	class:QuestionSet
+build_list_item	app/controllers/recipe_controller.rb	/^  def build_list_item(recipe, i)$/;"	f	class:RecipeController
+build_recipe_line_item	app/controllers/recipe_controller.rb	/^  def build_recipe_line_item(match_code, ingredient, ingr_record)$/;"	f	class:RecipeController
+build_remove_list	app/views/question_set.rb	/^  def build_remove_list(list)$/;"	f	class:QuestionSet
+caramel	app/controllers/recipe_controller.rb	/^  def caramel$/;"	f	class:RecipeController
+change	db/migrate/20130519061300_create_recipes.rb	/^  def change$/;"	f	class:CreateRecipes
+change	db/migrate/20130519093200_create_ingredients.rb	/^  def change$/;"	f	class:CreateIngredients
+change	db/migrate/20130522142100_create_recipe_ingredients.rb	/^  def change$/;"	f	class:CreateRecipeIngredients
+check_if_name_is_entered	app/controllers/recipe_controller.rb	/^  def check_if_name_is_entered$/;"	f	class:RecipeController
+check_if_name_matches_a_recipe	app/controllers/recipe_controller.rb	/^  def check_if_name_matches_a_recipe(matching_recipe)$/;"	f	class:RecipeController
+check_if_name_matches_ingredient	app/controllers/ingredient_controller.rb	/^  def check_if_name_matches_ingredient(ingredient_match)$/;"	f	class:IngredientController
+check_modify_trigger	app/views/question_set.rb	/^  def check_modify_trigger(modify_trigger, question)$/;"	f	class:QuestionSet
+check_unique_name	app/views/question_set.rb	/^  def check_unique_name(new_name, new_recipe, descr, answer)$/;"	f	class:QuestionSet
+citrus	app/controllers/recipe_controller.rb	/^  def citrus$/;"	f	class:RecipeController
+citrus_zest	app/controllers/recipe_controller.rb	/^  def citrus_zest$/;"	f	class:RecipeController
+clone_recipe	app/views/question_set.rb	/^  def clone_recipe(answer)$/;"	f	class:QuestionSet
+clone_recipe_ingredients	app/views/question_set.rb	/^  def clone_recipe_ingredients(base_recipe, new_recipe)$/;"	f	class:QuestionSet
+confirm_name_is_entered	app/controllers/ingredient_controller.rb	/^  def confirm_name_is_entered$/;"	f	class:IngredientController
+connect_to	bootstrap_ar.rb	/^def connect_to(env)$/;"	f
+coriander	app/controllers/recipe_controller.rb	/^  def coriander$/;"	f	class:RecipeController
+corn_sugar	app/controllers/recipe_controller.rb	/^  def corn_sugar$/;"	f	class:RecipeController
+create	app/controllers/ingredient_controller.rb	/^  def create$/;"	f	class:IngredientController
+create	app/controllers/recipe_controller.rb	/^  def create$/;"	f	class:RecipeController
+create	app/controllers/recipe_ingredient_controller.rb	/^  def create$/;"	f	class:RecipeIngredientController
+create_modified_recipe	app/views/question_set.rb	/^  def create_modified_recipe(question)$/;"	f	class:QuestionSet
+currants	app/controllers/recipe_controller.rb	/^  def currants$/;"	f	class:RecipeController
+decrease	app/views/question_set.rb	/^  def decrease$/;"	f	class:QuestionSet
+delete	app/controllers/ingredient_controller.rb	/^  def delete$/;"	f	class:IngredientController
+delete	app/controllers/recipe_controller.rb	/^  def delete$/;"	f	class:RecipeController
+delete	app/controllers/recipe_ingredient_controller.rb	/^  def delete$/;"	f	class:RecipeIngredientController
+dupont	app/controllers/recipe_controller.rb	/^  def dupont$/;"	f	class:RecipeController
+eight	app/controllers/recipe_controller.rb	/^  def eight$/;"	f	class:RecipeController
+five	app/controllers/recipe_controller.rb	/^  def five$/;"	f	class:RecipeController
+flavor	app/views/question_set.rb	/^  def flavor$/;"	f	class:QuestionSet
+floral	app/controllers/recipe_controller.rb	/^  def floral$/;"	f	class:RecipeController
+floral_spicy	app/controllers/recipe_controller.rb	/^  def floral_spicy$/;"	f	class:RecipeController
+four	app/controllers/recipe_controller.rb	/^  def four$/;"	f	class:RecipeController
+french	app/controllers/recipe_controller.rb	/^  def french$/;"	f	class:RecipeController
+fruit	app/views/question_set.rb	/^  def fruit$/;"	f	class:QuestionSet
+fruit_redirect_menu	app/views/question_set.rb	/^  def fruit_redirect_menu$/;"	f	class:QuestionSet
+generate_ingredient_destroyed_message	app/controllers/ingredient_controller.rb	/^  def generate_ingredient_destroyed_message(matching_ingredient)$/;"	f	class:IngredientController
+generate_recipe_destroyed_message	app/controllers/recipe_controller.rb	/^  def generate_recipe_destroyed_message(matching_recipe)$/;"	f	class:RecipeController
+ginger	app/controllers/recipe_controller.rb	/^  def ginger$/;"	f	class:RecipeController
+grain	app/views/question_set.rb	/^  def grain$/;"	f	class:QuestionSet
+grain_redirect_menu	app/views/question_set.rb	/^  def grain_redirect_menu$/;"	f	class:QuestionSet
+gravity	app/views/question_set.rb	/^  def gravity$/;"	f	class:QuestionSet
+gravity_redirect_menu	app/views/question_set.rb	/^  def gravity_redirect_menu$/;"	f	class:QuestionSet
+hibiscus	app/controllers/recipe_controller.rb	/^  def hibiscus$/;"	f	class:RecipeController
+honey	app/controllers/recipe_controller.rb	/^  def honey$/;"	f	class:RecipeController
+hops	app/views/question_set.rb	/^  def hops$/;"	f	class:QuestionSet
+hops_redirect_menu	app/views/question_set.rb	/^  def hops_redirect_menu$/;"	f	class:QuestionSet
+increase	app/views/question_set.rb	/^  def increase$/;"	f	class:QuestionSet
+initialize	app/controllers/ingredient_controller.rb	/^  def initialize(ingredient_params)$/;"	f	class:IngredientController
+initialize	app/controllers/recipe_controller.rb	/^  def initialize(params, record = nil)$/;"	f	class:RecipeController
+initialize	app/controllers/recipe_ingredient_controller.rb	/^  def initialize$/;"	f	class:RecipeIngredientController
+initialize	app/views/question_set.rb	/^  def initialize(record = nil)$/;"	f	class:QuestionSet
+invalid_recipe_message	app/views/question_set.rb	/^  def invalid_recipe_message(answer)$/;"	f	class:QuestionSet
+lavender	app/controllers/recipe_controller.rb	/^  def lavender$/;"	f	class:RecipeController
+list_ingredients	app/controllers/ingredient_controller.rb	/^  def list_ingredients$/;"	f	class:IngredientController
+list_recipes	app/controllers/recipe_controller.rb	/^  def list_recipes$/;"	f	class:RecipeController
+list_recipes	app/views/question_set.rb	/^  def list_recipes(modify_trigger = nil)$/;"	f	class:QuestionSet
+logo	app/views/menu.rb	/^  def self.logo$/;"	F	class:Menu
+mango	app/controllers/recipe_controller.rb	/^  def mango$/;"	f	class:RecipeController
+menu	app/views/menu.rb	/^  def self.menu$/;"	F	class:Menu
+menu	app/views/question_set.rb	/^  def menu$/;"	f	class:QuestionSet
+modify	app/views/question_set.rb	/^  def modify$/;"	f	class:QuestionSet
+only_brett_b	app/controllers/recipe_controller.rb	/^  def only_brett_b$/;"	f	class:RecipeController
+only_brett_b_trois	app/controllers/recipe_controller.rb	/^  def only_brett_b_trois$/;"	f	class:RecipeController
+only_brett_c	app/controllers/recipe_controller.rb	/^  def only_brett_c$/;"	f	class:RecipeController
+only_brett_l	app/controllers/recipe_controller.rb	/^  def only_brett_l$/;"	f	class:RecipeController
+other	app/views/question_set.rb	/^  def other$/;"	f	class:QuestionSet
+pass_record	app/views/question_set.rb	/^  def pass_record$/;"	f	class:QuestionSet
+peaches	app/controllers/recipe_controller.rb	/^  def peaches$/;"	f	class:RecipeController
+piney_citrus	app/controllers/recipe_controller.rb	/^  def piney_citrus$/;"	f	class:RecipeController
+primary	app/views/question_set.rb	/^  def primary$/;"	f	class:QuestionSet
+quantity_unit	app/controllers/recipe_controller.rb	/^  def quantity_unit(match_code)$/;"	f	class:RecipeController
+recipe_foot	app/controllers/recipe_controller.rb	/^  def recipe_foot(matching_recipe)$/;"	f	class:RecipeController
+recipe_head	app/controllers/recipe_controller.rb	/^  def recipe_head(matching_recipe)$/;"	f	class:RecipeController
+remove	app/controllers/recipe_controller.rb	/^  def remove(name, usage, duration)$/;"	f	class:RecipeController
+remove	app/views/question_set.rb	/^  def remove$/;"	f	class:QuestionSet
+remove_redirect_menu	app/views/question_set.rb	/^  def remove_redirect_menu$/;"	f	class:QuestionSet
+render_definition	app/views/style.rb	/^  def self.render_definition$/;"	F	class:Style
+render_ingredient_bill	app/controllers/recipe_controller.rb	/^  def render_ingredient_bill(match_code, ingredient_list)$/;"	f	class:RecipeController
+render_line_item	app/controllers/ingredient_controller.rb	/^  def render_line_item(ingredient, i)$/;"	f	class:IngredientController
+render_list	app/views/techniques.rb	/^  def self.render_list$/;"	F	class:Techniques
+render_menu	app/views/menu.rb	/^  def self.render_menu$/;"	F	class:Menu
+rice	app/controllers/recipe_controller.rb	/^  def rice$/;"	f	class:RecipeController
+roast	app/views/question_set.rb	/^  def roast$/;"	f	class:QuestionSet
+rose_hips	app/controllers/recipe_controller.rb	/^  def rose_hips$/;"	f	class:RecipeController
+route	app/views/question_set.rb	/^  def route(question, trackback)$/;"	f	class:QuestionSet
+rye	app/controllers/recipe_controller.rb	/^  def rye$/;"	f	class:RecipeController
+rye	app/views/question_set.rb	/^  def rye$/;"	f	class:QuestionSet
+secondary_brett_b	app/controllers/recipe_controller.rb	/^  def secondary_brett_b$/;"	f	class:RecipeController
+secondary_brett_c	app/controllers/recipe_controller.rb	/^  def secondary_brett_c$/;"	f	class:RecipeController
+secondary_brett_l	app/controllers/recipe_controller.rb	/^  def secondary_brett_l$/;"	f	class:RecipeController
+set_matching_recipe	app/controllers/recipe_controller.rb	/^  def set_matching_recipe$/;"	f	class:RecipeController
+seven	app/controllers/recipe_controller.rb	/^  def seven$/;"	f	class:RecipeController
+spices	app/views/question_set.rb	/^  def spices$/;"	f	class:QuestionSet
+spices_redirect_menu	app/views/question_set.rb	/^  def spices_redirect_menu$/;"	f	class:QuestionSet
+spicy	app/controllers/recipe_controller.rb	/^  def spicy$/;"	f	class:RecipeController
+sweetness	app/views/question_set.rb	/^  def sweetness$/;"	f	class:QuestionSet
+switch_primary_yeast	app/controllers/recipe_controller.rb	/^  def switch_primary_yeast(name)$/;"	f	class:RecipeController
+test_add_ingredient_ignores_duplicate_names	test/integration/test_adding_ingredients.rb	/^  def test_add_ingredient_ignores_duplicate_names$/;"	f	class:TestAddingIngredient
+test_add_ingredient_takes_arguments_and_saves_them	test/integration/test_adding_ingredients.rb	/^  def test_add_ingredient_takes_arguments_and_saves_them$/;"	f	class:TestAddingIngredient
+test_add_ingredient_takes_arguments_and_uses_them	test/integration/test_adding_ingredients.rb	/^  def test_add_ingredient_takes_arguments_and_uses_them$/;"	f	class:TestAddingIngredient
+test_duplicate_ingredient_names_outputs_error_message	test/integration/test_adding_ingredients.rb	/^  def test_duplicate_ingredient_names_outputs_error_message$/;"	f	class:TestAddingIngredient
+test_duplicate_names_are_ignored	test/integration/test_adding_recipe.rb	/^  def test_duplicate_names_are_ignored$/;"	f	class:TestAddingRecipe
+test_duplicate_names_outputs_error_message	test/integration/test_adding_recipe.rb	/^  def test_duplicate_names_outputs_error_message$/;"	f	class:TestAddingRecipe
+test_ingredient_list_is_populated	test/integration/test_listing_ingredients.rb	/^  def test_ingredient_list_is_populated$/;"	f	class:TestListingIngredients
+test_list_is_populated	test/integration/test_listing_recipe.rb	/^  def test_list_is_populated$/;"	f	class:TestListingRecipes
+test_listing_additional_ingredients	test/integration/test_listing_ingredients.rb	/^  def test_listing_additional_ingredients$/;"	f	class:TestListingIngredients
+test_listing_additional_recipes	test/integration/test_listing_recipe.rb	/^  def test_listing_additional_recipes$/;"	f	class:TestListingRecipes
+test_prints_main_menu	test/integration/test_print_initial_menu.rb	/^  def test_prints_main_menu$/;"	f	class:TestPrintMenu
+test_prints_multiword_name_recipe	test/integration/test_print_recipe.rb	/^  def test_prints_multiword_name_recipe$/;"	f	class:TestPrintRecipe
+test_prints_recipe	test/integration/test_print_recipe.rb	/^  def test_prints_recipe$/;"	f	class:TestPrintRecipe
+test_prints_style_description	test/integration/test_print_style_description.rb	/^  def test_prints_style_description$/;"	f	class:TestPrintStyleDescription
+test_prints_techniques_list	test/integration/test_print_techniques_list.rb	/^  def test_prints_techniques_list$/;"	f	class:TestPrintTechniquesList
+test_remove_only_recipe	test/integration/test_removing_recipe.rb	/^  def test_remove_only_recipe$/;"	f	class:TestRemovingRecipe
+test_remove_particular_ingredient	test/integration/test_removing_ingredient.rb	/^  def test_remove_particular_ingredient$/;"	f	class:TestRemovingIngredient
+test_remove_particular_ingredient_doesnt_remove_all	test/integration/test_removing_ingredient.rb	/^  def test_remove_particular_ingredient_doesnt_remove_all$/;"	f	class:TestRemovingIngredient
+test_remove_particular_recipe	test/integration/test_removing_recipe.rb	/^  def test_remove_particular_recipe$/;"	f	class:TestRemovingRecipe
+test_remove_particular_recipe_doesnt_remove_all	test/integration/test_removing_recipe.rb	/^  def test_remove_particular_recipe_doesnt_remove_all$/;"	f	class:TestRemovingRecipe
+test_remove_single_ingredient	test/integration/test_removing_ingredient.rb	/^  def test_remove_single_ingredient$/;"	f	class:TestRemovingIngredient
+test_takes_arguments_and_saves_them	test/integration/test_adding_recipe.rb	/^  def test_takes_arguments_and_saves_them$/;"	f	class:TestAddingRecipe
+test_takes_arguments_and_uses_them	test/integration/test_adding_recipe.rb	/^  def test_takes_arguments_and_uses_them$/;"	f	class:TestAddingRecipe
+thai_basil	app/controllers/recipe_controller.rb	/^  def thai_basil$/;"	f	class:RecipeController
+titleize	app/lib/helper.rb	/^  def titleize$/;"	f	class:Helper
+turbinado_sugar	app/controllers/recipe_controller.rb	/^  def turbinado_sugar$/;"	f	class:RecipeController
+view	app/controllers/recipe_controller.rb	/^  def view$/;"	f	class:RecipeController
+view	app/controllers/recipe_ingredient_controller.rb	/^  def view$/;"	f	class:RecipeIngredientController
+wheat	app/controllers/recipe_controller.rb	/^  def wheat$/;"	f	class:RecipeController
+wheat	app/views/question_set.rb	/^  def wheat$/;"	f	class:QuestionSet
+white_peppercorns	app/controllers/recipe_controller.rb	/^  def white_peppercorns$/;"	f	class:RecipeController
+yeast	app/views/question_set.rb	/^  def yeast$/;"	f	class:QuestionSet
+yeast_redirect_menu	app/views/question_set.rb	/^  def yeast_redirect_menu$/;"	f	class:QuestionSet

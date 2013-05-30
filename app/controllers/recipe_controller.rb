@@ -510,18 +510,18 @@ Primary Fermentation Temp:  #{matching_recipe.primary_fermentation_temp}
     question_set.adjunct_redirect_menu
   end
 
-  private
+  # private
 
-  def params
-    @params
-  end
+  # def params
+  #   @params
+  # end
 
-  def record
-    @record
-  end
+  # def record
+  #   @record
+  # end
 
-  def question_set
-    @question_set
-  end
+  # def question_set
+  #   @question_set
+  # end
 
 end
