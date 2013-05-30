@@ -7,11 +7,13 @@ connect_to database
 
 command = nil
 command = ARGV.shift.downcase unless ARGV == []
+command += ' ' + ARGV.shift.downcase if command == 'add'|| command == 'delete'
 name = ARGV[0..-1].join(' ').downcase unless ARGV.nil?
 
-params = { command: command, recipe: { name: name } }
-recipe_controller = RecipeController.new(params)
-ingredient_controller = IngredientController.new
+recipe_params = { command: command, recipe: { name: name } }
+ingredient_params = { command: command, ingredient: { name: name } }
+recipe_controller = RecipeController.new(recipe_params)
+ingredient_controller = IngredientController.new(ingredient_params)
 question_set = QuestionSet.new
 
 case command
@@ -21,16 +23,20 @@ when 'style'
   Style.render_definition
 when 'techniques'
   Techniques.render_list
+when 'add ingredient'
+  ingredient_controller.create
 when 'ingredients'
   ingredient_controller.list_ingredients
+when 'delete ingredient'
+  ingredient_controller.delete
 when 'build'
   question_set.menu
-when 'add'
+when 'add recipe'
   recipe_controller.create
 when 'view'
   recipe_controller.view
 when 'list'
   recipe_controller.list_recipes
-when 'delete'
+when 'delete recipe'
   recipe_controller.delete
 end

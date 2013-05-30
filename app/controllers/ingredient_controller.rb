@@ -1,7 +1,8 @@
 
 class IngredientController
 
-  def initialize
+  def initialize(params)
+    @params = params
   end
 
   def create
@@ -18,7 +19,11 @@ class IngredientController
     ingredients.each_with_index do | ingredient, i |
       list_num = (i + 1) < 10 ? " #{i + 1}" : "#{i + 1}"
       ingredient_name = "#{list_num}. #{ingredient.name.titleize}:"
-      puts ingredient_name.ljust(26) + "#{ingredient.description}"
+      if !ingredient.description.nil?
+        puts ingredient_name.ljust(26) + "#{ingredient.description}"
+      else
+        puts "#{list_num}. #{ingredient.name.titleize}"
+      end
     end
   end
 
@@ -27,6 +32,12 @@ class IngredientController
     matching_ingredients.each do |ingredient|
       ingredient.destroy
     end
+  end
+
+  private
+
+  def params
+    @params
   end
 
 end

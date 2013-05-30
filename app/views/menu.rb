@@ -20,7 +20,7 @@ Learn about ingredients:         sb ingredients
 View recipe library:             sb list
 Modify a recipe:                 sb build <recipe_name>
 View an existing recipe:         sb view <recipe_name>
-Delete an existing recipe:       sb delete <recipe_name>
+Delete an existing recipe:       sb delete recipe <recipe_name>
 EOS
 
     puts logo + menu

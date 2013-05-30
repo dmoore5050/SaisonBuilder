@@ -9,7 +9,7 @@ class RecipeController
   end
 
   def create
-    recipe = Recipe.new(params[:recipe])
+    recipe = Recipe.new params[:recipe]
     case
     when recipe.save then puts 'Success!'
     else puts "Failure: #{recipe.errors.full_messages.join(", ")}"
