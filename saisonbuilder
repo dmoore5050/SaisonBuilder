@@ -18,11 +18,11 @@ question_set = QuestionSet.new
 
 case command
 when nil
-  Menu.render_menu
+  MenuView.render_menu
 when 'style'
-  Style.render_definition
+  StyleView.render_definition
 when 'techniques'
-  Techniques.render_list
+  TechniquesView.render_list
 when 'add ingredient'
   ingredient_controller.create
 when 'ingredients'
