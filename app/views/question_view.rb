@@ -19,6 +19,21 @@ EOS
     QuestionRouter.route question, 'menu', @record
   end
 
+  def list_recipes(modify_trigger = nil)
+    question = <<EOS
+
+Choose a saison recipe:
+    Classic -          Dry, rustic, yeast-centric, light pear, unadorned
+    Hoppy Classic -    Dry, grassy, peppery, light pear, earthy
+    Rye Saison -       Earthy malt character, restrained hops, yeast-forward
+    New World -        Dry, bright, citrus, fruit, peppery
+    Black Saison -     Complex malt character, mild roast, spicy yeast character
+    Pacific 6 Grain -  Bright, clean citrus, crisp, underlying malt complexity
+
+EOS
+    RecipeClone.check_modify_trigger modify_trigger, question
+  end
+
   def modify
     question = <<EOS
 
@@ -45,6 +60,7 @@ Which item would you like to delete from the recipe?
 If usage and duration are present, please answer in the form of name, usage, duration.
 Ex: Amarillo, boil, 30 min
 )
+
     puts question
     name, usage, duration = $stdin.gets.downcase.chomp!.split(', ')
     component = RecipeModification.new @record
