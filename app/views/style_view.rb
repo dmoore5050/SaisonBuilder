@@ -1,5 +1,5 @@
 
-module Style
+module StyleView
 
   def self.render_definition
     style_description = <<EOS

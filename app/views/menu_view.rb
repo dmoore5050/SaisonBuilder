@@ -1,5 +1,5 @@
 
-module Menu
+module MenuView
 
   def self.logo
     logo = <<EOS

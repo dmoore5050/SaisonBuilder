@@ -1,5 +1,5 @@
 
-module Techniques
+module TechniquesView
 
   def self.render_list
     techniques_list = <<EOS
