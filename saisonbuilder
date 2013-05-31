@@ -14,7 +14,7 @@ recipe_params = { command: command, recipe: { name: name } }
 ingredient_params = { command: command, ingredient: { name: name } }
 recipe_controller = RecipeController.new(recipe_params)
 ingredient_controller = IngredientController.new(ingredient_params)
-question_set = QuestionSet.new
+question_set = QuestionView.new
 
 case command
 when nil
