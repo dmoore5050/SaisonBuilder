@@ -37,7 +37,7 @@ class QuestionSet
       selected_recipe = RecipeController.new params
       selected_recipe.view
     elsif COMPONENTS_ARRAY.include? answer
-      component = RecipeController.new nil, @record
+      component = RecipeModification.new @record
       component.send("#{answer}")
     else
       puts "\n'#{answer}' is not a valid option. Please choose from the choices listed."
