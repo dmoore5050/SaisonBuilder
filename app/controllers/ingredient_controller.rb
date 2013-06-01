@@ -35,7 +35,6 @@ class IngredientController
   end
 
   def delete
-    confirm_name_is_entered
     ingredient_match = Ingredient.where(name: params[:ingredient][:name]).first
     check_if_name_matches_ingredient ingredient_match
     ingr_array = RecipeIngredient.where(ingredient_id: ingredient_match.id).all
@@ -44,14 +43,6 @@ class IngredientController
     end
     ingredient_match.destroy
     generate_ingredient_destroyed_message ingredient_match
-  end
-
-  def confirm_name_is_entered
-    if params[:ingredient][:name].nil?
-      puts "\nYou did not specify an ingredient name."
-      puts 'To view a list of possible ingredients, type sb ingredients'
-      exit
-    end
   end
 
   def check_if_name_matches_ingredient(ingredient_match)

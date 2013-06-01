@@ -6,20 +6,7 @@ class RecipeController
 
   def initialize(params)
       @params = params
-      set_matching_recipe
-  end
-
-  def set_matching_recipe
-    check_if_name_is_entered
-    @matching_recipe = Recipe.where(name: params[:recipe][:name]).first
-  end
-
-  def check_if_name_is_entered
-    if params[:recipe][:name].nil?
-      puts "\nYou did not specify a recipe name."
-      puts 'To view a list of possible recipes, type sb list'
-      exit
-    end
+      @matching_recipe = Recipe.where(name: params[:recipe][:name]).first
   end
 
   def check_if_name_matches_a_recipe(matching_recipe)
