@@ -1,12 +1,21 @@
 require_relative '../../bootstrap_ar'
 
-class RecipeModification
+class RecordModification
 
   attr_reader :record, :next_question
 
-  def initialize(record)
+  def initialize(record = nil)
     @record = record
     @next_question = QuestionView.new record
+  end
+
+  def describe(type, name, description)
+    case type
+    when 'ingredient' then record_match = Ingredient.where(name: name).first
+    when 'recipe' then record_match = Recipe.where(name: name).first
+    end
+
+    record_match.update_attributes(description: description)
   end
 
   def remove(name, usage, duration)
@@ -137,8 +146,7 @@ class RecipeModification
 
   def wheat
     base_malt = RecipeIngredient.where(recipe_id: @record, quantity: 6..25).first
-    base_malt.quantity -= 3
-    base_malt.save
+    base_malt.update_attributes(quantity: base_malt.quantity - 3)
 
     args = [['wheat malt', nil, 3], ['rice hulls', nil, 0.2]]
 
@@ -151,8 +159,7 @@ class RecipeModification
 
   def rye
     base_malt = RecipeIngredient.where(recipe_id: @record, quantity: 6..25).first
-    base_malt.quantity -= 3
-    base_malt.save
+    base_malt.update_attributes(quantity: base_malt.quantity - 3)
 
     args = [['rye malt', nil, 3], ['rice hulls', nil, 0.2]]
 
@@ -185,8 +192,7 @@ class RecipeModification
 
   def eight
     base_malt = RecipeIngredient.where(recipe_id: @record, quantity: 6..25).first
-    base_malt.quantity += 1.5
-    base_malt.save
+    base_malt.update_attributes(quantity: base_malt.quantity + 1.5)
 
     sugar = RecipeIngredient.where(recipe_id: @record.id, ingredient_id: 36..37).first
     add_addl_sugar_to_recipe sugar
@@ -207,24 +213,21 @@ class RecipeModification
 
   def seven
     base_malt = RecipeIngredient.where(recipe_id: @record, quantity: 6..25).first
-    base_malt.quantity += 1.5
-    base_malt.save
+    base_malt.update_attributes(quantity: base_malt.quantity + 1.5)
 
     next_question.gravity_redirect_menu
   end
 
   def five
     base_malt = RecipeIngredient.where(recipe_id: @record, quantity: 6..25).first
-    base_malt.quantity -= 1.5
-    base_malt.save
+    base_malt.update_attributes(quantity: base_malt.quantity - 1.5)
 
     next_question.gravity_redirect_menu
   end
 
   def four
     base_malt = RecipeIngredient.where(recipe_id: @record, quantity: 6..25).first
-    base_malt.quantity -= 3
-    base_malt.save
+    base_malt.update_attributes(quantity: base_malt.quantity - 3)
 
     next_question.gravity_redirect_menu
   end
