@@ -6,7 +6,6 @@ class TestAddingIngredient < MiniTest::Unit::TestCase
   def test_add_ingredient_takes_arguments_and_saves_them
     assert_equal 14, Ingredient.count
     `ruby saisonbuilder add ingredient foo`
-    `ruby saisonbuilder ingredients`
     assert_equal 15, Ingredient.count
   end
 

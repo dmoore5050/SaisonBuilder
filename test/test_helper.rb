@@ -10,6 +10,7 @@ module DatabaseCleaner
     super
     Recipe.destroy_all
     Ingredient.destroy_all
+    RecipeIngredient.destroy_all
     load 'db/test_seeds.rb'
   end
 end

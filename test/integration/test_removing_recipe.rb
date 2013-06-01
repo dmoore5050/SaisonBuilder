@@ -13,7 +13,7 @@ class TestRemovingRecipe < MiniTest::Unit::TestCase
     Recipe.create(name: 'a')
     Recipe.create(name: 'b')
     Recipe.create(name: 'c')
-    assert !Recipe.where(name: 'b').all.empty?
+    refute Recipe.where(name: 'b').all.empty?
     `ruby saisonbuilder delete recipe b`
     assert Recipe.where(name: 'b').all.empty?
     assert_equal 4, Recipe.count
@@ -24,7 +24,7 @@ class TestRemovingRecipe < MiniTest::Unit::TestCase
     Recipe.create(name: 'a')
     Recipe.create(name: 'b')
     Recipe.create(name: 'c')
-    assert !Recipe.where(name: 'b').all.empty?
+    refute Recipe.where(name: 'b').all.empty?
     `ruby saisonbuilder delete recipe b`
     assert_equal 4, Recipe.count
   end
