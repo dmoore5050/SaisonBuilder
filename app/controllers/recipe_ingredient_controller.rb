@@ -11,11 +11,4 @@ class RecipeIngredientController
     end
   end
 
-  def delete
-    matching_recipe_ingredients = RecipeIngredient.where(name: params[:recipe_ingredient][:name]).all
-    matching_recipe_ingredients.each do |recipe|
-      recipe.destroy
-    end
-  end
-
 end
