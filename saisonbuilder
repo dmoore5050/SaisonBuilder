@@ -5,40 +5,37 @@ require_relative 'bootstrap_ar'
 database = ENV['FP_ENV'] || 'development'
 connect_to database
 
-command = nil
-command = ARGV.shift.downcase unless ARGV == []
-command += ' ' + ARGV.shift.downcase if command == 'add' || command == 'delete'
-name = ARGV[0..-1].join(' ').downcase unless ARGV.nil?
+command = ARGV.shift.downcase unless ARGV.empty?
+if command == 'add' || command == 'delete' and !ARGV.empty?
+  command += ' ' + ARGV.shift.downcase
+end
+name = ARGV.shift.downcase unless ARGV.empty?
+args = []
+until ARGV.empty?
+  name += ' ' + ARGV.shift.downcase unless name.include? ':'
+  args << ARGV.shift.downcase if name.include? ':'
+  name = name.tr(':', '') if ARGV.empty?
+end
 
-recipe_params = { command: command, recipe: { name: name } }
-ingredient_params = { command: command, ingredient: { name: name } }
-recipe_controller = RecipeController.new(recipe_params)
-ingredient_controller = IngredientController.new(ingredient_params)
+recipe_params = { recipe: { name: name, boil_length: args[0].to_i, primary_fermentation_temp: args[1] } }
+ingredient_params = { ingredient: { name: name } }
+recipe_controller = RecipeController.new recipe_params
+ingredient_controller = IngredientController.new ingredient_params
 question_set = QuestionView.new
 
 case command
-when nil
-  MenuView.render_menu
-when 'style'
-  StyleView.render_definition
-when 'techniques'
-  TechniquesView.render_list
-when 'add ingredient'
-  ingredient_controller.create
-when 'ingredients'
-  ingredient_controller.list_ingredients
-when 'delete ingredient'
-  ingredient_controller.delete
-when 'build'
-  question_set.menu
-when 'add recipe'
-  recipe_controller.create
-when 'view'
-  recipe_controller.view
-when 'list'
-  recipe_controller.list_recipes
-when 'delete recipe'
-  recipe_controller.delete
-else
-  puts "\nThat is not a valid command. Type sb to view a list of commands."
+when nil then MenuView.render_menu
+when 'style' then StyleView.render_definition
+when 'techniques' then TechniquesView.render_list
+when 'add' then AddInstructionsView.route_add_instructions
+when 'add ingredient' then ingredient_controller.create
+when 'ingredients' then ingredient_controller.list_ingredients
+when 'delete ingredient' then ingredient_controller.delete
+when 'build' then question_set.menu
+when 'describe' then question_set.describe
+when 'add recipe' then recipe_controller.create
+when 'view' then recipe_controller.view
+when 'list' then recipe_controller.list_recipes
+when 'delete recipe' then recipe_controller.delete
+else puts "\nThat is not a valid command. Type sb to view a list of commands."
 end
