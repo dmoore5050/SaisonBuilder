@@ -22,11 +22,6 @@ class TestAddingIngredient < MiniTest::Unit::TestCase
     assert_equal original_ingredient_count, Ingredient.count
   end
 
-  def test_blank_ingredient_name_outputs_error_message
-    results = `ruby sb add ingredient`
-    assert results.include?(' is required to create a new Ingredient'), "Actually was '#{results}'"
-  end
-
   def test_ingredient_name_longer_than_20_chars_is_ignored
     original_ingredient_count = Ingredient.count
     `ruby sb add ingredient thisisareallylongingredientname`
