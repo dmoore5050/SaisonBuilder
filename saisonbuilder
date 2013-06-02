@@ -18,7 +18,7 @@ until ARGV.empty?
 end
 
 recipe_params = { recipe: { name: name, boil_length: args[0].to_i, primary_fermentation_temp: args[1] } }
-ingredient_params = { ingredient: { name: name } }
+ingredient_params = { ingredient: { name: name, type_code: args[0], yeast_code_wl: args[1].to_i, yeast_code_wyeast: args[2].to_i} }
 recipe_controller = RecipeController.new recipe_params
 ingredient_controller = IngredientController.new ingredient_params
 question_set = QuestionView.new
@@ -32,7 +32,7 @@ when 'add ingredient' then ingredient_controller.create
 when 'ingredients' then ingredient_controller.list_ingredients
 when 'delete ingredient' then ingredient_controller.delete
 when 'build' then question_set.menu
-when 'describe' then question_set.describe
+when 'describe' then question_set.prep_describe
 when 'add recipe' then recipe_controller.create
 when 'view' then recipe_controller.view
 when 'list' then recipe_controller.list_recipes

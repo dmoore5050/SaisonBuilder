@@ -20,7 +20,9 @@ class RecipeController
   def create
     recipe = Recipe.new params[:recipe]
     case
-    when recipe.save then puts 'Success!'
+    when recipe.save
+      description = QuestionView.new
+      description.describe 'recipe', recipe.name
     else puts "Failure: #{recipe.errors.full_messages.join(", ")}"
     end
   end

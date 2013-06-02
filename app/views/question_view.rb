@@ -8,11 +8,16 @@ class QuestionView
     @record = record
   end
 
-  def describe
+  def prep_describe
     puts "\nAre you adding a description to a Recipe or an Ingredient?"
     record_type = $stdin.gets.downcase.chomp!
     puts "\nWhat is the name of the recipe or ingredient you want to describe?"
     name = $stdin.gets.downcase.chomp!
+
+    describe record_type, name
+  end
+
+  def describe(record_type, name)
     puts "\nPlease add a description."
     description = $stdin.gets.downcase.chomp!
 
