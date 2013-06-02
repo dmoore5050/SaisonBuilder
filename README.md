@@ -52,7 +52,7 @@ Planned usage is as follows:
 
 To begin using the app, cd to the SaisonBuilder directory and type:
 
-    ruby saisonbuilder
+    ruby sb
 
 Optionally, add the following to your .zshrc or .bash_profile files in your root directory to open with a single 'sb' or 'saisonbuilder' command:
 
@@ -61,21 +61,21 @@ Optionally, add the following to your .zshrc or .bash_profile files in your root
 
 In either case, executing the command will bring up a menu displaying the following options:
 
-    Return to this menu:             ruby saisonbuilder
-    Learn about the saison style:    ruby saisonbuilder style
-    Learn about brewing techniques:  ruby saisonbuilder techniques
-    Learn about ingredients:         ruby saisonbuilder ingredients
-    View recipe library:             ruby saisonbuilder list
-    Add an ingredient or recipe:     ruby saisonbuilder add
-    Change a description:            ruby saisonbuilder describe
-    Modify a recipe:                 ruby saisonbuilder build
-    View an existing recipe:         ruby saisonbuilder view <recipe_name>
-    Delete an existing recipe:       ruby saisonbuilder delete recipe <recipe_name>
-    Delete an existing ingredient:   ruby saisonbuilder delete ingredient <ingredient_name>
+    Return to this menu:             ruby sb
+    Learn about the saison style:    ruby sb style
+    Learn about brewing techniques:  ruby sb techniques
+    Learn about ingredients:         ruby sb ingredients
+    View recipe library:             ruby sb list
+    Add an ingredient or recipe:     ruby sb add
+    Change a description:            ruby sb describe
+    Modify a recipe:                 ruby sb build
+    View an existing recipe:         ruby sb view <recipe_name>
+    Delete an existing recipe:       ruby sb delete recipe <recipe_name>
+    Delete an existing ingredient:   ruby sb delete ingredient <ingredient_name>
 
 Most of these options are self-exlanatory. The one exception is the command that forms the core of SaisonBuilder's functionality:
 
-    Build a recipe:                  ruby saisonbuilder build
+    Build a recipe:                  ruby sb build
 
 When executed, sb build guides the user through a series of questions that allow the user to change practically any aspect(s) of any of the five base recipes. After the user is finished modifying the recipe, the saved recipe can then be found in the library, and can be viewed, further modified, or deleted by the user. This process can then be repeated as often as the user wishes, for any recipe - base or modified - that is in the library.
 

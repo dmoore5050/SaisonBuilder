@@ -10,8 +10,8 @@ class TestListingRecipes < MiniTest::Unit::TestCase
  1. Classic:             Dry, rustic, yeast-centric, light pear, unadorned.
  2. New World:           Dry, bright, citrus, fruit, peppery.
 
-To view a recipe, type: sb view <recipe name>.
-Example: sb view black saison
+To view a recipe, type: ruby sb view <recipe name>.
+Example: ruby sb view black saison
 EOS
     actual = `ruby sb list`
     assert_equal expected, actual
