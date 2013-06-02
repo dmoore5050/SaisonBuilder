@@ -20,23 +20,26 @@ Migrations/models in place.
 Seed files in place.
 The following commands are fully functional:
 
-* ruby saisonbuilder
-* ruby saisonbuilder style
-* ruby saisonbuilder techniques
-* ruby saisonbuilder ingredients
-* ruby saisonbuilder list
-* ruby saisonbuilder add
-* ruby saisonbuilder describe
-* ruby saisonbuilder build
-* ruby saisonbuilder view <recipe name>
-* ruby saisonbuilder delete recipe <recipe name>
-* ruby saisonbuilder delete ingredient <ingredient name>
+* ruby sb
+* ruby sb style
+* ruby sb techniques
+* ruby sb ingredients
+* ruby sb list
+* ruby sb add ingredient
+* ruby sb describe
+* ruby sb modify
+* ruby sb view <recipe name>
+* ruby sb delete recipe <recipe name>
+* ruby sb delete ingredient <ingredient name>
 
 
 ###To do:
 
-+ Implement build-by-ingredient functionality.
-+ Allow build to take a name argument
+* ruby sb build - implementation in progress.
+
++ Implement build-by-ingredient functionality
++ Change build & modify to take name arguments
++ Allow user-generated recipe to be modified in addition to default recipes
 
 Features
 --------
@@ -66,18 +69,23 @@ In either case, executing the command will bring up a menu displaying the follow
     Learn about brewing techniques:  ruby sb techniques
     Learn about ingredients:         ruby sb ingredients
     View recipe library:             ruby sb list
-    Add an ingredient or recipe:     ruby sb add
-    Change a description:            ruby sb describe
-    Modify a recipe:                 ruby sb build
+    Adding an ingredient:            ruby sb add ingredient
+    Change or add a description:     ruby sb describe
+    Build a new recipe:              ruby sb build
+    Modify a recipe:                 ruby sb modify
     View an existing recipe:         ruby sb view <recipe_name>
     Delete an existing recipe:       ruby sb delete recipe <recipe_name>
     Delete an existing ingredient:   ruby sb delete ingredient <ingredient_name>
 
-Most of these options are self-exlanatory. The one exception is the command that forms the core of SaisonBuilder's functionality:
+Most of these options are self-exlanatory. There are, however, several exceptions that deserve a more in-depth explanation:
 
-    Build a recipe:                  ruby sb build
+    Modify a recipe:                  ruby sb modify
 
-When executed, sb build guides the user through a series of questions that allow the user to change practically any aspect(s) of any of the five base recipes. After the user is finished modifying the recipe, the saved recipe can then be found in the library, and can be viewed, further modified, or deleted by the user. This process can then be repeated as often as the user wishes, for any recipe - base or modified - that is in the library.
+When executed, sb modify guides the user through a series of questions that allow the user to change practically any aspect(s) of any of the five base recipes. After the user is finished modifying the recipe, the saved recipe can then be found in the library, and can be viewed, further modified, or deleted by the user. This process can then be repeated as often as the user wishes, for any recipe - base or modified - that is in the library.
+
+    Build a new recipe:              ruby sb build
+
+When executed, sb build displays a set of instructions on how to initiate a new recipe build. The user my then follow the instructions, and will be taken through the process of assigning a name and initial recipe parameters, adding a description, and finally, attaching individual ingredients, with quantities and usage, to the recipe. The user may add as many ingredients as he or she wishes.
 
 Demo
 ----

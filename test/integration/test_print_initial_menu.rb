@@ -22,9 +22,10 @@ Learn about the saison style:    ruby sb style
 Learn about brewing techniques:  ruby sb techniques
 Learn about ingredients:         ruby sb ingredients
 View recipe library:             ruby sb list
-Add an ingredient or recipe:     ruby sb add
-Change a description:            ruby sb describe
-Modify a recipe:                 ruby sb build
+Adding an ingredient:            ruby sb add ingredient
+Change or add a description:     ruby sb describe
+Build a new recipe:              ruby sb build
+Modify a recipe:                 ruby sb modify
 View an existing recipe:         ruby sb view <recipe_name>
 Delete an existing recipe:       ruby sb delete recipe <recipe_name>
 Delete an existing ingredient:   ruby sb delete ingredient <ingredient_name>

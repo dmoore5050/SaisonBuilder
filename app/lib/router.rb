@@ -1,7 +1,7 @@
 require_relative '../../bootstrap_ar'
 
 RECIPE_NAME_ARRAY = %w( classic hoppy_classic rye_saison new_world black_saison pacific_6_grain)
-OPTION_ARRAY = %w( menu remove list_recipes modify yeast primary blend brett_only brett_secondary grain sweetness roast brown black wheat rye hops flavor aroma gravity increase decrease other spices fruit botanicals adjuncts more_botanicals)
+OPTION_ARRAY = %w( menu remove modify yeast primary blend brett_only brett_secondary grain sweetness roast brown black wheat rye hops flavor aroma gravity increase decrease other spices fruit botanicals adjuncts more_botanicals)
 COMPONENTS_ARRAY = %w( dupont french american blend_brett_c blend_brett_b blend_brett_l only_brett_c only_brett_b only_brett_l only_brett_b_trois secondary_brett_b secondary_brett_c secondary_brett_l caramel honey wheat rye brown black eight seven five four bittering floral_spicy piney_citrus spicy floral citrus coriander citrus_zest white_peppercorns thai_basil ginger peaches blackberries mango currants hibiscus lavender rose_hips corn_sugar turbinado_sugar rice)
 
 module Router
@@ -12,17 +12,9 @@ module Router
 
     if answer.include?('q') || answer.include?('x')
       return
-    elsif answer == 'modify_recipe' || answer == 'modify' && trackback == 'menu'
-      modify_trigger = 'mod' # trigger for routing, could be any string
-      base_recipes = QuestionView.new record
-      base_recipes.list_recipes modify_trigger
     elsif OPTION_ARRAY.include? answer
       next_question = QuestionView.new record
       next_question.send("#{answer}")
-    elsif RECIPE_NAME_ARRAY.include? answer
-      params = { recipe: { name: answer.tr('_', ' ') } }
-      selected_recipe = RecipeController.new params
-      selected_recipe.view
     elsif COMPONENTS_ARRAY.include? answer
       component = RecordModification.new record
       component.send("#{answer}")

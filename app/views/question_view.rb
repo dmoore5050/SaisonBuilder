@@ -9,7 +9,7 @@ class QuestionView
   end
 
   def prep_describe
-    puts "\nAre you adding a description to a Recipe or an Ingredient?"
+    puts "\nAre you changing the description of a Recipe, or of an Ingredient?"
     record_type = $stdin.gets.downcase.chomp!
     puts "\nWhat is the name of the recipe or ingredient you want to describe?"
     name = $stdin.gets.downcase.chomp!
@@ -18,28 +18,19 @@ class QuestionView
   end
 
   def describe(record_type, name)
-    puts "\nPlease add a description."
+    puts "\nPlease add a description:"
     description = $stdin.gets.downcase.chomp!
 
     change = RecordModification.new
     change.describe record_type, name, description
+
+    #move to next stage of addition process
   end
 
-  def menu
+  def modify
     question = <<EOS
 
-Please choose one of the following options:
-     List Recipes -   View a list of existing recipes
-     Modify Recipe -  Modify an existing base recipe
-
-EOS
-    Router.route question, 'menu', @record
-  end
-
-  def list_recipes(modify_trigger = nil)
-    question = <<EOS
-
-Choose a saison recipe:
+Choose a saison recipe to modify:
     Classic -          Dry, rustic, yeast-centric, light pear, unadorned
     Hoppy Classic -    Dry, grassy, peppery, light pear, earthy
     Rye Saison -       Earthy malt character, restrained hops, yeast-forward
@@ -48,10 +39,10 @@ Choose a saison recipe:
     Pacific 6 Grain -  Bright, clean citrus, crisp, underlying malt complexity
 
 EOS
-    RecipeClone.check_modify_trigger modify_trigger, question
+    RecipeClone.create_modified_recipe question
   end
 
-  def modify
+  def menu
     question = <<EOS
 
 What aspect of the recipe would you like to change?
@@ -64,7 +55,7 @@ What aspect of the recipe would you like to change?
     Quit -     I'm finished modifying this recipe
 
 EOS
-    Router.route question, 'modify', @record
+    Router.route question, 'menu', @record
   end
 
   def remove
@@ -99,7 +90,7 @@ Your recipe has been modified to reflect these changes.
 
 Are you finished removing ingredients?
     Remove -  No, I would like to remove another ingredient.
-    Modify -  Yes, take me back to the Modify Recipe menu.
+    Menu -    Yes, take me back to the Modify Recipe menu.
     Quit -    I want to exit SaisonBuilder.
 
 EOS
@@ -178,7 +169,7 @@ Your recipe has been modified to reflect these changes.
 
 Are you finished modifying your recipe's yeast bill?
     Yeast -   No, take me back to the Yeast modification menu.
-    Modify -  Yes, take me back to the Modify Recipe menu.
+    Menu -    Yes, take me back to the Modify Recipe menu.
     Quit -    I want to exit SaisonBuilder.
 
 EOS
@@ -193,7 +184,7 @@ How would you like to alter malt character:
     Roast -      Increase roast
     Wheat -      Increase wheat character (doughy)
     Rye -        Increase rye character (earthy, robust)
-    Modify -     I'm finished modifying malt character (return to Modify menu)
+    Menu -       I'm finished modifying malt character (return to Modify menu)
 
 EOS
     Router.route question, 'grain', @record
@@ -252,7 +243,7 @@ Your recipe has been modified to reflect these changes.
 
 Are you finished modifying your recipe's grain bill?
     Grain -   No, take me back to the Grain modification menu.
-    Modify -  Yes, take me back to the Modify Recipe menu.
+    Menu -    Yes, take me back to the Modify Recipe menu.
     Quit -    I want to exit SaisonBuilder.
 
 EOS
@@ -298,7 +289,7 @@ EOS
 Your recipe has been modified to reflect these changes.
 
 Are you finished modifying your recipe?
-    Modify -  No, take me back to the Modify Recipe menu.
+    Menu -    No, take me back to the Modify Recipe menu.
     Quit -    Yes, I want to exit SaisonBuilder.
 
 EOS
@@ -345,7 +336,7 @@ Your recipe has been modified to reflect these changes.
 
 Are you finished modifying your recipe's hops bill?
     Hops -    No, take me back to the Hops modification menu.
-    Modify -  Yes, take me back to the Modify Recipe menu.
+    Menu -    Yes, take me back to the Modify Recipe menu.
     Quit -    I want to exit SaisonBuilder.
 
 EOS
@@ -387,7 +378,7 @@ Your recipe has been modified to reflect these changes.
 
 Are you finished adding Spices to your recipe?
     Spices -   No, take me back to the spices modification menu.
-    Modify -   Yes, take me back to the Modify Recipe menu.
+    Menu -     Yes, take me back to the Modify Recipe menu.
     Other -    Yes, take me back to the Other Ingredients menu.
     Quit -     I want to exit SaisonBuilder.
 
@@ -416,7 +407,7 @@ Your recipe has been modified to reflect these changes.
 Are you finished adding Fruit to your recipe?
     Fruit -    No, take me back to the Fruit modification menu.
     Other -    Yes, take me back to the Other Ingredients menu.
-    Modify -   Yes, take me back to the Modify Recipe menu.
+    Menu -     Yes, take me back to the Modify Recipe menu.
     Quit -     I want to exit SaisonBuilder.
 
 EOS
@@ -443,7 +434,7 @@ Your recipe has been modified to reflect these changes.
 Are you finished adding Botanicals to your recipe?
     Botanicals -  No, take me back to the Botanicals modification menu.
     Other -       Yes, take me back to the Other Ingredients menu.
-    Modify -      Yes, take me back to the Modify Recipe menu.
+    Menu -        Yes, take me back to the Modify Recipe menu.
     Quit -        I want to exit SaisonBuilder.
 
 EOS
@@ -470,7 +461,7 @@ Your recipe has been modified to reflect these changes.
 Are you finished adding Adjuncts to your recipe?
     Adjuncts -  No, take me back to the Adjuncts modification menu.
     Other -     Yes, take me back to the Other Ingredients menu.
-    Modify -    Yes, take me back to the Modify Recipe menu.
+    Menu -      Yes, take me back to the Modify Recipe menu.
     Quit -      I want to exit SaisonBuilder.
 
 EOS

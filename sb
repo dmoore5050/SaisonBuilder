@@ -27,13 +27,22 @@ case command
 when nil then MenuView.render_menu
 when 'style' then StyleView.render_definition
 when 'techniques' then TechniquesView.render_list
-when 'add' then AddInstructionsView.route_add_instructions
-when 'add ingredient' then ingredient_controller.create
+when 'add ingredient'
+  case name
+  when nil then AddInstructionsView.add_ingredient_instructions_view
+  else ingredient_controller.create
+  end
 when 'ingredients' then ingredient_controller.list_ingredients
 when 'delete ingredient' then ingredient_controller.delete
-when 'build' then question_set.menu
+when 'modify' then question_set.modify
+when 'build'
+  case name
+  when nil then BuildInstructionsView.build_recipe_instructions_view
+  else
+    recipe_controller.create
+    question_set.describe 'recipe', name
+  end
 when 'describe' then question_set.prep_describe
-when 'add recipe' then recipe_controller.create
 when 'view' then recipe_controller.view
 when 'list' then recipe_controller.list_recipes
 when 'delete recipe' then recipe_controller.delete

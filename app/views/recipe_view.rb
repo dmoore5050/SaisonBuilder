@@ -36,20 +36,20 @@ Primary Fermentation Temp:  #{matching_recipe.primary_fermentation_temp}
 )
   end
 
-  def render_ingredient_bill(match_code, ingredient_list)
+  def render_ingredient_bill(type, ingredient_list)
     ingredient_bill = ''
 
     ingredient_list.each do | ingredient |
       ingr_record = Ingredient.where("id = #{ingredient.ingredient_id}").first
-      if ingr_record.type_code == match_code
-        ingredient_bill += build_recipe_line_item match_code, ingredient, ingr_record
+      if ingr_record.type_code == type
+        ingredient_bill += build_recipe_line_item type, ingredient, ingr_record
       end
     end
     ingredient_bill
   end
 
-  def build_recipe_line_item(match_code, ingredient, ingr_record)
-    measure = quantity_unit match_code
+  def build_recipe_line_item(type, ingredient, ingr_record)
+    measure = quantity_unit type
     usage_indicator = ingredient.usage == 'boil' ? '@ ' : nil
     line_item = "#{ingredient.quantity} #{measure} #{ingr_record.name.titleize}".ljust(28)
     line_item += "Add during: #{ingredient.usage.capitalize}" unless ingredient.usage.nil?
@@ -59,9 +59,11 @@ Primary Fermentation Temp:  #{matching_recipe.primary_fermentation_temp}
     line_item += "\n"
   end
 
-  def quantity_unit(match_code)
-    case match_code
-    when 'hop' || 'spice' || 'botanicals' then 'oz'
+  def quantity_unit(type)
+    case type
+    when 'spice' then 'oz'
+    when 'hop' then 'oz'
+    when 'botanical' then 'oz'
     when 'yeast' then 'pkg'
     else 'lbs'
     end

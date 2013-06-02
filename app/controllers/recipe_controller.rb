@@ -9,20 +9,11 @@ class RecipeController
       @matching_recipe = Recipe.where(name: params[:recipe][:name]).first
   end
 
-  def check_if_name_matches_a_recipe(matching_recipe)
-    if matching_recipe.nil?
-      puts "\n#{params[:recipe][:name].titleize} is not a valid recipe name."
-      puts 'To view a list of possible recipes, type: ruby sb list'
-      exit
-    end
-  end
-
   def create
     recipe = Recipe.new params[:recipe]
     case
     when recipe.save
-      question = QuestionView.new
-      question.describe 'recipe', recipe.name
+      puts 'Success!'
     else puts "Failure: #{recipe.errors.full_messages.join(", ")}"
     end
   end
@@ -68,6 +59,14 @@ class RecipeController
     check_if_name_matches_a_recipe @matching_recipe
     recipe_view = RecipeView.new (@matching_recipe)
     recipe_view.render_recipe
+  end
+
+  def check_if_name_matches_a_recipe(matching_recipe)
+    if matching_recipe.nil?
+      puts "\n#{params[:recipe][:name].titleize} is not a valid recipe name."
+      puts 'To view a list of possible recipes, type: ruby sb list'
+      exit
+    end
   end
 
 end

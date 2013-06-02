@@ -10,9 +10,7 @@ class IngredientController
   def create
     ingredient = Ingredient.new params[:ingredient]
     case
-    when ingredient.save
-      question = QuestionView.new
-      question.describe 'ingredient', ingredient.name
+    when ingredient.save then puts "\nSuccess!"
     else puts "Failure: #{ingredient.errors.full_messages.join(", ")}"
     end
   end

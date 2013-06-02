@@ -2,13 +2,6 @@ require_relative '../../bootstrap_ar'
 
 module RecipeClone
 
-  def self.check_modify_trigger(modify_trigger, question)
-    case modify_trigger
-    when nil then QuestionRouter.route question, 'list_recipes', @record
-    else create_modified_recipe question
-    end
-  end
-
   def self.create_modified_recipe(question)
     puts question
     answer = $stdin.gets.downcase.chomp!
@@ -16,9 +9,9 @@ module RecipeClone
     if RECIPE_NAME_ARRAY.include? answer.tr(' ', '_')
       clone_recipe answer
       modify_choice = QuestionView.new @record
-      modify_choice.modify
+      modify_choice.menu
     else
-      invalid_recipe_message answer
+      invalid_recipe_message question, answer
     end
   end
 
