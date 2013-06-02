@@ -56,11 +56,10 @@ module RecipeClone
     end
   end
 
-  def self.invalid_recipe_message(answer)
+  def self.invalid_recipe_message(question, answer)
     puts "\n'#{answer}' is not a valid option. Please choose from the recipes listed."
     puts "Type 'Menu' to return to Recipes menu, or 'Quit' to exit SaisonBuilder."
-    modify_trigger = 'mod' # trigger for routing, actual string is arbitrary
-    list_recipes modify_trigger
+    create_modified_recipe question
   end
 
 end

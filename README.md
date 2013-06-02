@@ -56,8 +56,8 @@ To begin using the app, cd to the SaisonBuilder directory and type:
 
 Optionally, add the following to your .zshrc or .bash_profile files in your root directory to open with a single 'sb' or 'saisonbuilder' command:
 
-    alias sb='ruby ~/your/file/path/saisonbuilder'
-    alias saisonbuilder='ruby ~/your/file/path/saisonbuilder'
+    alias sb='ruby ~/your/file/path/sb'
+    alias saisonbuilder='ruby ~/your/file/path/sb'
 
 In either case, executing the command will bring up a menu displaying the following options:
 
