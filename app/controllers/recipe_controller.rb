@@ -30,7 +30,7 @@ class RecipeController
   def list_recipes
     recipes = Recipe.all
     puts "\n"
-    recipes.each_with_index do |recipe, i|
+    recipes.each_with_index do | recipe, i |
       puts build_list_item recipe, i
     end
     puts "\nTo view a recipe, type: sb view <recipe name>."
