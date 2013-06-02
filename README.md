@@ -20,19 +20,23 @@ Migrations/models in place.
 Seed files in place.
 The following commands are fully functional:
 
-* sb
-* sb style
-* sb techniques
-* sb ingredients
-* sb list
-* sb view <recipe name>
-* sb delete <recipe name>
-* sb build
+* ruby saisonbuilder
+* ruby saisonbuilder style
+* ruby saisonbuilder techniques
+* ruby saisonbuilder ingredients
+* ruby saisonbuilder list
+* ruby saisonbuilder add
+* ruby saisonbuilder describe
+* ruby saisonbuilder build
+* ruby saisonbuilder view <recipe name>
+* ruby saisonbuilder delete recipe <recipe name>
+* ruby saisonbuilder delete ingredient <ingredient name>
+
 
 ###To do:
 
-+ Refactor
-+ Bugfix
++ Implement build-by-ingredient functionality.
++ Allow build to take a name argument
 
 Features
 --------
@@ -60,11 +64,14 @@ In either case, executing the command will bring up a menu displaying the follow
     Return to this menu:             ruby saisonbuilder
     Learn about the saison style:    ruby saisonbuilder style
     Learn about brewing techniques:  ruby saisonbuilder techniques
-    List available ingredients:      ruby saisonbuilder ingredients
+    Learn about ingredients:         ruby saisonbuilder ingredients
     View recipe library:             ruby saisonbuilder list
-    Build a recipe:                  ruby saisonbuilder build
+    Add an ingredient or recipe:     ruby saisonbuilder add
+    Change a description:            ruby saisonbuilder describe
+    Modify a recipe:                 ruby saisonbuilder build
     View an existing recipe:         ruby saisonbuilder view <recipe_name>
-    Delete an existing recipe:       ruby saisonbuilder delete <recipe_name>
+    Delete an existing recipe:       ruby saisonbuilder delete recipe <recipe_name>
+    Delete an existing ingredient:   ruby saisonbuilder delete ingredient <ingredient_name>
 
 Most of these options are self-exlanatory. The one exception is the command that forms the core of SaisonBuilder's functionality:
 
@@ -96,7 +103,12 @@ Changelog
 + 2013-5-24 - Fixed display bugs, streamlined recipe seeding and view method. Modify now clones base recipe.
 + 2013-5-25 - Added majority of modify recipe ingredient methods.
 + 2013-5-26 - Added last mod recipe ingr methods, and refactored those methods.
-+ 2013-5-27 - Shifted recipe_ingredient mod methods into recipe.
++ 2013-5-27 - Implemented add description and remove ingredient functionality.
++ 2013-5-28 - Extracted validation methods.
++ 2013-5-29 - Bugfixes. Refactored initial ARGV assignment.
++ 2013-5-30 - Added add/delete ingredient functionality to command line.
++ 2013-5-31 - General reorganization of file structure.
++ 2013-6-01 - Add ingr/recipe now takes arguments. Replaced validation methods with AR validation.
 
 Acknowledgements
 ----------------
