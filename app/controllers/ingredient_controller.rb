@@ -11,8 +11,8 @@ class IngredientController
     ingredient = Ingredient.new params[:ingredient]
     case
     when ingredient.save
-      description = QuestionView.new
-      description.describe 'ingredient', ingredient.name
+      question = QuestionView.new
+      question.describe 'ingredient', ingredient.name
     else puts "Failure: #{ingredient.errors.full_messages.join(", ")}"
     end
   end

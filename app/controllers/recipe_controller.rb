@@ -21,8 +21,8 @@ class RecipeController
     recipe = Recipe.new params[:recipe]
     case
     when recipe.save
-      description = QuestionView.new
-      description.describe 'recipe', recipe.name
+      question = QuestionView.new
+      question.describe 'recipe', recipe.name
     else puts "Failure: #{recipe.errors.full_messages.join(", ")}"
     end
   end
