@@ -22,14 +22,14 @@ class TestListingIngredients < MiniTest::Unit::TestCase
 13. Turbinado Sugar:      Adjunct. Adds subtle molasses character.
 14. Corn Sugar:           Adjunct. Adds no flavor; add to raise gravity without boosting body.
 EOS
-    actual = `ruby saisonbuilder ingredients`
+    actual = `ruby sb ingredients`
     assert_equal expected, actual
   end
 
   def test_listing_additional_ingredients
     Ingredient.create(name: 'foo')
     Ingredient.create(name: 'bar')
-    actual = `ruby saisonbuilder ingredients`
+    actual = `ruby sb ingredients`
     expected = <<EOS
 
  1. Pilsner:              Pale base malt, prominent in continental examples.

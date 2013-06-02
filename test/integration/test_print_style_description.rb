@@ -4,7 +4,7 @@ class TestPrintStyleDescription < MiniTest::Unit::TestCase
   include DatabaseCleaner
 
   def test_prints_style_description
-    actual = `ruby saisonbuilder style`
+    actual = `ruby sb style`
     expected = <<EOS
 
     Saison, or Farmhouse ale, is a style of beer native to the

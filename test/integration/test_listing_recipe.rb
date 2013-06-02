@@ -13,14 +13,14 @@ class TestListingRecipes < MiniTest::Unit::TestCase
 To view a recipe, type: sb view <recipe name>.
 Example: sb view black saison
 EOS
-    actual = `ruby saisonbuilder list`
+    actual = `ruby sb list`
     assert_equal expected, actual
   end
 
   def test_listing_additional_recipes
     Recipe.create(name: 'foo')
     Recipe.create(name: 'bar')
-    actual = `ruby saisonbuilder list`
+    actual = `ruby sb list`
     expected = <<EOS
 
  1. Classic:             Dry, rustic, yeast-centric, light pear, unadorned.
@@ -28,8 +28,8 @@ EOS
  3. Foo
  4. Bar
 
-To view a recipe, type: sb view <recipe name>.
-Example: sb view black saison
+To view a recipe, type: ruby sb view <recipe name>.
+Example: ruby sb view black saison
 EOS
     assert_equal expected, actual
   end

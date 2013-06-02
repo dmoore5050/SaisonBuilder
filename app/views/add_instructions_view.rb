@@ -16,7 +16,7 @@ module AddInstructionsView
 
 To add a recipe, use the following format:
 
-sb add recipe <recipe_name>: <boil_length> <primary_fermentation_temp>
+ruby sb add recipe <recipe_name>: <boil_length> <primary_fermentation_temp>
 
 <boil_length> is the length of the boil in minutes.
 Examples would include 60, 75, 90.
@@ -26,8 +26,8 @@ Examples: 72F, 63-78F, 74+F
 
 Examples of valid commands:
 
-sb add recipe midnight in bruges: 60 85F
-sb add recipe francine: 90 65-72F
+ruby sb add recipe midnight in bruges: 60 85F
+ruby sb add recipe francine: 90 65-72F
 
 EOS
 
@@ -39,7 +39,7 @@ EOS
 
 To add an ingredient, use the following format:
 
-sb add ingredient <ingredient_name>: <ingredient_type> <white_lab_mfg_code> <wyeast_mfg_code>
+ruby sb add ingredient <ingredient_name>: <ingredient_type> <white_lab_mfg_code> <wyeast_mfg_code>
 
 The following are valid <ingredient_types>:
 grain, hops, yeast, fruit, spices, botanicals, adjuncts.
@@ -49,8 +49,8 @@ White Lab uses a 3 digit number, Wyeast a 4 digit number.
 
 Examples of valid commands:
 
-sb add ingredient red wheat malt: grain
-sb add ingredient american ale: yeast 060 1056
+ruby sb add ingredient red wheat malt: grain
+ruby sb add ingredient american ale: yeast 060 1056
 
 EOS
 

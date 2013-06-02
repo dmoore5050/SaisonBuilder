@@ -4,7 +4,7 @@ class TestPrintRecipe < MiniTest::Unit::TestCase
   include DatabaseCleaner
 
   def test_prints_recipe
-    actual = `ruby saisonbuilder view classic`
+    actual = `ruby sb view classic`
 
     expected = %Q(
 Name:          Classic
@@ -26,7 +26,7 @@ Primary Fermentation Temp:  85F
   end
 
   def test_prints_multiword_name_recipe
-    actual = `ruby saisonbuilder view new world`
+    actual = `ruby sb view new world`
 
     expected = %Q(
 Name:          New World

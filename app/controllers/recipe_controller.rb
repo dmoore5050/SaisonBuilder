@@ -12,7 +12,7 @@ class RecipeController
   def check_if_name_matches_a_recipe(matching_recipe)
     if matching_recipe.nil?
       puts "\n#{params[:recipe][:name].titleize} is not a valid recipe name."
-      puts 'To view a list of possible recipes, type sb list'
+      puts 'To view a list of possible recipes, type: ruby sb list'
       exit
     end
   end
@@ -33,8 +33,8 @@ class RecipeController
     recipes.each_with_index do | recipe, i |
       puts build_list_item recipe, i
     end
-    puts "\nTo view a recipe, type: sb view <recipe name>."
-    puts 'Example: sb view black saison'
+    puts "\nTo view a recipe, type: ruby sb view <recipe name>."
+    puts 'Example: ruby sb view black saison'
   end
 
   def build_list_item(recipe, i)

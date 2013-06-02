@@ -5,7 +5,7 @@ class TestRemovingIngredient < MiniTest::Unit::TestCase
 
   def test_remove_single_ingredient
     Ingredient.create(name: 'only child')
-    `ruby saisonbuilder delete ingredient "only child"`
+    `ruby sb delete ingredient "only child"`
     assert Ingredient.count == 14
   end
 
@@ -14,7 +14,7 @@ class TestRemovingIngredient < MiniTest::Unit::TestCase
     Ingredient.create(name: 'b')
     Ingredient.create(name: 'c')
     refute Ingredient.where(name: 'b').all.empty?
-    `ruby saisonbuilder delete ingredient b`
+    `ruby sb delete ingredient b`
     assert Ingredient.where(name: 'b').all.empty?
     assert_equal 16, Ingredient.count
   end
@@ -25,7 +25,7 @@ class TestRemovingIngredient < MiniTest::Unit::TestCase
     Ingredient.create(name: 'b')
     Ingredient.create(name: 'c')
     refute Ingredient.where(name: 'b').all.empty?
-    `ruby saisonbuilder delete ingredient b`
+    `ruby sb delete ingredient b`
     assert_equal 16, Ingredient.count
   end
 end

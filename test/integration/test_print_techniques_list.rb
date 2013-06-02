@@ -4,7 +4,7 @@ class TestPrintTechniquesList < MiniTest::Unit::TestCase
   include DatabaseCleaner
 
   def test_prints_techniques_list
-    actual = `ruby saisonbuilder techniques`
+    actual = `ruby sb techniques`
     expected = <<EOS
 
     SECONDARY FERMENTATION - extended fermentation of a beer that

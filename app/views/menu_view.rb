@@ -15,17 +15,17 @@ EOS
 
   def self.menu
     menu = <<EOS
-Return to this menu:             sb
-Learn about the saison style:    sb style
-Learn about brewing techniques:  sb techniques
-Learn about ingredients:         sb ingredients
-View recipe library:             sb list
-Add an ingredient or recipe:     sb add
-Change a description:            sb describe
-Modify a recipe:                 sb build <recipe_name>
-View an existing recipe:         sb view <recipe_name>
-Delete an existing recipe:       sb delete recipe <recipe_name>
-Delete an existing ingredient:   sb delete ingredient <ingredient_name>
+Return to this menu:             ruby sb
+Learn about the saison style:    ruby sb style
+Learn about brewing techniques:  ruby sb techniques
+Learn about ingredients:         ruby sb ingredients
+View recipe library:             ruby sb list
+Add an ingredient or recipe:     ruby sb add
+Change a description:            ruby sb describe
+Modify a recipe:                 ruby sb build
+View an existing recipe:         ruby sb view <recipe_name>
+Delete an existing recipe:       ruby sb delete recipe <recipe_name>
+Delete an existing ingredient:   ruby sb delete ingredient <ingredient_name>
 EOS
   end
 

@@ -50,7 +50,7 @@ class IngredientController
   def check_if_name_matches_ingredient(ingredient_match)
     if ingredient_match.nil?
       puts "\n#{params[:recipe][:name].titleize} is an invalid ingredient name."
-      puts 'To view a list of possible ingredients, type ingredient list'
+      puts 'To view a list of possible ingredients, type ruby sb ingredients'
       exit
     end
   end
