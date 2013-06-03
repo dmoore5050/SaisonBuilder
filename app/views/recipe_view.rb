@@ -51,11 +51,23 @@ Primary Fermentation Temp:  #{matching_recipe.primary_fermentation_temp}
     measure = quantity_unit type
     usage_indicator = ingredient.usage == 'boil' ? '@ ' : nil
     line_item = "#{ingredient.quantity} #{measure} #{ingr_record.name.titleize}".ljust(28)
-    line_item += "Add during: #{ingredient.usage.capitalize}" unless ingredient.usage.nil?
-    line_item += ", #{usage_indicator}#{ingredient.duration}" unless ingredient.duration.nil?
-    line_item += ". Mfg. code(s): White Labs WLP#{ingr_record.yeast_code_wl}" unless ingr_record.yeast_code_wl.nil?
-    line_item += ", Wyeast #{ingr_record.yeast_code_wyeast}" unless ingr_record.yeast_code_wyeast.nil?
+    line_item += add_usage ingredient unless ingredient.usage.nil?
+    line_item += add_duration ingredient, usage_indicator unless ingredient.duration.nil?
+    line_item += add_yeast_codes ingr_record unless ingr_record.yeast_code_wl.nil?
     line_item += "\n"
+  end
+
+  def add_usage(ingredient)
+    "Add during: #{ingredient.usage.capitalize}"
+  end
+
+  def add_duration(ingredient, usage_indicator)
+    ", #{usage_indicator}#{ingredient.duration}"
+  end
+
+  def add_yeast_codes(record)
+    yeast_codes = ". Mfg. code(s): White Labs WLP#{record.yeast_code_wl}"
+    yeast_codes += ", Wyeast #{record.yeast_code_wyeast}" unless record.yeast_code_wyeast.nil?
   end
 
   def quantity_unit(type)

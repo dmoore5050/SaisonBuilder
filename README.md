@@ -17,7 +17,7 @@ Project Status
 [![Code Climate](https://codeclimate.com/github/dmoore5050/SaisonBuilder.png)](https://codeclimate.com/github/dmoore5050/SaisonBuilder)
 
 Migrations/models in place.
-Seed files in place.
+Seed files in place.<br />
 The following commands are fully functional:
 
 * ruby sb
