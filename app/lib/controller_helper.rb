@@ -1,4 +1,4 @@
-module Helper
+module ControllerHelper
 
   def titleize
     self.split(' ').map { |word| word.capitalize }.join(' ')
@@ -16,6 +16,15 @@ module Helper
     when match.destroyed?
       puts "\nThe record has been deleted."
     else puts "Failure: #{match.errors.full_messages.join(", ")}"
+    end
+  end
+
+  def self.confirm_match(record)
+    if record.nil?
+      puts "\nThat is not a valid record name."
+      puts 'Type sb ingredients to view a list of ingredients, or'
+      puts 'type sb list to view a list of recipes.'
+      exit
     end
   end
 

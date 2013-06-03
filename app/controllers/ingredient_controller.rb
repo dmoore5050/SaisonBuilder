@@ -9,7 +9,7 @@ class IngredientController
 
   def create
     ingredient = Ingredient.new params[:ingredient]
-    Helper.creation_success_message ingredient
+    ControllerHelper.creation_success_message ingredient
   end
 
   def list_ingredients
@@ -33,21 +33,13 @@ class IngredientController
 
   def delete
     ingredient_match = Ingredient.where(name: params[:ingredient][:name]).first
-    check_if_name_matches_ingredient ingredient_match
+    ControllerHelper.confirm_match ingredient_match
     ingr_array = RecipeIngredient.where(ingredient_id: ingredient_match.id).all
     ingr_array.each do | recipe_ingredient |
       recipe_ingredient.destroy
     end
     ingredient_match.destroy
-    Helper.matching_record_destroyed_message ingredient_match
-  end
-
-  def check_if_name_matches_ingredient(ingredient_match)
-    if ingredient_match.nil?
-      puts "\n#{params[:recipe][:name].titleize} is an invalid ingredient name."
-      puts 'To view a list of possible ingredients, type ruby sb ingredients'
-      exit
-    end
+    ControllerHelper.matching_record_destroyed_message ingredient_match
   end
 
 end

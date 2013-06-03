@@ -11,7 +11,7 @@ class RecipeController
 
   def create
     recipe = Recipe.new params[:recipe]
-    Helper.creation_success_message recipe
+    ControllerHelper.creation_success_message recipe
   end
 
   def list_recipes
@@ -34,13 +34,13 @@ class RecipeController
   end
 
   def delete
-    check_if_name_matches_a_recipe matching_recipe
+    ControllerHelper.confirm_match matching_recipe
     ingr_array = RecipeIngredient.where(recipe_id: matching_recipe.id).all
     ingr_array.each do | recipe_ingredient |
       recipe_ingredient.destroy
     end
     matching_recipe.destroy
-    Helper.matching_record_destroyed_message matching_recipe
+    ControllerHelper.matching_record_destroyed_message matching_recipe
   end
 
   def generate_recipe_destroyed_message(matching_recipe)
@@ -52,17 +52,9 @@ class RecipeController
   end
 
   def view
-    check_if_name_matches_a_recipe @matching_recipe
-    recipe_view = RecipeView.new (@matching_recipe)
+    ControllerHelper.confirm_match @matching_recipe
+    recipe_view = RecipeView.new @matching_recipe
     recipe_view.render_recipe
-  end
-
-  def check_if_name_matches_a_recipe(matching_recipe)
-    if matching_recipe.nil?
-      puts "\n#{params[:recipe][:name].titleize} is not a valid recipe name."
-      puts 'To view a list of possible recipes, type: ruby sb list'
-      exit
-    end
   end
 
 end
