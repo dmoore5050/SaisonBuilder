@@ -276,7 +276,7 @@ What is your desired final gravity?
     Seven - 7% ABV
 
 EOS
-    Router.route question, 'increase', @record
+    route_modification question, 'increase', 'change_gravity'
   end
 
   def decrease
@@ -287,7 +287,7 @@ What is your desired final gravity?
     Four - 4% ABV
 
 EOS
-    Router.route question, 'decrease', @record
+    route_modification question, 'decrease', 'change_gravity'
   end
 
   def gravity_redirect_menu

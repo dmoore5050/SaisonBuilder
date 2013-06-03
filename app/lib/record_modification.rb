@@ -133,17 +133,26 @@ class RecordModification
     next_question.grain_redirect_menu
   end
 
-  def eight
+  def change_gravity(answer, trackback)
     base_malt = RecipeIngredient.where(recipe_id: @record, quantity: 6..25).first
-    base_malt.update_attributes(quantity: base_malt.quantity + 1.5)
 
-    sugar = RecipeIngredient.where(recipe_id: @record.id, ingredient_id: 36..37).first
-    add_addl_sugar_to_recipe sugar
+    case answer
+    when 'eight'
+     quantity_adjustment = base_malt.quantity + 1.5
+     sugar = RecipeIngredient.where(recipe_id: @record, ingredient_id: 38..39).first
+     add_sugar_to_recipe sugar
+    when 'seven' then quantity_adjustment = base_malt.quantity + 1.5
+    when 'five'  then quantity_adjustment = base_malt.quantity - 1.5
+    when 'four'  then quantity_adjustment = base_malt.quantity - 3
+    else repeat_question answer, trackback
+    end
+
+    base_malt.update_attributes(quantity: quantity_adjustment)
 
     next_question.gravity_redirect_menu
   end
 
-  def add_addl_sugar_to_recipe(sugar)
+  def add_sugar_to_recipe(sugar)
     if sugar.nil?
       name, usage, quantity = 'corn sugar', 'Peak krausen', 2
 
@@ -154,26 +163,9 @@ class RecordModification
     end
   end
 
-  def seven
-    base_malt = RecipeIngredient.where(recipe_id: @record, quantity: 6..25).first
-    base_malt.update_attributes(quantity: base_malt.quantity + 1.5)
-
-    next_question.gravity_redirect_menu
-  end
-
-  def five
-    base_malt = RecipeIngredient.where(recipe_id: @record, quantity: 6..25).first
-    base_malt.update_attributes(quantity: base_malt.quantity - 1.5)
-
-    next_question.gravity_redirect_menu
-  end
-
-  def four
-    base_malt = RecipeIngredient.where(recipe_id: @record, quantity: 6..25).first
-    base_malt.update_attributes(quantity: base_malt.quantity - 3)
-
-    next_question.gravity_redirect_menu
-  end
+  # ***********************************
+  #          progress marker
+  # ***********************************
 
   def bittering
     name, usage, quantity, duration = 'styrian goldings', 'boil', 0.5, '60 min'
