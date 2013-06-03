@@ -14,6 +14,7 @@ Project Status
 --------------
 
 [![Build Status](https://travis-ci.org/dmoore5050/SaisonBuilder.png)](https://travis-ci.org/dmoore5050/SaisonBuilder)
+[![Code Climate](https://codeclimate.com/github/dmoore5050/SaisonBuilder.png)](https://codeclimate.com/github/dmoore5050/SaisonBuilder)
 
 Migrations/models in place.
 Seed files in place.
