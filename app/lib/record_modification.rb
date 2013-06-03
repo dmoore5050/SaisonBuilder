@@ -58,14 +58,14 @@ class RecordModification
     repeat_question.send("#{trackback}")
   end
 
-  def blend_brett(answer, trackback)
+  def add_brett(answer, trackback, yeast_usage)
     case answer
     when 'brett c' then name = 'brett. clausenii'
     when 'brett b' then name = 'brett. brux.'
     when 'brett l' then name = 'brett. lambicus'
     else repeat_question answer, trackback
     end
-    usage, quantity = 'primary', 1
+    usage, quantity = yeast_usage, 1
 
     add_new_ingredient name, usage, quantity
     next_question.yeast_redirect_menu
@@ -81,19 +81,6 @@ class RecordModification
     end
 
     switch_primary_yeast name
-    next_question.yeast_redirect_menu
-  end
-
-  def brett_secondary(answer, trackback)
-    case answer
-    when 'brett c' then name = 'brett. clausenii'
-    when 'brett b' then name = 'brett. brux.'
-    when 'brett l' then name = 'brett. lambicus'
-    else repeat_question answer, trackback
-    end
-    usage, quantity = 'secondary', 1
-
-    add_new_ingredient name, usage, quantity
     next_question.yeast_redirect_menu
   end
 

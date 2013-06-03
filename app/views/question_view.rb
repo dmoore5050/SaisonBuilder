@@ -123,11 +123,11 @@ EOS
     route_modification question, 'primary', 'change_primary'
   end
 
-  def route_modification(question, trackback, route)
+  def route_modification(question, trackback, route, *usage)
     puts question
     answer = $stdin.gets.downcase.chomp!
     alteration = RecordModification.new @record
-    alteration.send("#{route}", answer, trackback)
+    alteration.send("#{route}", answer, trackback, *usage)
   end
 
   def blend
@@ -139,7 +139,7 @@ Please choose a strain of Brettanomyces:
     Brett L -  Intense Brett character, barnyard, horseblanket, dank
 
 EOS
-    route_modification question, 'blend', 'blend_brett'
+    route_modification question, 'blend', 'add_brett', 'primary'
   end
 
   def brett_only
@@ -166,7 +166,7 @@ Please choose a strain of Brettanomyces:
     Brett L -  Intense Brett character, barnyard, horseblanket, dank
 
 EOS
-    route_modification question, 'brett_secondary', 'brett_secondary'
+    route_modification question, 'brett_secondary', 'add_brett', 'secondary'
   end
 
   def yeast_redirect_menu
