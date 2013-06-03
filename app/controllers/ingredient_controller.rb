@@ -39,7 +39,7 @@ class IngredientController
       recipe_ingredient.destroy
     end
     ingredient_match.destroy
-    ControllerHelper.matching_record_destroyed_message ingredient_match
+    ControllerHelper.record_destroyed_message ingredient_match
   end
 
 end

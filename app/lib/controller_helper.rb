@@ -11,10 +11,9 @@ module ControllerHelper
     end
   end
 
-  def self.matching_record_destroyed_message(match)
+  def self.record_destroyed_message(match)
     case
-    when match.destroyed?
-      puts "\nThe record has been deleted."
+    when match.destroyed? then puts "\nThe record has been deleted."
     else puts "Failure: #{match.errors.full_messages.join(", ")}"
     end
   end

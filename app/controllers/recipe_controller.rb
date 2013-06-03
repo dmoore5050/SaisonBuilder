@@ -40,15 +40,7 @@ class RecipeController
       recipe_ingredient.destroy
     end
     matching_recipe.destroy
-    ControllerHelper.matching_record_destroyed_message matching_recipe
-  end
-
-  def generate_recipe_destroyed_message(matching_recipe)
-    case
-    when matching_recipe.destroyed?
-      puts "\n#{params[:recipe][:name].titleize} has been deleted."
-    else puts "Failure: #{recipe.errors.full_messages.join(", ")}"
-    end
+    ControllerHelper.record_destroyed_message matching_recipe
   end
 
   def view
