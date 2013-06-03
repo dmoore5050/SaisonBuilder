@@ -73,10 +73,10 @@ class RecordModification
 
   def brett_primary(answer, trackback)
     case answer
-    when 'brett c' then name = 'brett. clausenii'
-    when 'brett b' then name = 'brett. brux.'
-    when 'brett b trois'then name = 'brett. brux. trois'
-    when 'brett l' then name = 'brett. lambicus'
+    when 'brett c'       then name = 'brett. clausenii'
+    when 'brett b'       then name = 'brett. brux.'
+    when 'brett b trois' then name = 'brett. brux. trois'
+    when 'brett l'       then name = 'brett. lambicus'
     else repeat_question answer, trackback
     end
 
@@ -84,25 +84,24 @@ class RecordModification
     next_question.yeast_redirect_menu
   end
 
-  def caramel
-    name, usage, quantity = 'caramunich', nil, 0.5
+  def add_sweetness(answer, trackback)
+    case answer
+    when 'caramel' then name = 'caramunich'
+    when 'honey'   then name = 'honey malt'
+    else repeat_question answer, trackback
+    end
+    usage, quantity = nil, 0.5
 
     add_new_ingredient name, usage, quantity
     next_question.grain_redirect_menu
   end
 
-  def honey
-    name, usage, quantity = 'honey malt', nil, 0.5
-
-    add_new_ingredient name, usage, quantity
-    next_question.grain_redirect_menu
-  end
-
-  def wheat
-    base_malt = RecipeIngredient.where(recipe_id: @record, quantity: 6..25).first
-    base_malt.update_attributes(quantity: base_malt.quantity - 3)
-
-    args = [['wheat malt', nil, 3], ['rice hulls', nil, 0.2]]
+  def add_base_grain(answer, trackback)
+    case answer
+    when 'wheat' then args = [['wheat malt', nil, 3], ['rice hulls', nil, 0.2]]
+    when 'rye'   then args = [['rye malt', nil, 3], ['rice hulls', nil, 0.2]]
+    else repeat_question answer, trackback
+    end
 
     args.each do | argument_set |
       name, usage, quantity = argument_set
@@ -111,31 +110,21 @@ class RecordModification
     next_question.grain_redirect_menu
   end
 
-  def rye
-    base_malt = RecipeIngredient.where(recipe_id: @record, quantity: 6..25).first
-    base_malt.update_attributes(quantity: base_malt.quantity - 3)
-
-    args = [['rye malt', nil, 3], ['rice hulls', nil, 0.2]]
-
-    args.each do | argument_set |
-      name, usage, quantity = argument_set
-      add_new_ingredient name, usage, quantity
+  def add_roast(answer, trackback)
+    case answer
+    when 'brown'
+      args = [
+        ['chocolate malt', nil, 0.4],
+        ['flaked oats', nil, 1]
+      ]
+    when 'black'
+      args = [
+        ['chocolate malt', nil, 0.4],
+        ['carafa 2 special', nil, 0.4],
+        ['flaked oats', nil, 1]
+      ]
+    else repeat_question answer, trackback
     end
-    next_question.grain_redirect_menu
-  end
-
-  def brown
-    name, usage, quantity = [['chocolate malt', nil, 0.4], ['flaked oats', nil, 1]]
-
-    args.each do | argument_set |
-      name, usage, quantity = argument_set
-      add_new_ingredient name, usage, quantity
-    end
-    next_question.grain_redirect_menu
-  end
-
-  def black
-    args = [['chocolate malt', nil, 0.4], ['carafa 2 special', nil, 0.4], ['flaked oats', nil, 1]]
 
     args.each do | argument_set |
       name, usage, quantity = argument_set

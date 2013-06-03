@@ -205,7 +205,7 @@ Choose a desired sweetness character:
     Honey -    Subtle honey character
 
 EOS
-    Router.route question, 'sweetness', @record
+    route_modification question, 'sweetness', 'add_sweetness'
   end
 
   def roast
@@ -222,25 +222,25 @@ EOS
   def brown
     puts "\nAdding dark malt character to recipe..."
     component = RecordModification.new @record
-    component.brown
+    component.add_roast 'brown', 'brown'
   end
 
   def black
     puts "\nAdding dark malt character to recipe..."
     component = RecordModification.new @record
-    component.black
+    component.add_roast 'black', 'black'
   end
 
   def wheat
     puts "\nChanging base malt composition to add wheat character..."
     component = RecordModification.new @record
-    component.wheat
+    component.add_base_grain 'wheat', 'wheat'
   end
 
   def rye
     puts "\nChanging base malt composition to add rye character..."
     component = RecordModification.new @record
-    component.rye
+    component.add_base_grain 'rye', 'rye'
   end
 
   def grain_redirect_menu
