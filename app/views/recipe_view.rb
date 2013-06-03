@@ -51,9 +51,9 @@ Primary Fermentation Temp:  #{matching_recipe.primary_fermentation_temp}
     measure = quantity_unit type
     usage_indicator = ingredient.usage == 'boil' ? '@ ' : nil
     line_item = "#{ingredient.quantity} #{measure} #{ingr_record.name.titleize}".ljust(28)
-    line_item += add_usage ingredient unless ingredient.usage.nil?
+    line_item += add_usage ingredient                     unless ingredient.usage.nil?
     line_item += add_duration ingredient, usage_indicator unless ingredient.duration.nil?
-    line_item += add_yeast_codes ingr_record unless ingr_record.yeast_code_wl.nil?
+    line_item += add_yeast_codes ingr_record              unless ingr_record.yeast_code_wl.nil?
     line_item += "\n"
   end
 

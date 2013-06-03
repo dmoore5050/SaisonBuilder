@@ -153,33 +153,12 @@ class RecordModification
     end
   end
 
+
+
   def add_late_ingredient(answer, trackback, redirect)
-    case answer
-    when 'subtle'            then args = 'styrian goldings', 'boil', 0.5, '60 min'
-    when 'significant'       then args = 'simcoe', 'boil', 1, '60 min'
-    when 'floral_spicy'      then args = 'hallertau', 'boil', 1, '20 min'
-    when 'piney_citrus'      then args = 'simcoe', 'boil', 0.5, '20 min'
-    when 'floral'            then args = 'hallertau', 'dryhop', 1, '5 days'
-    when 'spicy'             then args = 'saaz', 'dryhop', 1, '5 days'
-    when 'citrus'            then args = 'amarillo', 'dryhop', 1, '5 days'
-    when 'coriander'         then args = 'coriander', 'boil', 1, '10 mins'
-    when 'citrus zest'       then args = 'citrus zest', 'boil', 1, '10 mins'
-    when 'white peppercorns' then args = 'white peppercorns', 'boil', 0.05, '5 mins'
-    when 'thai basil'        then args = 'thai basil', 'boil', 2, '5 mins'
-    when 'ginger'            then args = 'ginger', 'boil', 2, '10 mins'
-    when 'peaches'           then args = 'peaches', 'secondary', 4, 'Until fermentation completed'
-    when 'blackberries'      then args = 'blackberries', 'secondary', 4, 'Until fermentation completed'
-    when 'mango'             then args = 'mango', 'secondary', 4, 'Until fermentation completed'
-    when 'currants'          then args = 'currants', 'secondary', 2, 'Until fermentation completed'
-    when 'hibiscus'          then args = 'hibiscus', 'secondary', 2, '5 days'
-    when 'lavender'          then args = 'lavender', 'secondary', 0.5, '5 days'
-    when 'rose hips'         then args = 'rose hips', 'boil', 0.5, '5 min'
-    when 'corn sugar'        then args = 'corn sugar', 'Peak Krausen', 1, 'Until fermentation complete'
-    when 'turbinado sugar'   then args = 'turbinado sugar', 'Peak Krausen', 1, 'Until fermentation complete'
-    when 'rice'              then args = 'rice', 'Precook, mash', 1, nil
-    else repeat_question answer, trackback
-    end
-    name, usage, quantity, duration = args
+    repeat_question answer, trackback unless INGREDIENT_SET.has_key? answer
+
+    name, usage, quantity, duration = INGREDIENT_SET[answer]
 
     add_new_ingredient name, usage, quantity, duration
     next_question.send("#{redirect}")
