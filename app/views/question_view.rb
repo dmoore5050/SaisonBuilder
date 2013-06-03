@@ -123,11 +123,11 @@ EOS
     route_modification question, 'primary', 'change_primary'
   end
 
-  def route_modification(question, trackback, route, *usage)
+  def route_modification(question, trackback, route, *arg)
     puts question
     answer = $stdin.gets.downcase.chomp!
     alteration = RecordModification.new @record
-    alteration.send("#{route}", answer, trackback, *usage)
+    alteration.send("#{route}", answer, trackback, *arg)
   end
 
   def blend
@@ -154,7 +154,7 @@ Please choose a strain of Brettanomyces
     Brett L -        Intense, dank, musty, horseblanket
 
 EOS
-    route_modification question, 'brett_only', 'brett_primary'
+    route_modification question, 'brett_only', 'change_primary'
   end
 
   def brett_secondary
@@ -315,6 +315,16 @@ EOS
     Router.route question, 'hops', @record
   end
 
+  def bittering
+    question = <<EOS
+How much bitterness would you like to add?
+    Subtle -       A slight increase to bitterness
+    Significant -  A sharp increase that shifts the balance of the beer
+
+EOS
+    route_modification question, 'bittering', 'add_late_ingredient', 'hops_redirect_menu'
+  end
+
   def flavor
     question = <<EOS
 What kind of hop flavor would you like to add?
@@ -322,7 +332,7 @@ What kind of hop flavor would you like to add?
     Piney citrus -  Increase flavor/aroma (American hop character)
 
 EOS
-    Router.route question, 'flavor', @record
+    route_modification question, 'flavor', 'add_late_ingredient', 'hops_redirect_menu'
   end
 
   def aroma
@@ -333,7 +343,7 @@ What kind of hop aroma would you like to add?
     Citrus -  Increase aroma (American)
 
 EOS
-    Router.route question, 'aroma_hops', @record
+    route_modification question, 'aroma', 'add_late_ingredient', 'hops_redirect_menu'
   end
 
   def hops_redirect_menu
@@ -375,7 +385,7 @@ What spice would you like to add to the recipe?
     Ginger
 
 EOS
-    Router.route question, 'spices', @record
+    route_modification question, 'spices', 'add_late_ingredient', 'spices_redirect_menu'
   end
 
   def spices_redirect_menu
@@ -403,7 +413,7 @@ What fruit would like to add to the recipe?
     Currants
 
 EOS
-    Router.route question, 'fruit', @record
+    route_modification question, 'fruit', 'add_late_ingredient', 'fruit_redirect_menu'
   end
 
   def fruit_redirect_menu
@@ -430,7 +440,7 @@ What botanical would you like to add to the recipe?
     Rose Hips
 
 EOS
-    Router.route question, 'botanicals', @record
+    route_modification question, 'botanical', 'add_late_ingredient', 'botanicals_redirect_menu'
   end
 
   def botanicals_redirect_menu
@@ -457,7 +467,7 @@ What adjunct would you like to add to the recipe?
     Rice -             Used to lighten body/flavor.
 
 EOS
-    Router.route question, 'adjuncts', @record
+    route_modification question, 'adjunct', 'add_late_ingredient', 'adjunct_redirect_menu'
   end
 
   def adjunct_redirect_menu

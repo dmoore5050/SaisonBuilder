@@ -41,13 +41,17 @@ class RecordModification
 
   def change_primary(answer, trackback)
     case answer
-    when 'dupont'   then yeast = 'dupont strain'
-    when 'french'   then yeast = 'french saison'
-    when 'american' then yeast = 'american farmhouse'
+    when 'dupont'        then name = 'dupont strain'
+    when 'french'        then name = 'french saison'
+    when 'american'      then name = 'american farmhouse'
+    when 'brett c'       then name = 'brett. clausenii'
+    when 'brett b'       then name = 'brett. brux.'
+    when 'brett b trois' then name = 'brett. brux. trois'
+    when 'brett l'       then name = 'brett. lambicus'
     else repeat_question answer, trackback
     end
 
-    switch_yeast yeast
+    switch_yeast name
     next_question.yeast_redirect_menu
   end
 
@@ -68,19 +72,6 @@ class RecordModification
     usage, quantity = yeast_usage, 1
 
     add_new_ingredient name, usage, quantity
-    next_question.yeast_redirect_menu
-  end
-
-  def brett_primary(answer, trackback)
-    case answer
-    when 'brett c'       then name = 'brett. clausenii'
-    when 'brett b'       then name = 'brett. brux.'
-    when 'brett b trois' then name = 'brett. brux. trois'
-    when 'brett l'       then name = 'brett. lambicus'
-    else repeat_question answer, trackback
-    end
-
-    switch_primary_yeast name
     next_question.yeast_redirect_menu
   end
 
@@ -158,159 +149,40 @@ class RecordModification
 
       add_new_ingredient name, usage, quantity
     else
-      sugar.quantity += 1
-      sugar.save
+      sugar.update_attributes(quantity: sugar.quantity + 1)
     end
   end
 
-  # ***********************************
-  #          progress marker
-  # ***********************************
-
-  def bittering
-    name, usage, quantity, duration = 'styrian goldings', 'boil', 0.5, '60 min'
-
-    add_new_ingredient name, usage, quantity, duration
-    next_question.hops_redirect_menu
-  end
-
-  def floral_spicy
-    name, usage, quantity, duration = 'hallertau', 'boil', 1, '20 min'
-
-    add_new_ingredient name, usage, quantity, duration
-    next_question.hops_redirect_menu
-  end
-
-  def piney_citrus
-    name, usage, quantity, duration = 'simcoe', 'boil', 0.5, '20 min'
-
-    add_new_ingredient name, usage, quantity, duration
-    next_question.hops_redirect_menu
-  end
-
-  def floral
-    name, usage, quantity, duration = 'hallertau', 'dryhop', 1, '5 days'
-
-    add_new_ingredient name, usage, quantity, duration
-    next_question.hops_redirect_menu
-  end
-
-  def spicy
-    name, usage, quantity, duration = 'saaz', 'dryhop', 1, '5 days'
+  def add_late_ingredient(answer, trackback, redirect)
+    case answer
+    when 'subtle'            then args = 'styrian goldings', 'boil', 0.5, '60 min'
+    when 'significant'       then args = 'simcoe', 'boil', 1, '60 min'
+    when 'floral_spicy'      then args = 'hallertau', 'boil', 1, '20 min'
+    when 'piney_citrus'      then args = 'simcoe', 'boil', 0.5, '20 min'
+    when 'floral'            then args = 'hallertau', 'dryhop', 1, '5 days'
+    when 'spicy'             then args = 'saaz', 'dryhop', 1, '5 days'
+    when 'citrus'            then args = 'amarillo', 'dryhop', 1, '5 days'
+    when 'coriander'         then args = 'coriander', 'boil', 1, '10 mins'
+    when 'citrus zest'       then args = 'citrus zest', 'boil', 1, '10 mins'
+    when 'white peppercorns' then args = 'white peppercorns', 'boil', 0.05, '5 mins'
+    when 'thai basil'        then args = 'thai basil', 'boil', 2, '5 mins'
+    when 'ginger'            then args = 'ginger', 'boil', 2, '10 mins'
+    when 'peaches'           then args = 'peaches', 'secondary', 4, 'Until fermentation completed'
+    when 'blackberries'      then args = 'blackberries', 'secondary', 4, 'Until fermentation completed'
+    when 'mango'             then args = 'mango', 'secondary', 4, 'Until fermentation completed'
+    when 'currants'          then args = 'currants', 'secondary', 2, 'Until fermentation completed'
+    when 'hibiscus'          then args = 'hibiscus', 'secondary', 2, '5 days'
+    when 'lavender'          then args = 'lavender', 'secondary', 0.5, '5 days'
+    when 'rose hips'         then args = 'rose hips', 'boil', 0.5, '5 min'
+    when 'corn sugar'        then args = 'corn sugar', 'Peak Krausen', 1, 'Until fermentation complete'
+    when 'turbinado sugar'   then args = 'turbinado sugar', 'Peak Krausen', 1, 'Until fermentation complete'
+    when 'rice'              then args = 'rice', 'Precook, mash', 1, nil
+    else repeat_question answer, trackback
+    end
+    name, usage, quantity, duration = args
 
     add_new_ingredient name, usage, quantity, duration
-    next_question.hops_redirect_menu
+    next_question.send("#{redirect}")
   end
 
-  def citrus
-    name, usage, quantity, duration = 'amarillo', 'dryhop', 1, '5 days'
-
-    add_new_ingredient name, usage, quantity, duration
-    next_question.hops_redirect_menu
-  end
-
-  def coriander
-    name, usage, quantity, duration = 'coriander', 'boil', 1, '10 mins'
-
-    add_new_ingredient name, usage, quantity, duration
-    next_question.spices_redirect_menu
-  end
-
-  def citrus_zest
-    name, usage, quantity, duration = 'citrus zest', 'boil', 1, '10 mins'
-
-    add_new_ingredient name, usage, quantity, duration
-    next_question.spices_redirect_menu
-  end
-
-  def white_peppercorns
-    name, usage, quantity, duration = 'white peppercorns', 'boil', 0.05, '5 mins'
-
-    add_new_ingredient name, usage, quantity, duration
-    next_question.spices_redirect_menu
-  end
-
-  def thai_basil
-    name, usage, quantity, duration = 'thai basil', 'boil', 2, '5 mins'
-
-    add_new_ingredient name, usage, quantity, duration
-    next_question.spices_redirect_menu
-  end
-
-  def ginger
-    name, usage, quantity, duration = 'ginger', 'boil', 2, '10 mins'
-
-    add_new_ingredient name, usage, quantity, duration
-    next_question.spices_redirect_menu
-  end
-
-  def peaches
-    name, usage, quantity, duration = 'peaches', 'secondary', 4, 'Until fermentation completed'
-
-    add_new_ingredient name, usage, quantity, duration
-    next_question.fruit_redirect_menu
-  end
-
-  def blackberries
-    name, usage, quantity, duration = 'blackberries', 'secondary', 4, 'Until fermentation completed'
-
-    add_new_ingredient name, usage, quantity, duration
-    next_question.fruit_redirect_menu
-  end
-
-  def mango
-    name, usage, quantity, duration = 'mango', 'secondary', 4, 'Until fermentation completed'
-
-    add_new_ingredient name, usage, quantity, duration
-    next_question.fruit_redirect_menu
-  end
-
-  def currants
-    name, usage, quantity, duration = 'currants', 'secondary', 2, 'Until fermentation completed'
-
-    add_new_ingredient name, usage, quantity, duration
-    next_question.fruit_redirect_menu
-  end
-
-  def hibiscus
-    name, usage, quantity, duration = 'hibiscus', 'secondary', 2, '5 days'
-
-    add_new_ingredient name, usage, quantity, duration
-    next_question.botanicals_redirect_menu
-  end
-
-  def lavender
-    name, usage, quantity, duration = 'lavender', 'secondary', 0.5, '5 days'
-
-    add_new_ingredient name, usage, quantity, duration
-    next_question.botanicals_redirect_menu
-  end
-
-  def rose_hips
-    name, usage, quantity, duration = 'rose hips', 'boil', 0.5, '5 min'
-
-    add_new_ingredient name, usage, quantity, duration
-    next_question.botanicals_redirect_menu
-  end
-
-  def corn_sugar
-    name, usage, quantity = 'corn sugar', 'Peak Krausen', 1
-
-    add_new_ingredient name, usage, quantity
-    next_question.adjunct_redirect_menu
-  end
-
-  def turbinado_sugar
-    name, usage, quantity = 'turbinado sugar', 'Peak Krausen', 1
-
-    add_new_ingredient name, usage, quantity
-    next_question.adjunct_redirect_menu
-  end
-
-  def rice
-    name, usage, quantity = 'rice', 'Precook, mash', 1
-
-    add_new_ingredient name, usage, quantity
-    next_question.adjunct_redirect_menu
-  end
 end
