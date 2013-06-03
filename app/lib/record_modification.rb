@@ -11,8 +11,8 @@ class RecordModification
 
   def describe(type, name, description)
     case type
-    when 'ingredient' then record_match = Ingredient.where(name: name).first
-    when 'recipe' then record_match = Recipe.where(name: name).first
+    when 'ingredient' then record_match = Ingredient.where(name: name)
+    when 'recipe' then record_match = Recipe.where(name: name)
     end
 
     record_match.update_attributes(description: description)
@@ -31,100 +31,67 @@ class RecordModification
     @record.recipe_ingredients.create(ingredient_id: ingr, usage: usage, quantity: quantity, duration: duration)
   end
 
-  def switch_primary_yeast(name)
-    primary_yeast = RecipeIngredient.where(recipe_id: @record, usage: 'primary').first
+  def switch_yeast(name)
+    primary_yeast = record.recipe_ingredients.where(usage: 'primary').first
     usage, quantity =  primary_yeast.usage, primary_yeast.quantity
     primary_yeast.destroy
 
     add_new_ingredient name, usage, quantity
   end
 
-  def dupont
-    new_primary_yeast = 'dupont strain'
+  def change_primary(answer, trackback)
+    case answer
+    when 'dupont'   then yeast = 'dupont strain'
+    when 'french'   then yeast = 'french saison'
+    when 'american' then yeast = 'american farmhouse'
+    else repeat_question answer, trackback
+    end
 
-    switch_primary_yeast new_primary_yeast
+    switch_yeast yeast
     next_question.yeast_redirect_menu
   end
 
-  def french
-    new_primary_yeast = 'french saison'
-
-    switch_primary_yeast new_primary_yeast
-    next_question.yeast_redirect_menu
+  def repeat_question(answer, trackback)
+    puts "\n'#{answer}' is not a valid option. Please choose from the choices listed."
+    puts "Type 'Menu' to return to Recipes menu, or 'Quit' to exit SaisonBuilder."
+    repeat_question = QuestionView.new record
+    repeat_question.send("#{trackback}")
   end
 
-  def american
-    new_primary_yeast = 'american farmhouse'
-
-    switch_primary_yeast new_primary_yeast
-    next_question.yeast_redirect_menu
-  end
-
-  def blend_brett_c
-    name, usage, quantity = 'brett. clausenii', 'primary', 1
+  def blend_brett(answer, trackback)
+    case answer
+    when 'brett c' then name = 'brett. clausenii'
+    when 'brett b' then name = 'brett. brux.'
+    when 'brett l' then name = 'brett. lambicus'
+    else repeat_question answer, trackback
+    end
+    usage, quantity = 'primary', 1
 
     add_new_ingredient name, usage, quantity
     next_question.yeast_redirect_menu
   end
 
-  def blend_brett_b
-    name, usage, quantity = 'brett. brux.', 'primary', 1
+  def brett_primary(answer, trackback)
+    case answer
+    when 'brett c' then name = 'brett. clausenii'
+    when 'brett b' then name = 'brett. brux.'
+    when 'brett b trois'then name = 'brett. brux. trois'
+    when 'brett l' then name = 'brett. lambicus'
+    else repeat_question answer, trackback
+    end
 
-    add_new_ingredient name, usage, quantity
+    switch_primary_yeast name
     next_question.yeast_redirect_menu
   end
 
-  def blend_brett_l
-    name, usage, quantity = 'brett. lambicus', 'primary', 1
-
-    add_new_ingredient name, usage, quantity
-    next_question.yeast_redirect_menu
-  end
-
-  def only_brett_c
-    new_primary_yeast = 'brett. clausenii'
-
-    switch_primary_yeast new_primary_yeast
-    next_question.yeast_redirect_menu
-  end
-
-  def only_brett_b
-    new_primary_yeast = 'brett. brux.'
-
-    switch_primary_yeast new_primary_yeast
-    next_question.yeast_redirect_menu
-  end
-
-  def only_brett_b_trois
-    new_primary_yeast = 'brett. brux. trois'
-
-    switch_primary_yeast new_primary_yeast
-    next_question.yeast_redirect_menu
-  end
-
-  def only_brett_l
-    new_primary_yeast = 'brett. lambicus'
-
-    switch_primary_yeast new_primary_yeast
-    next_question.yeast_redirect_menu
-  end
-
-  def secondary_brett_c
-    name, usage, quantity = 'brett. clausenii', 'secondary', 1
-
-    add_new_ingredient name, usage, quantity
-    next_question.yeast_redirect_menu
-  end
-
-  def secondary_brett_b
-    name, usage, quantity = 'brett. brux.', 'secondary', 1
-
-    add_new_ingredient name, usage, quantity
-    next_question.yeast_redirect_menu
-  end
-
-  def secondary_brett_l
-    name, usage, quantity = 'brett. lambicus', 'secondary', 1
+  def brett_secondary(answer, trackback)
+    case answer
+    when 'brett c' then name = 'brett. clausenii'
+    when 'brett b' then name = 'brett. brux.'
+    when 'brett l' then name = 'brett. lambicus'
+    else repeat_question answer, trackback
+    end
+    usage, quantity = 'secondary', 1
 
     add_new_ingredient name, usage, quantity
     next_question.yeast_redirect_menu

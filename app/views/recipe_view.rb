@@ -1,4 +1,3 @@
-INGREDIENT_PRINT_ORDER = %w(grain adjunct hop spice fruit botanical yeast)
 
 class RecipeView
 
@@ -37,10 +36,10 @@ Primary Fermentation Temp:  #{matching_recipe.primary_fermentation_temp}
   end
 
   def render_ingredient_bill(type, ingredient_list)
-    ingredient_bill = ''
 
+    ingredient_bill = ''
     ingredient_list.each do | ingredient |
-      ingr_record = Ingredient.where("id = #{ingredient.ingredient_id}").first
+      ingr_record = Ingredient.where(id: ingredient.ingredient_id).first
       if ingr_record.type_code == type
         ingredient_bill += build_recipe_line_item type, ingredient, ingr_record
       end

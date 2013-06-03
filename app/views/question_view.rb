@@ -21,8 +21,8 @@ class QuestionView
     puts "\nPlease add a description:"
     description = $stdin.gets.downcase.chomp!
 
-    change = RecordModification.new
-    change.describe record_type, name, description
+    alteration = RecordModification.new
+    alteration.describe record_type, name, description
 
     #move to next stage of addition process
   end
@@ -120,19 +120,26 @@ Please choose a new primary yeast:
     American -  Trad'l saison yeast blended with Brettanomyces.
 
 EOS
-    Router.route question, 'primary', @record
+    route_modification question, 'primary', 'change_primary'
+  end
+
+  def route_modification(question, trackback, route)
+    puts question
+    answer = $stdin.gets.downcase.chomp!
+    alteration = RecordModification.new @record
+    alteration.send("#{route}", answer, trackback)
   end
 
   def blend
     question = <<EOS
 
 Please choose a strain of Brettanomyces:
-    Blend Brett C -  Subtle, pineapple/tropical fruit aroma
-    Blend Brett B -  Moderate intensity, barnyard, musty
-    Blend Brett L -  Intense Brett character, barnyard, horseblanket, dank
+    Brett C -  Subtle, pineapple/tropical fruit aroma
+    Brett B -  Moderate intensity, barnyard, musty
+    Brett L -  Intense Brett character, barnyard, horseblanket, dank
 
 EOS
-    Router.route question, 'blend', @record
+    route_modification question, 'blend', 'blend_brett'
   end
 
   def brett_only
@@ -141,25 +148,25 @@ EOS
 Please choose a strain of Brettanomyces
 (Expect a significantly longer fermentation period when using only Brett):
 
-    Only Brett B Trois -  Delicate Pineapple and tropical fruit, tart.
-    Only Brett B -        Barnyard, musty, leather
-    Only Brett C -        Pineapple/tropical fruit aroma
-    Only Brett L -        Intense, dank, musty, horseblanket
+    Brett B Trois -  Delicate Pineapple and tropical fruit, tart.
+    Brett B -        Barnyard, musty, leather
+    Brett C -        Pineapple/tropical fruit aroma
+    Brett L -        Intense, dank, musty, horseblanket
 
 EOS
-    Router.route question, 'brett_only', @record
+    route_modification question, 'brett_only', 'brett_primary'
   end
 
   def brett_secondary
     question = <<EOS
 
 Please choose a strain of Brettanomyces:
-    Secondary Brett C -  Subtle, pineapple/tropical fruit aroma
-    Secondary Brett B -  Moderate intensity, barnyard, musty
-    Secondary Brett L -  Intense Brett character, barnyard, horseblanket, dank
+    Brett C -  Subtle, pineapple/tropical fruit aroma
+    Brett B -  Moderate intensity, barnyard, musty
+    Brett L -  Intense Brett character, barnyard, horseblanket, dank
 
 EOS
-    Router.route question, 'brett_secondary', @record
+    route_modification question, 'brett_secondary', 'brett_secondary'
   end
 
   def yeast_redirect_menu
