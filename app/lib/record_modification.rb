@@ -40,16 +40,8 @@ class RecordModification
   end
 
   def change_primary(answer, trackback)
-    case answer
-    when 'dupont'        then name = 'dupont strain'
-    when 'french'        then name = 'french saison'
-    when 'american'      then name = 'american farmhouse'
-    when 'brett c'       then name = 'brett. clausenii'
-    when 'brett b'       then name = 'brett. brux.'
-    when 'brett b trois' then name = 'brett. brux. trois'
-    when 'brett l'       then name = 'brett. lambicus'
-    else repeat_question answer, trackback
-    end
+    repeat_question answer, trackback unless INGREDIENT_SET.has_key? answer
+    name = INGREDIENT_SET[answer]
 
     switch_yeast name
     next_question.yeast_redirect_menu
@@ -63,59 +55,35 @@ class RecordModification
   end
 
   def add_brett(answer, trackback, yeast_usage)
-    case answer
-    when 'brett c' then name = 'brett. clausenii'
-    when 'brett b' then name = 'brett. brux.'
-    when 'brett l' then name = 'brett. lambicus'
-    else repeat_question answer, trackback
-    end
-    usage, quantity = yeast_usage, 1
+    repeat_question answer, trackback unless INGREDIENT_SET.has_key? answer
+    name, usage, quantity = INGREDIENT_SET[answer], yeast_usage, 1
 
     add_new_ingredient name, usage, quantity
     next_question.yeast_redirect_menu
   end
 
   def add_sweetness(answer, trackback)
-    case answer
-    when 'caramel' then name = 'caramunich'
-    when 'honey'   then name = 'honey malt'
-    else repeat_question answer, trackback
-    end
-    usage, quantity = nil, 0.5
+    repeat_question answer, trackback unless INGREDIENT_SET.has_key? answer
+    name, usage, quantity = INGREDIENT_SET[answer], nil, 0.5
 
     add_new_ingredient name, usage, quantity
     next_question.grain_redirect_menu
   end
 
   def add_base_grain(answer, trackback)
-    case answer
-    when 'wheat' then args = [['wheat malt', nil, 3], ['rice hulls', nil, 0.2]]
-    when 'rye'   then args = [['rye malt', nil, 3], ['rice hulls', nil, 0.2]]
-    else repeat_question answer, trackback
-    end
+    base_malt = RecipeIngredient.where(recipe_id: @record, quantity: 6..25).first
+    base_malt.update_attributes(quantity: base_malt.quantity - 3)
 
-    args.each do | argument_set |
-      name, usage, quantity = argument_set
-      add_new_ingredient name, usage, quantity
-    end
-    next_question.grain_redirect_menu
+    add_multiple_grains answer, trackback
   end
 
   def add_roast(answer, trackback)
-    case answer
-    when 'brown'
-      args = [
-        ['chocolate malt', nil, 0.4],
-        ['flaked oats', nil, 1]
-      ]
-    when 'black'
-      args = [
-        ['chocolate malt', nil, 0.4],
-        ['carafa 2 special', nil, 0.4],
-        ['flaked oats', nil, 1]
-      ]
-    else repeat_question answer, trackback
-    end
+    add_multiple_grains answer, trackback
+  end
+
+  def add_multiple_grains(answer, trackback)
+    repeat_question answer, trackback unless INGREDIENT_SET.has_key? answer
+    args = INGREDIENT_SET[answer]
 
     args.each do | argument_set |
       name, usage, quantity = argument_set
@@ -146,18 +114,14 @@ class RecordModification
   def add_sugar_to_recipe(sugar)
     if sugar.nil?
       name, usage, quantity = 'corn sugar', 'Peak krausen', 2
-
       add_new_ingredient name, usage, quantity
     else
       sugar.update_attributes(quantity: sugar.quantity + 1)
     end
   end
 
-
-
   def add_late_ingredient(answer, trackback, redirect)
     repeat_question answer, trackback unless INGREDIENT_SET.has_key? answer
-
     name, usage, quantity, duration = INGREDIENT_SET[answer]
 
     add_new_ingredient name, usage, quantity, duration
