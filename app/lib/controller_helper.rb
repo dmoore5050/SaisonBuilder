@@ -7,18 +7,18 @@ module ControllerHelper
   def self.creation_success_message(record)
     case
     when record.save then puts "\nSuccess!"
-    else render_error_message
+    else self.render_error_message record
     end
   end
 
   def self.record_destroyed_message(record)
     case
     when record.destroyed? then puts "\nThe record has been deleted."
-    else render_error_message
+    else self.render_error_message record
     end
   end
 
-  def render_error_message
+  def self.render_error_message(record)
     puts "Failure: #{record.errors.full_messages.join(", ")}"
   end
 
