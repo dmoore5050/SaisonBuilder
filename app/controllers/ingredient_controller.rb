@@ -9,10 +9,7 @@ class IngredientController
 
   def create
     ingredient = Ingredient.new params[:ingredient]
-    case
-    when ingredient.save then puts "\nSuccess!"
-    else puts "Failure: #{ingredient.errors.full_messages.join(", ")}"
-    end
+    Helper.creation_success_message ingredient
   end
 
   def list_ingredients
@@ -42,7 +39,7 @@ class IngredientController
       recipe_ingredient.destroy
     end
     ingredient_match.destroy
-    generate_ingredient_destroyed_message ingredient_match
+    Helper.matching_record_destroyed_message ingredient_match
   end
 
   def check_if_name_matches_ingredient(ingredient_match)
@@ -50,14 +47,6 @@ class IngredientController
       puts "\n#{params[:recipe][:name].titleize} is an invalid ingredient name."
       puts 'To view a list of possible ingredients, type ruby sb ingredients'
       exit
-    end
-  end
-
-  def generate_ingredient_destroyed_message(matching_ingredient)
-    case
-    when matching_ingredient.destroyed?
-      puts "\n#{params[:ingredient][:name].titleize} has been deleted."
-    else puts "Failure: #{ingredient.errors.full_messages.join(", ")}"
     end
   end
 

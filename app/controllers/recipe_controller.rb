@@ -11,11 +11,7 @@ class RecipeController
 
   def create
     recipe = Recipe.new params[:recipe]
-    case
-    when recipe.save
-      puts 'Success!'
-    else puts "Failure: #{recipe.errors.full_messages.join(", ")}"
-    end
+    Helper.creation_success_message recipe
   end
 
   def list_recipes
@@ -44,7 +40,7 @@ class RecipeController
       recipe_ingredient.destroy
     end
     matching_recipe.destroy
-    generate_recipe_destroyed_message matching_recipe
+    Helper.matching_record_destroyed_message matching_recipe
   end
 
   def generate_recipe_destroyed_message(matching_recipe)

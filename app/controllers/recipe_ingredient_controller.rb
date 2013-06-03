@@ -5,10 +5,7 @@ class RecipeIngredientController
 
   def create
     recipe_ingredient = RecipeIngredient.new(params[:recipe_ingredient])
-    case
-    when recipe_ingredient.save then puts 'Success!'
-    else puts "Failure: #{recipe_ingredient.errors.full_messages.join(", ")}"
-    end
+    Helper.creation_success_message recipe_ingredient
   end
 
 end

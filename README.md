@@ -15,7 +15,6 @@ Project Status
 
 [![Build Status](https://travis-ci.org/dmoore5050/SaisonBuilder.png)](https://travis-ci.org/dmoore5050/SaisonBuilder)
 
-Basic database add-remove-list functionality in place.
 Migrations/models in place.
 Seed files in place.
 The following commands are fully functional:
@@ -28,9 +27,9 @@ The following commands are fully functional:
 * ruby sb add ingredient
 * ruby sb describe
 * ruby sb modify
-* ruby sb view <recipe name>
-* ruby sb delete recipe <recipe name>
-* ruby sb delete ingredient <ingredient name>
+* ruby sb view [recipe name]
+* ruby sb delete recipe [recipe name]
+* ruby sb delete ingredient [ingredient name]
 
 
 ###To do:
