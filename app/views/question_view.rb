@@ -19,7 +19,7 @@ class QuestionView
   def repeat_question(answer, trackback)
     puts "\n'#{answer}' is not a valid option. Please choose from the choices listed."
     puts "Type 'Menu' to return to Recipes menu, or 'Quit' to exit SaisonBuilder."
-    self.send("#{trackback}")
+    send("#{trackback}")
   end
 
   def prep_describe
@@ -134,7 +134,7 @@ Please choose a new primary yeast:
     American -  Trad'l saison yeast blended with Brettanomyces.
 
 EOS
-    route_modification 'primary', 'change_primary'
+    route_modification question, 'primary', 'change_primary'
   end
 
   def blend
@@ -146,7 +146,6 @@ Please choose a strain of Brettanomyces:
     Brett L -  Intense Brett character, barnyard, horseblanket, dank
 
 EOS
-
     route_modification question, 'blend', 'add_brett', 'primary'
   end
 
@@ -174,7 +173,6 @@ Please choose a strain of Brettanomyces:
     Brett L -  Intense Brett character, barnyard, horseblanket, dank
 
 EOS
-
     route_modification question, 'brett_secondary', 'add_brett', 'secondary'
   end
 

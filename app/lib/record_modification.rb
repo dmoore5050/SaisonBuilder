@@ -81,29 +81,17 @@ class RecordModification
     next_question.grain_redirect_menu
   end
 
-  def change_gravity(answer, trackback) #crack this nut
-    base_malt = RecipeIngredient.where(recipe_id: @record, quantity: 6..25).first
+  def change_gravity(answer, trackback)
+    base_malt = @record.recipe_ingredients.where(quantity: 6..25).first
 
-    case answer
-    when 'eight'
-     quantity_adjustment = base_malt.quantity + 1.5
-     sugar = RecipeIngredient.where(recipe_id: @record, ingredient_id: 38..39).first
-     add_sugar_to_recipe sugar
-    when 'seven' then quantity_adjustment = base_malt.quantity + 1.5
-    when 'five'  then quantity_adjustment = base_malt.quantity - 1.5
-    when 'four'  then quantity_adjustment = base_malt.quantity - 3
-    else repeat_question answer, trackback
+    quantity_adjustment = base_malt.quantity + INGREDIENT_SET[answer]
+    base_malt.update_attributes(quantity: quantity_adjustment)
+    if answer == 'eight'
+      sugar = @record.recipe_ingredients.where(ingredient_id: 38..39).first
+      add_sugar_to_recipe sugar
     end
 
-    base_malt.update_attributes(quantity: quantity_adjustment)
-
     next_question.gravity_redirect_menu
-  end
-
-  def repeat_question(answer, trackback)
-    puts "\n'#{answer}' is not a valid option. Please choose from the choices listed."
-    puts "Type 'Menu' to return to Recipes menu, or 'Quit' to exit SaisonBuilder."
-    self.send("#{trackback}")
   end
 
   def add_sugar_to_recipe(sugar)
