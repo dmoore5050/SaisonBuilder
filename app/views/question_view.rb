@@ -8,6 +8,20 @@ class QuestionView
     @record = record
   end
 
+  def route_modification(question, trackback, route, *arg)
+    puts question
+    answer = $stdin.gets.downcase.chomp!
+    repeat_question answer, trackback unless INGREDIENT_SET.has_key? answer
+    alteration = RecordModification.new @record
+    alteration.send("#{route}", answer, *arg)
+  end
+
+  def repeat_question(answer, trackback)
+    puts "\n'#{answer}' is not a valid option. Please choose from the choices listed."
+    puts "Type 'Menu' to return to Recipes menu, or 'Quit' to exit SaisonBuilder."
+    self.send("#{trackback}")
+  end
+
   def prep_describe
     puts "\nAre you changing the description of a Recipe, or of an Ingredient?"
     record_type = $stdin.gets.downcase.chomp!
@@ -120,21 +134,8 @@ Please choose a new primary yeast:
     American -  Trad'l saison yeast blended with Brettanomyces.
 
 EOS
-    route_modification question, 'primary', 'change_primary'
-  end
-
-  def route_modification(question, trackback, route, *arg)
-    puts question
-    answer = $stdin.gets.downcase.chomp!
-    repeat_question answer, trackback unless INGREDIENT_SET.has_key? answer
-    alteration = RecordModification.new @record
-    alteration.send("#{route}", answer, trackback, *arg)
-  end
-
-  def repeat_question(answer, trackback)
-    puts "\n'#{answer}' is not a valid option. Please choose from the choices listed."
-    puts "Type 'Menu' to return to Recipes menu, or 'Quit' to exit SaisonBuilder."
-    self.send("#{trackback}")
+    trackback, route = 'primary', 'change_primary'
+    route_modification question, trackback, route
   end
 
   def blend
@@ -146,7 +147,8 @@ Please choose a strain of Brettanomyces:
     Brett L -  Intense Brett character, barnyard, horseblanket, dank
 
 EOS
-    route_modification question, 'blend', 'add_brett', 'primary'
+    trackback, route, usage = 'blend', 'add_brett', 'primary'
+    route_modification question, trackback, route, usage
   end
 
   def brett_only
@@ -161,7 +163,8 @@ Please choose a strain of Brettanomyces
     Brett L -        Intense, dank, musty, horseblanket
 
 EOS
-    route_modification question, 'brett_only', 'change_primary'
+    trackback, route = 'brett_only', 'change_primary'
+    route_modification question, trackback, route
   end
 
   def brett_secondary
@@ -173,7 +176,8 @@ Please choose a strain of Brettanomyces:
     Brett L -  Intense Brett character, barnyard, horseblanket, dank
 
 EOS
-    route_modification question, 'brett_secondary', 'add_brett', 'secondary'
+    trackback, route, usage = 'brett_secondary', 'add_brett', 'secondary'
+    route_modification question, trackback, route, usage
   end
 
   def yeast_redirect_menu
@@ -212,7 +216,8 @@ Choose a desired sweetness character:
     Honey -    Subtle honey character
 
 EOS
-    route_modification question, 'sweetness', 'add_sweetness'
+    trackback, route, redirect = 'sweetness', 'add_ingredient', 'grain_redirect_menu'
+    route_modification question, trackback, route, redirect
   end
 
   def roast
@@ -228,26 +233,30 @@ EOS
 
   def brown
     puts "\nAdding dark malt character to recipe..."
+    trackback, route, redirect = 'brown', 'brown', 'grain_redirect_menu'
     component = RecordModification.new @record
-    component.add_roast 'brown', 'brown'
+    component.add_roast trackback, route, redirect
   end
 
   def black
     puts "\nAdding dark malt character to recipe..."
+    trackback, route, redirect = 'black', 'black', 'grain_redirect_menu'
     component = RecordModification.new @record
-    component.add_roast 'black', 'black'
+    component.add_roast trackback, route, redirect
   end
 
   def wheat
     puts "\nChanging base malt composition to add wheat character..."
+    trackback, route, redirect = 'wheat', 'wheat', 'grain_redirect_menu'
     component = RecordModification.new @record
-    component.add_base_grain 'wheat', 'wheat'
+    component.add_base_grain trackback, route, redirect
   end
 
   def rye
     puts "\nChanging base malt composition to add rye character..."
+    trackback, route, redirect = 'rye', 'rye', 'grain_redirect_menu'
     component = RecordModification.new @record
-    component.add_base_grain 'rye', 'rye'
+    component.add_base_grain trackback, route, redirect
   end
 
   def grain_redirect_menu
@@ -283,7 +292,8 @@ What is your desired final gravity?
     Seven - 7% ABV
 
 EOS
-    route_modification question, 'increase', 'change_gravity'
+    trackback =  'increase'
+    send_gravity_change question, trackback
   end
 
   def decrease
@@ -294,7 +304,15 @@ What is your desired final gravity?
     Four - 4% ABV
 
 EOS
-    route_modification question, 'decrease', 'change_gravity'
+    trackback =  'decrease'
+    send_gravity_change question, trackback
+  end
+
+  def send_gravity_change(question, trackback)
+    puts question
+    answer = $stdin.gets.downcase.chomp!
+    alteration = RecordModification.new @record
+    alteration.change_gravity answer, trackback
   end
 
   def gravity_redirect_menu
@@ -329,7 +347,8 @@ How much bitterness would you like to add?
     Significant -  A sharp increase that shifts the balance of the beer
 
 EOS
-    route_modification question, 'bittering', 'add_late_ingredient', 'hops_redirect_menu'
+    trackback, route, redirect = 'bittering', 'add_ingredient', 'hops_redirect_menu'
+    route_modification question, trackback, route, redirect
   end
 
   def flavor
@@ -339,7 +358,8 @@ What kind of hop flavor would you like to add?
     Piney citrus -  Increase flavor/aroma (American hop character)
 
 EOS
-    route_modification question, 'flavor', 'add_late_ingredient', 'hops_redirect_menu'
+    trackback, route, redirect = 'flavor', 'add_ingredient', 'hops_redirect_menu'
+    route_modification question, trackback, route, redirect
   end
 
   def aroma
@@ -350,7 +370,8 @@ What kind of hop aroma would you like to add?
     Citrus -  Increase aroma (American)
 
 EOS
-    route_modification question, 'aroma', 'add_late_ingredient', 'hops_redirect_menu'
+    trackback, route, redirect = 'aroma', 'add_ingredient', 'hops_redirect_menu'
+    route_modification question, trackback, route, redirect
   end
 
   def hops_redirect_menu
@@ -392,7 +413,8 @@ What spice would you like to add to the recipe?
     Ginger
 
 EOS
-    route_modification question, 'spices', 'add_late_ingredient', 'spices_redirect_menu'
+    trackback, route, redirect = 'spices', 'add_ingredient', 'spices_redirect_menu'
+    route_modification question, trackback, route, redirect
   end
 
   def spices_redirect_menu
@@ -420,7 +442,8 @@ What fruit would like to add to the recipe?
     Currants
 
 EOS
-    route_modification question, 'fruit', 'add_late_ingredient', 'fruit_redirect_menu'
+    trackback, route, redirect = 'fruit', 'add_ingredient', 'fruit_redirect_menu'
+    route_modification question, trackback, route, redirect
   end
 
   def fruit_redirect_menu
@@ -447,7 +470,8 @@ What botanical would you like to add to the recipe?
     Rose Hips
 
 EOS
-    route_modification question, 'botanical', 'add_late_ingredient', 'botanicals_redirect_menu'
+    trackback, route, redirect = 'botanical', 'add_ingredient', 'botanicals_redirect_menu'
+    route_modification question, trackback, route, redirect
   end
 
   def botanicals_redirect_menu
@@ -474,7 +498,8 @@ What adjunct would you like to add to the recipe?
     Rice -             Used to lighten body/flavor.
 
 EOS
-    route_modification question, 'adjunct', 'add_late_ingredient', 'adjunct_redirect_menu'
+    trackback, route, redirect = 'adjunct', 'add_ingredient', 'adjunct_redirect_menu'
+    route_modification question, trackback, route, redirect
   end
 
   def adjunct_redirect_menu
