@@ -126,8 +126,15 @@ EOS
   def route_modification(question, trackback, route, *arg)
     puts question
     answer = $stdin.gets.downcase.chomp!
+    repeat_question answer, trackback unless INGREDIENT_SET.has_key? answer
     alteration = RecordModification.new @record
     alteration.send("#{route}", answer, trackback, *arg)
+  end
+
+  def repeat_question(answer, trackback)
+    puts "\n'#{answer}' is not a valid option. Please choose from the choices listed."
+    puts "Type 'Menu' to return to Recipes menu, or 'Quit' to exit SaisonBuilder."
+    self.send("#{trackback}")
   end
 
   def blend

@@ -40,22 +40,13 @@ class RecordModification
   end
 
   def change_primary(answer, trackback)
-    repeat_question answer, trackback unless INGREDIENT_SET.has_key? answer
     name = INGREDIENT_SET[answer]
 
     switch_yeast name
     next_question.yeast_redirect_menu
   end
 
-  def repeat_question(answer, trackback)
-    puts "\n'#{answer}' is not a valid option. Please choose from the choices listed."
-    puts "Type 'Menu' to return to Recipes menu, or 'Quit' to exit SaisonBuilder."
-    repeat_question = QuestionView.new record
-    repeat_question.send("#{trackback}")
-  end
-
   def add_brett(answer, trackback, yeast_usage)
-    repeat_question answer, trackback unless INGREDIENT_SET.has_key? answer
     name, usage, quantity = INGREDIENT_SET[answer], yeast_usage, 1
 
     add_new_ingredient name, usage, quantity
@@ -63,7 +54,6 @@ class RecordModification
   end
 
   def add_sweetness(answer, trackback)
-    repeat_question answer, trackback unless INGREDIENT_SET.has_key? answer
     name, usage, quantity = INGREDIENT_SET[answer], nil, 0.5
 
     add_new_ingredient name, usage, quantity
@@ -82,7 +72,6 @@ class RecordModification
   end
 
   def add_multiple_grains(answer, trackback)
-    repeat_question answer, trackback unless INGREDIENT_SET.has_key? answer
     args = INGREDIENT_SET[answer]
 
     args.each do | argument_set |
@@ -121,7 +110,6 @@ class RecordModification
   end
 
   def add_late_ingredient(answer, trackback, redirect)
-    repeat_question answer, trackback unless INGREDIENT_SET.has_key? answer
     name, usage, quantity, duration = INGREDIENT_SET[answer]
 
     add_new_ingredient name, usage, quantity, duration

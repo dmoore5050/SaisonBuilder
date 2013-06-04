@@ -117,6 +117,8 @@ Changelog
 + 2013-5-30 - Added add/delete ingredient functionality to command line.
 + 2013-5-31 - General reorganization of file structure.
 + 2013-6-01 - Add ingr/recipe now takes arguments. Replaced validation methods with AR validation.
++ 2013-6-02 - Solidified future app structure
++ 2013-6-03 - Extensive refactoring.
 
 Acknowledgements
 ----------------
