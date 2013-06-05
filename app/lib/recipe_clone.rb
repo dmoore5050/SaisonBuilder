@@ -44,7 +44,7 @@ module RecipeClone
       new_recipe[:name] = new_name
       new_recipe[:description] = descr
     else
-      puts "#{answer} is already in use. Please choose another.\n"
+      puts "\n#{new_name} is already in use. Please choose another.\n"
       clone_recipe answer
     end
   end

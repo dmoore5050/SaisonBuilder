@@ -76,7 +76,7 @@ EOS
     list, usage, duration = '', nil, nil
     build_remove_list list
     question = %Q(
-Which item would you like to delete from the recipe?
+Which item would you like to delete from the recipe?\n
 #{list}
 
 If usage and duration are present, please answer in the form of name, usage, duration.
@@ -85,15 +85,17 @@ Ex: Amarillo, boil, 30 min
 
     puts question
     name, usage, duration = $stdin.gets.downcase.chomp!.split(', ')
+    exit if name.include?('x') || name.include?('q')
     component = RecordModification.new @record
     component.remove name, usage, duration
   end
 
   def build_remove_list(list)
-    ingr_array = RecipeIngredient.where(recipe_id: @record).all
-    ingr_array.each do | ingredient |
+    ingredients = @record.recipe_ingredients.all
+    ingredients.each do | ingredient |
       ingredient_match = Ingredient.where(id: ingredient.ingredient_id).first
-      list << "    #{ingredient_match.name.titleize.ljust(21)}#{ingredient.usage} #{ingredient.duration}\n"
+      list << "    #{ingredient_match.name.titleize.ljust(21)}" +
+        "#{ingredient.usage} #{ingredient.duration}\n"
     end
   end
 

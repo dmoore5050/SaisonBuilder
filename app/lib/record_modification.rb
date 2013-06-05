@@ -21,7 +21,13 @@ class RecordModification
   def remove(name, usage, duration)
     matching_ingr = Ingredient.where(name: name)
     dropped_ingredient = RecipeIngredient.where(recipe_id: @record, ingredient_id: matching_ingr, usage: usage, duration: duration).first
-    dropped_ingredient.destroy
+    unless dropped_ingredient.nil?
+      dropped_ingredient.destroy
+    else
+      puts "\n#{name} is not a valid ingredient name."
+      puts 'Please choose from the list and follow the provided instructions.'
+      next_question.remove
+    end
 
     next_question.remove_redirect_menu
   end
@@ -61,7 +67,7 @@ class RecordModification
   end
 
   def add_base_grain(answer)
-    base_malt = RecipeIngredient.where(recipe_id: @record, quantity: 6..25).first
+    base_malt = @record.recipe_ingredients.where(quantity: 6..25).first
     base_malt.update_attributes(quantity: base_malt.quantity - 3)
 
     add_multiple_grains answer
