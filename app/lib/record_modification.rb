@@ -88,21 +88,26 @@ class RecordModification
   end
 
   def change_gravity(answer, trackback)
+    alter_gravity_ingredients answer
+
+    next_question.gravity_redirect_menu
+  end
+
+  def alter_gravity_ingredients(answer)
     base_malt = @record.recipe_ingredients.where(quantity: 6..25).first
 
     quantity_adjustment = base_malt.quantity + INGREDIENT_SET[answer]
     base_malt.update_attributes(quantity: quantity_adjustment)
     if answer == 'eight'
-      sugar = @record.recipe_ingredients.where(ingredient_id: 38..39).first
+      base_sugar = Ingredient.where(name: 'corn sugar').first
+      sugar = @record.recipe_ingredients.where(ingredient_id: base_sugar.id).first
       add_sugar_to_recipe sugar
     end
-
-    next_question.gravity_redirect_menu
   end
 
   def add_sugar_to_recipe(sugar)
     if sugar.nil?
-      name, usage, quantity = 'corn sugar', 'Peak krausen', 2
+      name, usage, quantity = 'corn sugar', 'Peak krausen', 1
       add_new_ingredient name, usage, quantity
     else
       sugar.update_attributes(quantity: sugar.quantity + 1)
