@@ -22,11 +22,11 @@ ActiveRecord::Schema.define(:version => 20130522142100) do
   end
 
   create_table "recipe_ingredients", :force => true do |t|
-    t.string "recipe_id"
-    t.string "ingredient_id"
-    t.float  "quantity"
-    t.string "usage"
-    t.string "duration"
+    t.integer "recipe_id"
+    t.integer "ingredient_id"
+    t.float   "quantity"
+    t.string  "usage"
+    t.string  "duration"
   end
 
   create_table "recipes", :force => true do |t|

@@ -33,8 +33,8 @@ class RecordModification
   end
 
   def add_new_ingredient(name, usage, quantity, duration = nil)
-    ingr = Ingredient.where(name: name).first
-    @record.recipe_ingredients.create(ingredient_id: ingr, usage: usage, quantity: quantity, duration: duration)
+    ingredient = Ingredient.where(name: name).first
+    @record.recipe_ingredients.create(ingredient_id: ingredient.id, usage: usage, quantity: quantity, duration: duration)
   end
 
   def switch_yeast(name)

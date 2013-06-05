@@ -56,7 +56,7 @@ recipe_array.each do | recipe_arguments, ingredient_profiles |
   the_recipe = Recipe.create(name: name, boil_length: boil_length, primary_fermentation_temp: ferm_temp, description: description)
   ingredient_profiles.each_with_object(the_recipe) do | ingredient |
     ingredient_name, usage, quantity, duration = ingredient
-    ingr = Ingredient.where(name: ingredient_name).first
-    the_recipe.recipe_ingredients.create(usage: usage, quantity: quantity, duration: duration, ingredient_id: ingr)
+    ingredient_match = Ingredient.where(name: ingredient_name).first
+    the_recipe.recipe_ingredients.create(usage: usage, quantity: quantity, duration: duration, ingredient_id: ingredient_match.id)
   end
 end
