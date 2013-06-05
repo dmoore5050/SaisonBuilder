@@ -215,7 +215,7 @@ Choose a desired sweetness character:
     Honey -    Subtle honey character
 
 EOS
-    route_modification question, 'sweetness', 'add_ingredient', 'grain_redirect_menu'
+    route_modification question, 'sweetness', 'prep_add_ingredient', 'grain_redirect_menu'
   end
 
   def roast
@@ -344,7 +344,7 @@ How much bitterness would you like to add?
 
 EOS
 
-    route_modification 'bittering', 'add_ingredient', 'hops_redirect_menu'
+    route_modification 'bittering', 'prep_add_ingredient', 'hops_redirect_menu'
   end
 
   def flavor
@@ -355,7 +355,7 @@ What kind of hop flavor would you like to add?
 
 EOS
 
-    route_modification question, 'flavor', 'add_ingredient', 'hops_redirect_menu'
+    route_modification question, 'flavor', 'prep_add_ingredient', 'hops_redirect_menu'
   end
 
   def aroma
@@ -367,7 +367,7 @@ What kind of hop aroma would you like to add?
 
 EOS
 
-    route_modification question, 'aroma', 'add_ingredient', 'hops_redirect_menu'
+    route_modification question, 'aroma', 'prep_add_ingredient', 'hops_redirect_menu'
   end
 
   def hops_redirect_menu
@@ -410,7 +410,7 @@ What spice would you like to add to the recipe?
 
 EOS
 
-    route_modification question, 'spices', 'add_ingredient', 'spices_redirect_menu'
+    route_modification question, 'spices', 'prep_add_ingredient', 'spices_redirect_menu'
   end
 
   def spices_redirect_menu
@@ -439,7 +439,7 @@ What fruit would like to add to the recipe?
 
 EOS
 
-    route_modification question, 'fruit', 'add_ingredient', 'fruit_redirect_menu'
+    route_modification question, 'fruit', 'prep_add_ingredient', 'fruit_redirect_menu'
   end
 
   def fruit_redirect_menu
@@ -467,7 +467,7 @@ What botanical would you like to add to the recipe?
 
 EOS
 
-    route_modification question, 'botanical', 'add_ingredient', 'botanicals_redirect_menu'
+    route_modification question, 'botanical', 'prep_add_ingredient', 'botanicals_redirect_menu'
   end
 
   def botanicals_redirect_menu
@@ -495,7 +495,7 @@ What adjunct would you like to add to the recipe?
 
 EOS
 
-    route_modification question, 'adjunct', 'add_ingredient', 'adjunct_redirect_menu'
+    route_modification question, 'adjunct', 'prep_add_ingredient', 'adjunct_redirect_menu'
   end
 
   def adjunct_redirect_menu

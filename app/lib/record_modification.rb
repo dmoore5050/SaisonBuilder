@@ -52,7 +52,7 @@ class RecordModification
     next_question.yeast_redirect_menu
   end
 
-  def add_ingredient(answer, redirect)
+  def prep_add_ingredient(answer, redirect)
     name, usage, quantity, duration = INGREDIENT_SET[answer]
 
     add_new_ingredient name, usage, quantity, duration
