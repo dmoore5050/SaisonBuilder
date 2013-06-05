@@ -11,11 +11,11 @@ class RecordModification
 
   def describe(type, name, description)
     case type
-    when 'ingredient' then record_match = Ingredient.where(name: name)
-    when 'recipe' then record_match = Recipe.where(name: name)
+    when 'ingredient' then record = Ingredient.where(name: name).first
+    when 'recipe' then record = Recipe.where(name: name).first
     end
 
-    record_match.update_attributes(description: description)
+    record.update_attributes(description: description)
   end
 
   def remove(name, usage, duration)

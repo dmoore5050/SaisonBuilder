@@ -25,6 +25,7 @@ class QuestionView
   def prep_describe
     puts "\nAre you changing the description of a Recipe, or of an Ingredient?"
     record_type = $stdin.gets.downcase.chomp!
+    prep_describe unless record_type == 'recipe' || record_type == 'ingredient'
     puts "\nWhat is the name of the recipe or ingredient you want to describe?"
     name = $stdin.gets.downcase.chomp!
 
