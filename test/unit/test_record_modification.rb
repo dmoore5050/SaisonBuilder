@@ -39,39 +39,69 @@ class TestRecordModification < MiniTest::Unit::TestCase
     assert_equal expected, actual
   end
 
-  def test_add_new_ingredient_adds_ingredient
-    @record = Recipe.create(name: 'test')
-    mod = RecordModification.new @record
+  def test_delete_destroys_correct_recipe_ingredient
+    record = Recipe.where(name: 'classic').first
+    mod = RecordModification.new record
 
-    assert_equal @record.recipe_ingredients.count, 0
+    ingredient = Ingredient.where(name: 'saaz').first
+    actual = record.recipe_ingredients.where(ingredient_id: ingredient.id).first
+    refute_equal nil, actual
+
+    name, usage, duration = 'saaz', 'boil', '15 min'
+    mod.delete_recipe_ingredient name, usage, duration
+
+    revised_actual = record.recipe_ingredients.where(ingredient_id: ingredient.id).first
+    assert_equal nil, revised_actual
+  end
+
+  def test_invalid_name_message
+    mod = RecordModification.new
+
+    answer = <<EOS
+
+James is not a valid ingredient name.
+Please choose from the list and follow the provided instructions.
+EOS
+
+    expected = answer
+    actual = mod.invalid_name_message 'James'
+
+    assert_equal expected, actual
+  end
+
+  def test_add_new_ingredient_adds_ingredient
+    record = Recipe.create(name: 'test')
+    mod = RecordModification.new record
+
+    assert_equal record.recipe_ingredients.count, 0
 
     ingredient_name, usage, quantity, duration = 'saaz', 'boil', 1, '30 min'
     mod.add_new_ingredient ingredient_name, usage, quantity, duration
 
-    assert_equal @record.recipe_ingredients.count, 1
+    assert_equal record.recipe_ingredients.count, 1
   end
 
   def test_add_new_ingredient_adds_correct_ingredient
-    @record = Recipe.create(name: 'test')
-    mod = RecordModification.new @record
+    record = Recipe.create(name: 'test')
+    mod = RecordModification.new record
 
     ingredient_name, usage, quantity, duration = 'saaz', 'boil', 1, '30 min'
     mod.add_new_ingredient ingredient_name, usage, quantity, duration
 
-    added_ingredient = @record.recipe_ingredients.last
+    added_ingredient = record.recipe_ingredients.last
     ingredient = Ingredient.where(name: 'saaz').first
 
     assert_equal added_ingredient.ingredient_id, ingredient.id
   end
 
   def test_add_new_ingredient_sets_correct_parameters
-    @record = Recipe.create(name: 'test')
-    mod = RecordModification.new @record
+    record = Recipe.create(name: 'test')
+    mod = RecordModification.new record
 
     ingredient_name, usage, quantity, duration = 'saaz', 'boil', 1, '30 min'
     mod.add_new_ingredient ingredient_name, usage, quantity, duration
 
-    added_ingredient = @record.recipe_ingredients.last
+    added_ingredient = record.recipe_ingredients.last
     actual_usage    = added_ingredient.usage
     actual_duration = added_ingredient.duration
     actual_quantity = added_ingredient.quantity
