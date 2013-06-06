@@ -19,17 +19,24 @@ class RecordModification
   end
 
   def remove(name, usage, duration)
+    delete_recipe_ingredient name, usage, duration
+    next_question.remove_redirect_menu
+  end
+
+  def delete_recipe_ingredient(name, usage, duration)
     matching_ingr = Ingredient.where(name: name)
     dropped_ingredient = RecipeIngredient.where(recipe_id: @record, ingredient_id: matching_ingr, usage: usage, duration: duration).first
     unless dropped_ingredient.nil?
       dropped_ingredient.destroy
     else
-      puts "\n#{name} is not a valid ingredient name."
-      puts 'Please choose from the list and follow the provided instructions.'
+      puts invalid_name_message name
       next_question.remove
     end
+  end
 
-    next_question.remove_redirect_menu
+  def invalid_name_message(name)
+    "\n#{name} is not a valid ingredient name." +
+    "\nPlease choose from the list and follow the provided instructions.\n"
   end
 
   def add_new_ingredient(name, usage, quantity, duration = nil)

@@ -2,8 +2,8 @@ require_relative '../../bootstrap_ar'
 
 module Router
 
-  def self.route(question, trackback, record)
-    puts question
+  def self.route(question_string, trackback, record)
+    puts question_string
     answer = $stdin.gets.downcase.chomp!.tr(' ', '_')
     question = QuestionView.new record
 
